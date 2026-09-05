@@ -10,34 +10,30 @@
 
 ```diff
 + STELLA DEVELOPER
-  пишу код для голосового
-  ассистента
+  голосовой ассистент
 
 + ASTRA TESTER
-  тестирую и нахожу баги
+  тестирование и QA
 
 + PLUGIN DEV
-  делаю плагины и интеграции
+  интеграции
 
 + CROSS-PLATFORM
-  десктоп приложения
-  под Win/Linux
+  Win / Linux
 ```
 
 </td>
 <td width="50%" align="center">
 
 ```diff
-+ TECH STACK
++ TECH
   Rust • Python • TypeScript
 
 + PLATFORMS
   Windows • Linux
 
-+ INTERESTS
-  Voice AI
-  Speech Recognition
-  Plugin Development
++ FOCUS
+  Voice AI • Plugins
 ```
 
 </td>
