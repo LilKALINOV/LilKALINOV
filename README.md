@@ -70,7 +70,15 @@ class LilKalinov:
 [![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/kalinov_fan)
 [![Steam](https://img.shields.io/badge/Steam-1B2838?style=for-the-badge&logo=steam&logoColor=white)](https://steamcommunity.com/id/LilKALINOV/)
 [![VK](https://img.shields.io/badge/VK-4680FF?style=for-the-badge&logo=vk&logoColor=white)](https://vk.com/bass.kalinov)
-[![Website](https://img.shields.io/badge/Website-FF0040?style=for-the-badge&logo=googlechrome&logoColor=white)](https://knice.tech)
+
+</div>
+
+<div align="center">
+
+### KNICE TECH & MINICE
+
+[![knice.tech](https://img.shields.io/badge/knice.tech-FF0040?style=for-the-badge&logo=googlechrome&logoColor=white)](https://knice.tech)
+[![minice.ai](https://img.shields.io/badge/minice.ai-FF0040?style=for-the-badge&logo=openai&logoColor=white)](https://minice.ai)
 
 </div>
 
