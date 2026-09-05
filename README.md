@@ -10,30 +10,53 @@
 
 <div align="center">
 
-## `about`
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:1a1a2e,100:0d1117&height=100&section=header&text=ABOUT&fontSize=40&fontColor=FF0040&fontAlignY=50&animation=fadeIn" width="100%"/>
 
 </div>
 
 <table>
 <tr>
-<td width="50%">
+<td width="50%" align="center">
 
-**Stella Developer** — пишу код для голосового ассистента
-
-**Astra Tester** — тестирую и нахожу баги
-
-**Plugin Dev** — делаю плагины и интеграции
-
-**Cross-platform** — десктоп приложения под Win/Linux
+```
+┌─────────────────────────────────────┐
+│                                     │
+│   🎤  STELLA DEVELOPER              │
+│       пишу код для голосового       │
+│       ассистента                    │
+│                                     │
+│   🔍  ASTRA TESTER                  │
+│       тестирую и нахожу баги        │
+│                                     │
+│   🔌  PLUGIN DEV                    │
+│       делаю плагины и интеграции    │
+│                                     │
+│   🖥️  CROSS-PLATFORM                │
+│       десктоп приложения            │
+│       под Win/Linux                 │
+│                                     │
+└─────────────────────────────────────┘
+```
 
 </td>
-<td width="50%">
+<td width="50%" align="center">
 
-**Tech Stack:** Rust, Python, TypeScript
-
-**Platforms:** Windows, Linux
-
-**Interests:** Voice AI, Speech Recognition, Plugins
+```
+┌─────────────────────────────────────┐
+│                                     │
+│   ⚡  TECH STACK                    │
+│       Rust • Python • TypeScript    │
+│                                     │
+│   💻  PLATFORMS                     │
+│       Windows • Linux               │
+│                                     │
+│   🎯  INTERESTS                     │
+│       Voice AI                      │
+│       Speech Recognition            │
+│       Plugin Development            │
+│                                     │
+└─────────────────────────────────────┘
+```
 
 </td>
 </tr>
