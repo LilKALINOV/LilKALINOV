@@ -67,21 +67,29 @@ class LilKalinov:
 
 <div align="center">
 
-[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=flat-square&logo=telegram&logoColor=white)](https://t.me/kalinov_fan)
-[![VK](https://img.shields.io/badge/VK-4680FF?style=flat-square&logo=vk&logoColor=white)](https://vk.com/bass.kalinov)
-[![Steam](https://img.shields.io/badge/Steam-1B2838?style=flat-square&logo=steam&logoColor=white)](https://steamcommunity.com/id/LilKALINOV/)
-[![Website](https://img.shields.io/badge/Website-FF0040?style=flat-square&logo=googlechrome&logoColor=white)](https://knice.tech)
+<table>
+<tr>
+<td align="center" width="9999" bgcolor="#1a1a2e">
 
-</div>
+```
+┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│   📱  Telegram     →  @kalinov_fan                          │
+│   🎮  Steam        →  LilKALINOV                            │
+│   👥  VK           →  bass.kalinov                          │
+│   🌐  Website      →  knice.tech                            │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
 
-<div align="center">
+</td>
+</tr>
+</table>
 
-| Platform | Link |
-|----------|------|
-| 📱 Telegram | [@kalinov_fan](https://t.me/kalinov_fan) |
-| 🎮 Steam | [LilKALINOV](https://steamcommunity.com/id/LilKALINOV/) |
-| 👥 VK | [bass.kalinov](https://vk.com/bass.kalinov) |
-| 🌐 Website | [knice.tech](https://knice.tech) |
+[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/kalinov_fan)
+[![Steam](https://img.shields.io/badge/Steam-1B2838?style=for-the-badge&logo=steam&logoColor=white)](https://steamcommunity.com/id/LilKALINOV/)
+[![VK](https://img.shields.io/badge/VK-4680FF?style=for-the-badge&logo=vk&logoColor=white)](https://vk.com/bass.kalinov)
+[![Website](https://img.shields.io/badge/Website-FF0040?style=for-the-badge&logo=googlechrome&logoColor=white)](https://knice.tech)
 
 </div>
 
