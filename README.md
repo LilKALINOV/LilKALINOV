@@ -85,27 +85,4 @@ class LilKalinov:
 
 </div>
 
----
 
-## `stats`
-
-<div align="center">
-
-<img height="180em" src="https://github-readme-stats.vercel.app/api?username=LilKALINOV&show_icons=true&theme=radical&bg_color=0d1117&hide_border=true&title_color=FF0040&icon_color=FF0040&text_color=c9d1d9" />
-<img height="180em" src="https://github-readme-streak-stats.herokuapp.com/?user=LilKALINOV&theme=radical&background=0d1117&hide_border=true&ring=FF0040&fire=FF0040&currStreakLabel=FF0040&sideLabels=c9d1d9" />
-
-</div>
-
-<div align="center">
-
-![Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=LilKALINOV&layout=compact&theme=radical&bg_color=0d1117&hide_border=true&title_color=FF0040&text_color=c9d1d9&langs_count=8)
-
-</div>
-
----
-
-<div align="center">
-
-![Visitors](https://komarev.com/ghpvc/?username=LilKALINOV&color=FF0040&style=flat-square&label=VIEWS)
-
-</div>
