@@ -1,133 +1,93 @@
-<div align="center">
-
-```
-██╗      █████╗ ██████╗  █████╗ ██╗   ██╗████████╗    ███████╗██╗   ██╗███████╗███████╗████████╗
-██║     ██╔══██╗██╔══██╗██╔══██╗╚██╗ ██╔╝╚══██╔══╝    ██╔════╝╚██╗ ██╔╝██╔════╝██╔════╝╚══██╔══╝
-██║     ███████║██████╔╝███████║ ╚████╔╝    ██║       ███████╗ ╚████╔╝ █████╗  ███████╗   ██║   
-██║     ██╔══██║██╔══██╗██╔══██║  ╚██╔╝     ██║       ╚════██║  ╚██╔╝  ██╔══╝  ╚════██║   ██║   
-███████╗██║  ██║██████╔╝██║  ██║   ██║      ██║       ███████║   ██║   ███████╗███████║   ██║   
-╚══════╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝      ╚═╝       ╚══════╝   ╚═╝   ╚══════╝╚══════╝   ╚═╝   
-```
-
-</div>
-
 <h1 align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,50:ff0040,100:1a1a2e&height=200&section=header&text=Lil%20KALINOV&fontSize=80&fontColor=ffffff&fontAlignY=35&desc=Stella%20Developer%20%7C%20Astra%20Tester&descSize=18&descAlignY=55&animation=fadeIn" width="100%"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=220&section=header&text=Lil%20KALINOV&fontSize=80&fontColor=ffffff&fontAlignY=40&desc=Stella%20Developer%20%7C%20Astra%20Tester&descSize=20&descAlignY=60&animation=fadeIn" width="100%"/>
 </h1>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=FF0040&center=true&vCenter=true&multiline=true&repeat=true&width=435&lines=Stella+Developer;Astra+Tester;Rust+%2F+C%23+%2F+Python;Plugin+Development" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=FF0040&center=true&vCenter=true&multiline=true&repeat=true&width=500&lines=Stella+Developer;Astra+Tester;Rust+%2F+C%23+%2F+Python;Plugin+Development" alt="Typing SVG" />
 </p>
 
----
+<br>
 
-<div align="center">
+## `about`
 
-### 🎙️ `SOUND WAVE`
-
-</div>
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/LilKALINOV/LilKALINOV/output/github-contribution-grid-snake-dark.svg" width="100%"/>
-</p>
-
-<div align="center">
-
-```ascii
-    ∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿
-    
-         ███████╗██╗   ██╗███████╗███████╗████████╗
-         ██╔════╝╚██╗ ██╔╝██╔════╝██╔════╝╚══██╔══╝
-         ███████╗ ╚████╔╝ █████╗  ███████╗   ██║   
-         ╚════██║  ╚██╔╝  ██╔══╝  ╚════██║   ██║   
-         ███████║   ██║   ███████╗███████║   ██║   
-         ╚══════╝   ╚═╝   ╚══════╝╚══════╝   ╚═╝   
-    
-    ∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿∿
-```
-
-</div>
-
----
-
-## `> ABOUT ME`
+<table>
+<tr>
+<td width="50%">
 
 ```python
 class LilKalinov:
     def __init__(self):
         self.name = "Кирилл Калинов"
-        self.alias = "Lil KALINOV"
         self.location = "Orsk, Russia 🇷🇺"
-        self.website = "https://knice.tech"
         
-    def what_i_do(self):
-        return [
-            "🎤 Stella Voice Assistant Developer",
-            "🔍 Astra Voice Assistant Tester",
-            "🔌 Plugin Development",
-            "🖥️ Desktop Applications (Windows / Linux)",
-            "🐍 Speech Recognition & Synthesis",
-        ]
-    
-    def currently_working_on(self):
+    def work(self):
         return {
-            "Stella": "Voice assistant development",
-            "Astra": "Testing & QA",
-            "Plugins": "Custom plugins and integrations",
-            "Cross-platform": "Windows & Linux support",
+            "Stella": "🎤 Voice Assistant Developer",
+            "Astra": "🔍 Voice Assistant Tester",
+            "Plugins": "🔌 Custom Integrations",
+            "Platforms": "🖥️ Windows & Linux"
         }
 ```
 
+</td>
+<td width="50%">
+
+**Stella Developer** — пишу код для голосового ассистента
+
+**Astra Tester** — тестирую и нахожу баги
+
+**Plugin Dev** — делаю плагины и интеграции
+
+**Cross-platform** — десктоп приложения под Win/Lin
+
+</td>
+</tr>
+</table>
+
 ---
 
-## `> TECH STACK`
+## `tech`
 
 <div align="center">
 
-![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)
-![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![Windows](https://img.shields.io/badge/Windows-0078D4?style=for-the-badge&logo=windows&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
+![Rust](https://img.shields.io/badge/Rust-000000?style=flat-square&logo=rust&logoColor=white)
+![C#](https://img.shields.io/badge/C%23-239120?style=flat-square&logo=csharp&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white)
+![Windows](https://img.shields.io/badge/Windows-0078D4?style=flat-square&logo=windows&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black)
+![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat-square&logo=github&logoColor=white)
 
 </div>
 
 ---
 
-## `> LINKS`
+## `links`
 
 <div align="center">
 
-[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/kalinov_fan)
-[![VK](https://img.shields.io/badge/VK-4680FF?style=for-the-badge&logo=vk&logoColor=white)](https://vk.com/bass.kalinov)
-[![Steam](https://img.shields.io/badge/Steam-1B2838?style=for-the-badge&logo=steam&logoColor=white)](https://steamcommunity.com/id/LilKALINOV/)
-[![Website](https://img.shields.io/badge/Website-FF0040?style=for-the-badge&logo=googlechrome&logoColor=white)](https://knice.tech)
+[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=flat-square&logo=telegram&logoColor=white)](https://t.me/kalinov_fan)
+[![VK](https://img.shields.io/badge/VK-4680FF?style=flat-square&logo=vk&logoColor=white)](https://vk.com/bass.kalinov)
+[![Steam](https://img.shields.io/badge/Steam-1B2838?style=flat-square&logo=steam&logoColor=white)](https://steamcommunity.com/id/LilKALINOV/)
+[![Website](https://img.shields.io/badge/Website-FF0040?style=flat-square&logo=googlechrome&logoColor=white)](https://knice.tech)
 
 </div>
 
 <div align="center">
 
-### 🔗 `QUICK LINKS`
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                                                             │
-│   📱 Telegram:  https://t.me/kalinov_fan                    │
-│   🎮 Steam:     https://steamcommunity.com/id/LilKALINOV/  │
-│   👥 VK:        https://vk.com/bass.kalinov                 │
-│   🌐 Website:   https://knice.tech                          │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
+| Platform | Link |
+|----------|------|
+| 📱 Telegram | [@kalinov_fan](https://t.me/kalinov_fan) |
+| 🎮 Steam | [LilKALINOV](https://steamcommunity.com/id/LilKALINOV/) |
+| 👥 VK | [bass.kalinov](https://vk.com/bass.kalinov) |
+| 🌐 Website | [knice.tech](https://knice.tech) |
 
 </div>
 
 ---
 
-## `> GITHUB STATS`
+## `stats`
 
 <div align="center">
 
@@ -144,94 +104,8 @@ class LilKalinov:
 
 ---
 
-## `> CONTRIBUTION SNAKE`
-
 <div align="center">
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/LilKALINOV/LilKALINOV/output/github-contribution-grid-snake-dark.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/LilKALINOV/LilKALINOV/output/github-contribution-grid-snake.svg" />
-  <img alt="github-snake" src="https://raw.githubusercontent.com/LilKALINOV/LilKALINOV/output/github-contribution-grid-snake-dark.svg" />
-</picture>
-
-</div>
-
----
-
-<div align="center">
-
-### 🎵 `NOW PLAYING`
-
-<table>
-<tr>
-<td align="center" width="9999" bgcolor="#0d1117">
-
-```
-♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪
-```
-
-</td>
-</tr>
-<tr>
-<td align="center" bgcolor="#0d1117">
-
-```
-   🎵  Lil KALINOV - Voice Assistant Developer  🎵
-   
-   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
-```
-
-</td>
-</tr>
-<tr>
-<td align="center" bgcolor="#0d1117">
-
-```
-♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪
-```
-
-</td>
-</tr>
-</table>
-
-</div>
-
-<div align="center">
-
-```ascii
-    ╔═══════════════════════════════════════════════════════════╗
-    ║                                                           ║
-    ║   🎤  NOW PLAYING: Voice Assistant Developer              ║
-    ║                                                           ║
-    ║   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  ║
-    ║   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  ║
-    ║   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  ║
-    ║                                                           ║
-    ║   ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪   ║
-    ║                                                           ║
-    ╚═══════════════════════════════════════════════════════════╝
-```
-
-</div>
-
----
-
-<div align="center">
-
-![Visitors](https://komarev.com/ghpvc/?username=LilKALINOV&color=FF0040&style=for-the-badge&label=PROFILE+VIEWS)
-
-</div>
-
-<div align="center">
-
-```
-█████████████████████████████████████████████████████████████
-█                                                           █
-█   "Voice is the future. I'm building it."                █
-█                                                           █
-█████████████████████████████████████████████████████████████
-```
+![Visitors](https://komarev.com/ghpvc/?username=LilKALINOV&color=FF0040&style=flat-square&label=VIEWS)
 
 </div>
