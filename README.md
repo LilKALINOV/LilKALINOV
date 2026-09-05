@@ -12,11 +12,11 @@
 </div>
 
 <h1 align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,50:ff0040,100:1a1a2e&height=200&section=header&text=Lil%20KALINOV&fontSize=80&fontColor=ffffff&fontAlignY=35&desc=Voice%20Assistant%20Developer&descSize=18&descAlignY=55&animation=fadeIn" width="100%"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1a2e,50:ff0040,100:1a1a2e&height=200&section=header&text=Lil%20KALINOV&fontSize=80&fontColor=ffffff&fontAlignY=35&desc=Stella%20Developer%20%7C%20Astra%20Tester&descSize=18&descAlignY=55&animation=fadeIn" width="100%"/>
 </h1>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=FF0040&center=true&vCenter=true&multiline=true&repeat=true&width=435&lines=Voice+Assistant+Developer;Rust+%2F+C%23+%2F+Python;Building+Astra+Voice+Assistant;Plugin+Development" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=FF0040&center=true&vCenter=true&multiline=true&repeat=true&width=435&lines=Stella+Developer;Astra+Tester;Rust+%2F+C%23+%2F+Python;Plugin+Development" alt="Typing SVG" />
 </p>
 
 ---
@@ -62,18 +62,18 @@ class LilKalinov:
         
     def what_i_do(self):
         return [
-            "🎤 Voice Assistant Development (Astra)",
-            "🔌 Plugin Development for Astra Voice Assistant",
+            "🎤 Stella Voice Assistant Developer",
+            "🔍 Astra Voice Assistant Tester",
+            "🔌 Plugin Development",
             "🖥️ Desktop Applications (Windows / Linux)",
             "🐍 Speech Recognition & Synthesis",
-            "🎨 Voice UI/UX Design",
         ]
     
     def currently_working_on(self):
         return {
-            "Astra Voice Assistant": "Desktop voice assistant with VRM character",
-            "Stella": "Voice assistant refinement",
-            "Astra Plugins": "Custom plugins and integrations",
+            "Stella": "Voice assistant development",
+            "Astra": "Testing & QA",
+            "Plugins": "Custom plugins and integrations",
             "Cross-platform": "Windows & Linux support",
         }
 ```
@@ -105,6 +105,23 @@ class LilKalinov:
 [![VK](https://img.shields.io/badge/VK-4680FF?style=for-the-badge&logo=vk&logoColor=white)](https://vk.com/bass.kalinov)
 [![Steam](https://img.shields.io/badge/Steam-1B2838?style=for-the-badge&logo=steam&logoColor=white)](https://steamcommunity.com/id/LilKALINOV/)
 [![Website](https://img.shields.io/badge/Website-FF0040?style=for-the-badge&logo=googlechrome&logoColor=white)](https://knice.tech)
+
+</div>
+
+<div align="center">
+
+### 🔗 `QUICK LINKS`
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│   📱 Telegram:  https://t.me/kalinov_fan                    │
+│   🎮 Steam:     https://steamcommunity.com/id/LilKALINOV/  │
+│   👥 VK:        https://vk.com/bass.kalinov                 │
+│   🌐 Website:   https://knice.tech                          │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
 
 </div>
 
@@ -145,11 +162,56 @@ class LilKalinov:
 
 ### 🎵 `NOW PLAYING`
 
+<table>
+<tr>
+<td align="center" width="9999" bgcolor="#0d1117">
+
 ```
-♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪
-   Voice Assistant Developer
-   Building the future of voice AI
-♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪
+♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪
+```
+
+</td>
+</tr>
+<tr>
+<td align="center" bgcolor="#0d1117">
+
+```
+   🎵  Lil KALINOV - Voice Assistant Developer  🎵
+   
+   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+```
+
+</td>
+</tr>
+<tr>
+<td align="center" bgcolor="#0d1117">
+
+```
+♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪
+```
+
+</td>
+</tr>
+</table>
+
+</div>
+
+<div align="center">
+
+```ascii
+    ╔═══════════════════════════════════════════════════════════╗
+    ║                                                           ║
+    ║   🎤  NOW PLAYING: Voice Assistant Developer              ║
+    ║                                                           ║
+    ║   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  ║
+    ║   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  ║
+    ║   ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓  ║
+    ║                                                           ║
+    ║   ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪ ♫ ♪   ║
+    ║                                                           ║
+    ╚═══════════════════════════════════════════════════════════╝
 ```
 
 </div>
