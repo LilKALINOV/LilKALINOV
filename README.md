@@ -16,9 +16,6 @@
 | | |
 | **PLUGIN DEV** | **FOCUS** |
 | интеграции | Voice AI • Plugins |
-| | |
-| **CROSS-PLATFORM** | |
-| Win / Linux | |
 
 </div>
 
