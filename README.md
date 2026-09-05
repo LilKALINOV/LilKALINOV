@@ -14,44 +14,36 @@
 <tr>
 <td width="50%" align="center">
 
-```
-┌─────────────────────────────────────┐
-│                                     │
-│   🎤  STELLA DEVELOPER              │
-│       пишу код для голосового       │
-│       ассистента                    │
-│                                     │
-│   🔍  ASTRA TESTER                  │
-│       тестирую и нахожу баги        │
-│                                     │
-│   🔌  PLUGIN DEV                    │
-│       делаю плагины и интеграции    │
-│                                     │
-│   🖥️  CROSS-PLATFORM                │
-│       десктоп приложения            │
-│       под Win/Linux                 │
-│                                     │
-└─────────────────────────────────────┘
+```diff
++ STELLA DEVELOPER
+  пишу код для голосового
+  ассистента
+
++ ASTRA TESTER
+  тестирую и нахожу баги
+
++ PLUGIN DEV
+  делаю плагины и интеграции
+
++ CROSS-PLATFORM
+  десктоп приложения
+  под Win/Linux
 ```
 
 </td>
 <td width="50%" align="center">
 
-```
-┌─────────────────────────────────────┐
-│                                     │
-│   ⚡  TECH STACK                    │
-│       Rust • Python • TypeScript    │
-│                                     │
-│   💻  PLATFORMS                     │
-│       Windows • Linux               │
-│                                     │
-│   🎯  INTERESTS                     │
-│       Voice AI                      │
-│       Speech Recognition            │
-│       Plugin Development            │
-│                                     │
-└─────────────────────────────────────┘
+```diff
++ TECH STACK
+  Rust • Python • TypeScript
+
++ PLATFORMS
+  Windows • Linux
+
++ INTERESTS
+  Voice AI
+  Speech Recognition
+  Plugin Development
 ```
 
 </td>
