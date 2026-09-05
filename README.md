@@ -2,8 +2,6 @@
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=300&section=header&text=Lil%20KALINOV&fontSize=100&fontColor=ffffff&fontAlignY=35&desc=Stella%20Developer%20%7C%20Astra%20Tester&descSize=24&descAlignY=55&animation=fadeIn" width="100%"/>
 </h1>
 
-<br>
-
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=80&section=header&text=ABOUT&fontSize=40&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
 
 <table>
@@ -46,8 +44,6 @@
 </tr>
 </table>
 
-<br>
-
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=80&section=header&text=TECH&fontSize=40&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
 
 <div align="center">
@@ -62,8 +58,6 @@
 
 </div>
 
-<br>
-
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=80&section=header&text=CONNECT&fontSize=40&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
 
 <div align="center">
@@ -74,8 +68,6 @@
 
 </div>
 
-<br>
-
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=80&section=header&text=PROJECTS&fontSize=40&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
 
 <div align="center">
@@ -84,7 +76,5 @@
 [![minice.ai](https://img.shields.io/badge/MINICE%20AI-FF0040?style=flat-square&logo=openai&logoColor=white&logoWidth=30&height=40)](https://minice.ai)
 
 </div>
-
-<br>
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=100&section=footer&animation=fadeIn" width="100%"/>
