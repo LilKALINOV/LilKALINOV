@@ -4,41 +4,23 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=120&section=header&text=ABOUT&fontSize=50&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
 
-<table>
-<tr>
-<td width="50%" align="center">
+<div align="center">
 
-```diff
-+ STELLA DEVELOPER
-  голосовой ассистент
+| | |
+|:---:|:---:|
+| **STELLA DEVELOPER** | **TECH** |
+| голосовой ассистент | Rust • Python • TypeScript |
+| | |
+| **ASTRA TESTER** | **PLATFORMS** |
+| тестирование и QA | Windows • Linux |
+| | |
+| **PLUGIN DEV** | **FOCUS** |
+| интеграции | Voice AI • Plugins |
+| | |
+| **CROSS-PLATFORM** | |
+| Win / Linux | |
 
-+ ASTRA TESTER
-  тестирование и QA
-
-+ PLUGIN DEV
-  интеграции
-
-+ CROSS-PLATFORM
-  Win / Linux
-```
-
-</td>
-<td width="50%" align="center">
-
-```diff
-+ TECH
-  Rust • Python • TypeScript
-
-+ PLATFORMS
-  Windows • Linux
-
-+ FOCUS
-  Voice AI • Plugins
-```
-
-</td>
-</tr>
-</table>
+</div>
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=120&section=header&text=TECH&fontSize=50&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
 
