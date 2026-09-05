@@ -67,25 +67,6 @@ class LilKalinov:
 
 <div align="center">
 
-<table>
-<tr>
-<td align="center" width="9999" bgcolor="#1a1a2e">
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                                                             │
-│   📱  Telegram     →  @kalinov_fan                          │
-│   🎮  Steam        →  LilKALINOV                            │
-│   👥  VK           →  bass.kalinov                          │
-│   🌐  Website      →  knice.tech                            │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
-
-</td>
-</tr>
-</table>
-
 [![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/kalinov_fan)
 [![Steam](https://img.shields.io/badge/Steam-1B2838?style=for-the-badge&logo=steam&logoColor=white)](https://steamcommunity.com/id/LilKALINOV/)
 [![VK](https://img.shields.io/badge/VK-4680FF?style=for-the-badge&logo=vk&logoColor=white)](https://vk.com/bass.kalinov)
