@@ -1,14 +1,11 @@
 <h1 align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=220&section=header&text=Lil%20KALINOV&fontSize=80&fontColor=ffffff&fontAlignY=40&desc=Stella%20Developer%20%7C%20Astra%20Tester&descSize=20&descAlignY=60&animation=fadeIn" width="100%"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=300&section=header&text=Lil%20KALINOV&fontSize=100&fontColor=ffffff&fontAlignY=35&desc=Stella%20Developer%20%7C%20Astra%20Tester&descSize=24&descAlignY=55&animation=fadeIn" width="100%"/>
 </h1>
 
 <br>
+<br>
 
-<div align="center">
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=100&section=header&text=ABOUT&fontSize=50&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
-
-</div>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=150&section=header&text=ABOUT&fontSize=60&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
 
 <table>
 <tr>
@@ -51,10 +48,11 @@
 </table>
 
 <br>
+<br>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=150&section=header&text=TECH&fontSize=60&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
 
 <div align="center">
-
-## `tech`
 
 ![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
@@ -67,10 +65,11 @@
 </div>
 
 <br>
+<br>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=150&section=header&text=CONNECT&fontSize=60&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
 
 <div align="center">
-
-## `connect`
 
 [![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/kalinov_fan)
 [![Steam](https://img.shields.io/badge/Steam-1B2838?style=for-the-badge&logo=steam&logoColor=white)](https://steamcommunity.com/id/LilKALINOV/)
@@ -79,12 +78,18 @@
 </div>
 
 <br>
+<br>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=150&section=header&text=PROJECTS&fontSize=60&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
 
 <div align="center">
-
-## `projects`
 
 [![knice.tech](https://img.shields.io/badge/KNICE%20TECH-FF0040?style=for-the-badge&logo=googlechrome&logoColor=white)](https://knice.tech)
 [![minice.ai](https://img.shields.io/badge/MINICE%20AI-FF0040?style=for-the-badge&logo=openai&logoColor=white)](https://minice.ai)
 
 </div>
+
+<br>
+<br>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=200&section=footer&animation=fadeIn" width="100%"/>
