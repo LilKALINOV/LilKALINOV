@@ -3,9 +3,8 @@
 </h1>
 
 <br>
-<br>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=150&section=header&text=ABOUT&fontSize=60&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=80&section=header&text=ABOUT&fontSize=40&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
 
 <table>
 <tr>
@@ -48,48 +47,44 @@
 </table>
 
 <br>
-<br>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=150&section=header&text=TECH&fontSize=60&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=80&section=header&text=TECH&fontSize=40&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
 
 <div align="center">
 
-![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![Windows](https://img.shields.io/badge/Windows-0078D4?style=for-the-badge&logo=windows&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
+![Rust](https://img.shields.io/badge/Rust-000000?style=flat-square&logo=rust&logoColor=white&logoWidth=30&labelColor=black&height=40)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white&logoWidth=30&height=40)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white&logoWidth=30&height=40)
+![Windows](https://img.shields.io/badge/Windows-0078D4?style=flat-square&logo=windows&logoColor=white&logoWidth=30&height=40)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black&logoWidth=30&height=40)
+![Git](https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white&logoWidth=30&height=40)
+![GitHub](https://img.shields.io/badge/GitHub-100000?style=flat-square&logo=github&logoColor=white&logoWidth=30&height=40)
 
 </div>
 
 <br>
-<br>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=150&section=header&text=CONNECT&fontSize=60&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=80&section=header&text=CONNECT&fontSize=40&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
 
 <div align="center">
 
-[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/kalinov_fan)
-[![Steam](https://img.shields.io/badge/Steam-1B2838?style=for-the-badge&logo=steam&logoColor=white)](https://steamcommunity.com/id/LilKALINOV/)
-[![VK](https://img.shields.io/badge/VK-4680FF?style=for-the-badge&logo=vk&logoColor=white)](https://vk.com/bass.kalinov)
+[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=flat-square&logo=telegram&logoColor=white&logoWidth=30&height=40)](https://t.me/kalinov_fan)
+[![Steam](https://img.shields.io/badge/Steam-1B2838?style=flat-square&logo=steam&logoColor=white&logoWidth=30&height=40)](https://steamcommunity.com/id/LilKALINOV/)
+[![VK](https://img.shields.io/badge/VK-4680FF?style=flat-square&logo=vk&logoColor=white&logoWidth=30&height=40)](https://vk.com/bass.kalinov)
 
 </div>
 
 <br>
-<br>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=150&section=header&text=PROJECTS&fontSize=60&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=80&section=header&text=PROJECTS&fontSize=40&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
 
 <div align="center">
 
-[![knice.tech](https://img.shields.io/badge/KNICE%20TECH-FF0040?style=for-the-badge&logo=googlechrome&logoColor=white)](https://knice.tech)
-[![minice.ai](https://img.shields.io/badge/MINICE%20AI-FF0040?style=for-the-badge&logo=openai&logoColor=white)](https://minice.ai)
+[![knice.tech](https://img.shields.io/badge/KNICE%20TECH-FF0040?style=flat-square&logo=googlechrome&logoColor=white&logoWidth=30&height=40)](https://knice.tech)
+[![minice.ai](https://img.shields.io/badge/MINICE%20AI-FF0040?style=flat-square&logo=openai&logoColor=white&logoWidth=30&height=40)](https://minice.ai)
 
 </div>
 
 <br>
-<br>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=200&section=footer&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=100&section=footer&animation=fadeIn" width="100%"/>
