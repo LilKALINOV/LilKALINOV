@@ -2,15 +2,11 @@
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=220&section=header&text=Lil%20KALINOV&fontSize=80&fontColor=ffffff&fontAlignY=40&desc=Stella%20Developer%20%7C%20Astra%20Tester&descSize=20&descAlignY=60&animation=fadeIn" width="100%"/>
 </h1>
 
-<p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=FF0040&center=true&vCenter=true&multiline=true&repeat=true&width=500&lines=Stella+Developer;Astra+Tester;Rust+%2F+Python;Plugin+Development" alt="Typing SVG" />
-</p>
-
 <br>
 
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:1a1a2e,100:0d1117&height=100&section=header&text=ABOUT&fontSize=40&fontColor=FF0040&fontAlignY=50&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=100&section=header&text=ABOUT&fontSize=50&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
 
 </div>
 
