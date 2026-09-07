@@ -6,18 +6,9 @@
 
 <div align="center">
 
-| | |
-|:---:|:---:|
-| **STELLA DEVELOPER** | **TECH** |
-| голосовой ассистент | Rust • Python • TypeScript |
-| | |
-| **ASTRA TESTER** | **PLATFORMS** |
-| тестирование и QA | Windows • Linux |
-| | |
-| **PLUGIN DEV** | **FOCUS** |
-| интеграции | Voice AI • Plugins |
-
-</div>
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=24&duration=3000&pause=1000&color=FF0040&center=true&vCenter=true&width=600&lines=Voice+Assistant+Developer;Plugin+Integration+Expert;QA+and+Testing+Specialist;Rust+%7C+Python+%7C+TypeScript" alt="Typing SVG" />
+</p>
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=120&section=header&text=TECH&fontSize=50&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
 
