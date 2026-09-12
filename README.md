@@ -1,94 +1,99 @@
-<h1 align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=300&section=header&text=Lil%20KALINOV&fontSize=90&fontColor=ffffff&fontAlignY=35&desc=Rust%20%26%20Python%20Developer%20%7C%20QA%20%26%20Plugin%20Specialist&descSize=24&descAlignY=55&animation=fadeIn" width="100%"/>
-</h1>
+### About
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=100&section=header&text=ABOUT%20ME&fontSize=40&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
+I'm **Lil KALINOV** — administrator and tech support lead at **KNICE TECH & MINICE**. I work on the core infrastructure and community tooling for projects like **Stella** and **Astra**.
 
-<div align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=FF0040&center=true&vCenter=true&width=600&lines=Administrator+%26+Tech+Support;Stella+Core+Modifier;Astra+QA+%26+Plugin+Developer;Cross-platform+App+Developer" alt="Typing SVG" />
-</div>
+I modify and maintain the latest versions of Stella, test Astra builds, and write custom plugins for the platform. Outside of that, I build cross-platform desktop applications for Windows and Linux using Rust and Python.
 
-<br/>
+**Most of my work happens behind the scenes** — supporting the team, fixing issues, and keeping things running smoothly. The public repos you see here are pieces I've built and shared on my own.
 
-<div align="center">
-  <table>
-    <tr>
-      <td align="center" width="50%">
-        <img src="https://img.shields.io/badge/KNICE_TECH_%26_MINICE_AI-Administrator-FF0040?style=for-the-badge" alt="Admin Badge"/>
-        <br/>
-        <sub>Полное администрирование и техническая поддержка проектов.</sub>
-      </td>
-      <td align="center" width="50%">
-        <img src="https://img.shields.io/badge/Stella_%26_Astra-Modifier_%26_QA-FF0040?style=for-the-badge" alt="Dev Badge"/>
-        <br/>
-        <sub>Модификация последних версий Stella. QA-тестировщик и разработчик плагинов для Astra.</sub>
-      </td>
-    </tr>
-    <tr>
-      <td align="center" colspan="2">
-        <img src="https://img.shields.io/badge/Cross_Platform-Windows_%26_Linux_Apps-FF0040?style=for-the-badge" alt="Platform Badge"/>
-        <br/>
-        <sub>Разработка нативных, эффективных и визуально отполированных приложений для Windows и Linux.</sub>
-      </td>
-    </tr>
-  </table>
-</div>
+---
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=100&section=header&text=TECH%20STACK&fontSize=40&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
+### Shipping
 
-<div align="center">
-  <!-- Языки программирования -->
-  <img src="https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white" alt="Rust" />
-  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
-  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
-  <br/><br/>
-  <!-- Платформы -->
-  <img src="https://img.shields.io/badge/Windows-0078D4?style=for-the-badge&logo=windows&logoColor=white" alt="Windows" />
-  <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux" />
-  <br/><br/>
-  <!-- Инструменты -->
-  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git" />
-  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-</div>
+<table>
+<tr>
+<td width="50%" valign="top">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=100&section=header&text=FEATURED%20PROJECTS&fontSize=40&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
+**Stella** · core modifications
 
-<div align="center">
-  <table>
-    <tr>
-      <td align="center" width="33%">
-        <strong>⚡ SwiftProxy</strong><br/>
-        <sub>Высокопроизводительный прокси-инструмент</sub><br/><br/>
-        <a href="https://github.com/Lil-KALINOV/SwiftProxy" target="_blank">
-          <img src="https://img.shields.io/badge/View_Repository-FF0040?style=for-the-badge&logo=github&logoColor=white" alt="SwiftProxy Repo" />
-        </a>
-      </td>
-      <td align="center" width="33%">
-        <strong>🛡️ KNICE TECH & MINICE AI</strong><br/>
-        <sub>Администрирование и техподдержка</sub><br/><br/>
-        <img src="https://img.shields.io/badge/Status-Active-00FF00?style=for-the-badge" alt="Active" />
-      </td>
-      <td align="center" width="33%">
-        <strong>🔌 Astra Plugins</strong><br/>
-        <sub>Кастомная разработка и QA</sub><br/><br/>
-        <img src="https://img.shields.io/badge/Role-Developer_%26_Tester-FF0040?style=for-the-badge" alt="Role" />
-      </td>
-    </tr>
-  </table>
-</div>
+Latest version maintenance and feature development. Rust-based modifications for performance and stability.
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=100&section=header&text=CONNECT%20WITH%20ME&fontSize=40&fontColor=ffffff&fontAlignY=50&animation=fadeIn" width="100%"/>
+</td>
+<td width="50%" valign="top">
 
-<div align="center">
-  <a href="https://t.me/kalinov_fan" target="_blank">
-    <img src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white" alt="Telegram" />
+**Astra** · QA & plugins
+
+Testing builds, developing custom plugins in Rust, Python, and TypeScript, and ensuring plugin isolation works as expected.
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+**KNICE TECH & MINICE** · the team
+
+Independent studio. I handle administration, technical support, and community management.
+
+</td>
+<td width="50%" valign="top">
+
+**Cross-platform apps** · Windows & Linux
+
+Desktop applications built for both platforms, focusing on performance and clean UI.
+
+</td>
+</tr>
+</table>
+
+### Open pieces
+
+| Repo | What it is |
+| --- | --- |
+| [**SwiftProxy**](https://github.com/Lil-KALINOV/SwiftProxy) | High-performance proxy tool built in Rust. Fast, lightweight, and designed for reliability. |
+
+---
+
+### Stack
+
+**Core** · Rust · Python · TypeScript  
+**Desktop** · Windows · Linux · Tauri  
+**Tools** · Git · GitHub · VS Code  
+
+---
+
+### Connect
+
+<p align="center">
+  <a href="https://t.me/kalinov_fan">
+    <img src="https://img.shields.io/badge/Telegram-2CA5E0?style=flat-square&logo=telegram&logoColor=white" alt="Telegram">
   </a>
-  <a href="https://steamcommunity.com/id/LilKALINOV/" target="_blank">
-    <img src="https://img.shields.io/badge/Steam-1B2838?style=for-the-badge&logo=steam&logoColor=white" alt="Steam" />
+  <a href="https://steamcommunity.com/id/LilKALINOV/">
+    <img src="https://img.shields.io/badge/Steam-1B2838?style=flat-square&logo=steam&logoColor=white" alt="Steam">
   </a>
-  <a href="https://vk.com/bass.kalinov" target="_blank">
-    <img src="https://img.shields.io/badge/VK-4680FF?style=for-the-badge&logo=vk&logoColor=white" alt="VK" />
+  <a href="https://vk.com/bass.kalinov">
+    <img src="https://img.shields.io/badge/VK-4680FF?style=flat-square&logo=vk&logoColor=white" alt="VK">
   </a>
-</div>
+</p>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:ff0040,100:0d1117&height=120&section=footer&animation=fadeIn" width="100%"/>
+---
+
+### Numbers
+
+<p align="center">
+  <img height="165" src="https://github-readme-stats.vercel.app/api?username=Lil-KALINOV&show_icons=true&hide_border=true&bg_color=00000000&title_color=FF6B00&text_color=8A85A3&icon_color=FFA500&rank_icon=github&hide=issues&cache_seconds=86400" alt="GitHub stats">
+  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Lil-KALINOV&layout=compact&hide_border=true&bg_color=00000000&title_color=FF6B00&text_color=8A85A3&langs_count=6&hide=shell&cache_seconds=86400" alt="Top languages">
+</p>
+
+<p align="center">
+  <img src="https://streak-stats.demolab.com?user=Lil-KALINOV&hide_border=true&background=00000000&stroke=1F1C2F&ring=FF6B00&fire=FFA500&currStreakLabel=FF6B00&currStreakNum=8A85A3&sideLabels=8A85A3&sideNums=8A85A3&dates=6E6A85&excludeDaysLabel=6E6A85" alt="Streak">
+</p>
+
+<p align="center">
+  <img src="https://github-profile-trophy.vercel.app/?username=Lil-KALINOV&theme=nord&no-frame=true&no-bg=true&column=6&margin-w=6&margin-h=6" alt="Trophies">
+</p>
+
+---
+
+<p align="center">
+  <sub>Low-level modifications, plugin development, and tech support for the team.</sub>
+</p>
