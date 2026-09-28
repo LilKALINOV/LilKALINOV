@@ -6,7 +6,7 @@
 -->
 
 <p align="center">
-  <img src="./assets/hero-b82e9c4b2b7f.svg" width="100%" alt="Lil KALINOV — системный разработчик и QA. Rust, Python, Go и голосовые интерфейсы Astra. Ссылки: Telegram, GitHub, SpherePrime." />
+  <img src="./assets/hero-61e678f8fe4d.svg" width="100%" alt="Lil KALINOV — системный разработчик и QA. Rust, Python, Go и голосовые интерфейсы Astra. Ссылки: Telegram, GitHub, SpherePrime." />
 </p>
 
 <p align="center">

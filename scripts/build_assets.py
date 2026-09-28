@@ -120,8 +120,8 @@ LINK_CARD_Y = 372
 LINK_CARD_GAP = 16
 
 # the avatar: the ico.jpg shipped with the repo, inlined as a data URI so the
-# SVG stays a single self-contained file behind camo. It fills the orbital
-# core where the "K." mark used to be, clipped to a circle inside the 58px ring.
+# SVG stays a single self-contained file behind camo. It fills the orbital core
+# where the "K." mark used to be, clipped to a circle inside the 58px ring.
 AVR_R = 46
 
 # --- card illustration corridor ------------------------------------------- #
@@ -814,14 +814,13 @@ def build_hero():
     body = f'''
 {defs}
 {card_defs}
-{avatar_clip}
 {blobs}
 {enter(f'''
 <rect x="0" y="0" width="{W}" height="{TOPBAR_H}" fill="#ffffff" opacity=".02"/>
 <path d="M0 {TOPBAR_H}.5H{W}" stroke="{HAIRLINE}"/>
 <path d="M0 {TOPBAR_H}.5H{W}" stroke="url(#topline)" stroke-width="1.5" class="flow" style="stroke-dasharray:90 {W}"/>
 <circle cx="{AXIS + 5}" cy="{n(top_mid)}" r="4.5" fill="url(#brandx)"/>
-{text(TEXT + 40, top_base, 'LilKALINOV <tspan fill="' + INK_MUTE + '">/</tspan> personal space', size=13.5, fill=INK_SOFT, mono=True)}
+{text(TEXT, top_base, 'LilKALINOV <tspan fill="' + INK_MUTE + '">/</tspan> personal space', size=13.5, fill=INK_SOFT, mono=True)}
 {text(RIGHT, top_base, '<tspan fill="' + CYAN + '">●</tspan> BUILD · TEST · SHIP', size=12.5, fill=INK_SOFT, mono=True, anchor='end', tracking=1)}
 ''', 0, 'enter-soft')}
 {enter(text(TEXT, 146, 'SYSTEMS / VOICE / PRIME', size=13, fill=CORAL, mono=True, tracking=4.2, weight=600), 0.06, 'enter-soft')}
