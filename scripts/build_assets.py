@@ -119,9 +119,10 @@ LINK_CARD_H = 46
 LINK_CARD_Y = 372
 LINK_CARD_GAP = 16
 
-# the avatar disc in the hero's top bar, where the old 4.5px dot used to be
-AVR_CX = AXIS + 5
-AVR_R = 14
+# the avatar: the ico.jpg shipped with the repo, inlined as a data URI so the
+# SVG stays a single self-contained file behind camo. It fills the orbital
+# core where the "K." mark used to be, clipped to a circle inside the 58px ring.
+AVR_R = 46
 
 # --- card illustration corridor ------------------------------------------- #
 # The rule the layout was missing: the vertical rule that splits the card's copy
@@ -761,21 +762,25 @@ def build_hero():
             f'stroke-width="1.5" style="animation-delay:{n(delay)}s"/>'
         )
 
-    # the avatar disc in the top bar: the ico.jpg shipped with the repo, inlined
-    # as a data URI so the SVG stays a single self-contained file behind camo.
-    top_mid = TOPBAR_H / 2
-    ico = ASSETS / 'ico.jpg'
+    # avatar disc in the orbital centre: the ico.jpg shipped with the repo,
+    # inlined as a data URI so the SVG stays a single self-contained file
+    # behind camo. It fills the morphing core where the "K." mark used to be;
+    # the ring and ripples are redrawn over it.
     avatar_image = ''
+    avatar_clip = ''
+    ico = ASSETS / 'ico.jpg'
     if ico.exists():
         avatar_b64 = base64.b64encode(ico.read_bytes()).decode('ascii')
+        avatar_clip = f'<clipPath id="avr"><circle cx="{n(cx)}" cy="{n(cy)}" r="{AVR_R}"/></clipPath>'
         avatar_image = (
-            f'<clipPath id="avr"><circle cx="{AVR_CX}" cy="{n(top_mid)}" r="{AVR_R}"/></clipPath>'
-            f'<image x="{n(AVR_CX - AVR_R)}" y="{n(top_mid - AVR_R)}" width="{AVR_R * 2}" height="{AVR_R * 2}" '
-            f'href="data:image/jpeg;base64,{avatar_b64}" clip-path="url(#avr)" preserveAspectRatio="xMidYMid slice"/>'
-            f'<circle class="pulse" cx="{AVR_CX}" cy="{n(top_mid)}" r="{AVR_R + 1}" fill="none" '
-            f'stroke="{EMBER}" stroke-width="1.6" filter="url(#soft)"/>'
-            f'<circle cx="{AVR_CX}" cy="{n(top_mid)}" r="{AVR_R}" fill="none" stroke="{EMBER}" stroke-opacity=".8"/>'
+            f'<circle cx="{n(cx)}" cy="{n(cy)}" r="{AVR_R}" fill="{PANEL_BOT}"/>'
+            f'<image x="{n(cx - AVR_R)}" y="{n(cy - AVR_R)}" width="{AVR_R * 2}" height="{AVR_R * 2}" '
+            f'href="data:image/jpeg;base64,{avatar_b64}" clip-path="url(#avr)" '
+            f'preserveAspectRatio="xMidYMid slice"/>'
+            f'<circle cx="{n(cx)}" cy="{n(cy)}" r="{AVR_R}" fill="none" stroke="url(#brandx)" '
+            f'stroke-opacity=".8" stroke-width="1.6"/>'
         )
+
 
 
 
@@ -809,12 +814,13 @@ def build_hero():
     body = f'''
 {defs}
 {card_defs}
+{avatar_clip}
 {blobs}
 {enter(f'''
 <rect x="0" y="0" width="{W}" height="{TOPBAR_H}" fill="#ffffff" opacity=".02"/>
 <path d="M0 {TOPBAR_H}.5H{W}" stroke="{HAIRLINE}"/>
 <path d="M0 {TOPBAR_H}.5H{W}" stroke="url(#topline)" stroke-width="1.5" class="flow" style="stroke-dasharray:90 {W}"/>
-{avatar_image}
+<circle cx="{AXIS + 5}" cy="{n(top_mid)}" r="4.5" fill="url(#brandx)"/>
 {text(TEXT + 40, top_base, 'LilKALINOV <tspan fill="' + INK_MUTE + '">/</tspan> personal space', size=13.5, fill=INK_SOFT, mono=True)}
 {text(RIGHT, top_base, '<tspan fill="' + CYAN + '">●</tspan> BUILD · TEST · SHIP', size=12.5, fill=INK_SOFT, mono=True, anchor='end', tracking=1)}
 ''', 0, 'enter-soft')}
@@ -832,10 +838,10 @@ def build_hero():
 {orbit}
 <circle class="mesh" cx="{cx}" cy="{cy}" r="60" fill="{CORAL}" opacity=".3" filter="url(#softer)"/>
 {ripples}
-<path class="morph" d="{ring_d(cx, cy, CORE_R, CIRCLE_K * CORE_R)}" fill="url(#panel)"/>
+{avatar_clip}
+{avatar_image}
 <path class="morph" d="{ring_d(cx, cy, CORE_R, CIRCLE_K * CORE_R)}" fill="none" stroke="url(#brandx)" stroke-opacity=".75" stroke-width="1.6"/>
 <circle class="pulse" cx="{cx}" cy="{cy}" r="58" fill="none" stroke="{CORAL}" stroke-width="2" filter="url(#soft)"/>
-{text(cx, cy + 19, '<tspan fill="' + INK + '">K</tspan><tspan fill="' + EMBER + '">.</tspan>', size=54, weight=700, anchor='middle')}
 {orbit_caption(cx, cy + 116, 'SPHEREPRIME · IN ORBIT', 11, 2.6)}
 ''', 0.14)}
 '''
