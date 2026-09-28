@@ -1,81 +1,34 @@
-<div align="center">
-  <h1>👋 Привет, я Lil KALINOV</h1>
-  <p>
-    <img src="https://img.shields.io/badge/Rust_%26_Python_Developer-FF7A00?style=flat-square&logo=rust&logoColor=white&logoWidth=20&height=28" alt="Rust & Python Developer" />
-    <img src="https://img.shields.io/badge/TypeScript_%26_UI_Architect-FF7A00?style=flat-square&logo=typescript&logoColor=white&logoWidth=20&height=28" alt="TypeScript & UI Architect" />
-    <img src="https://img.shields.io/badge/QA_%26_Plugin_Systems-FF7A00?style=flat-square&logo=checkmarx&logoColor=white&logoWidth=20&height=28" alt="QA & Plugin Systems" />
-  </p>
-</div>
+<!--
+  Every word on this page is drawn in assets/*.svg — there is no prose in this
+  file on purpose, so the design stays in one place: scripts/build_assets.py.
+  Regenerate with:  python scripts/build_assets.py
+  Check the layout with:  python scripts/verify_assets.py
+-->
 
----
-
-### 🟠 About Me
-
-Я администратор и специалист технической поддержки в студии **KNICE TECH & MINICE**, занимающейся разработкой десктопных голосовых помощников. Моя работа находится на стыке системного программирования, обеспечения качества (QA) и создания расширяемой архитектуры через плагины. 
-
-В свободное от основных проектов время я развиваю собственные open-source инициативы и планирую линейку кроссплатформенных утилит для Windows и Linux.
-
----
-
-### 🟠 Professional Experience & Projects
-
-> 💡 *Большая часть нашей работы в студии является closed source. Ниже представлены ключевые направления моей деятельности и публичные проекты.*
-
-| Проект / Направление | Моя роль и вклад | Статус / Ссылки |
-| :--- | :--- | :--- |
-| **KNICE TECH & MINICE**<br>*(Студия разработки)* | **Администратор / Техподдержка**<br>Обеспечение стабильной работы инфраструктуры, управление жизненным циклом проектов и прямая техническая поддержка пользователей. | 🌐 [knice.tech](https://knice.tech)<br>🌐 [astra.minice.ai](https://astra.minice.ai) |
-| **Astra**<br>*(Голосовой помощник)* | **QA Tester & Plugin Developer**<br>Проведение закрытого и открытого бета-тестирования. Разработка и интеграция плагинов, расширяющих функциональность ассистента без вмешательства в ядро. | 🟢 Активная разработка<br>🔒 Closed Source |
-| **Stella**<br>*(Предшественник Astra)* | **Core Modifier**<br>После прекращения официальных обновлений в 2025 году, я взял проект в свои руки: полностью переработал дизайн, повысил стабильность, исправил критические ошибки и внедрил новые функции. | 🟡 Поддерживается мной<br>🔒 Closed Source |
-
----
-
-### 🟠 Personal Projects & Roadmap
-
-| Проект | Описание и планы развития |
-| :--- | :--- |
-| ⚡ **[PrimeProxy](https://github.com/Lil-KALINOV/SwiftProxy)** | **Инструмент для обхода блокировок в РФ.**<br>• *Текущий стек:* Python.<br>•  Разработка специализированного плагина для бесшовной интеграции прямо в интерфейс **Astra**. |
-| 💻 **Desktop Utilities** | **Кроссплатформенные приложения.**<br>• *Планы:* Разработка линейки полезных, легковесных и визуально отполированных нативных приложений для экосистем Windows и Linux с фокусом на чистый UI и низкое потребление ресурсов. |
-
----
-
-### 🟠 Tech Stack
-
-<p align="left">
-  <!-- Языки программирования -->
-  <img src="https://img.shields.io/badge/Rust-FF7A00?style=flat-square&logo=rust&logoColor=white&logoWidth=20&height=28" alt="Rust" />
-  <img src="https://img.shields.io/badge/Python-FF7A00?style=flat-square&logo=python&logoColor=white&logoWidth=20&height=28" alt="Python" />
-  <img src="https://img.shields.io/badge/TypeScript-FF7A00?style=flat-square&logo=typescript&logoColor=white&logoWidth=20&height=28" alt="TypeScript" />
-  
-  <!-- UI & Фреймворки -->
-  <img src="https://img.shields.io/badge/Tauri-FF7A00?style=flat-square&logo=tauri&logoColor=white&logoWidth=20&height=28" alt="Tauri" />
-  <img src="https://img.shields.io/badge/Flutter-FF7A00?style=flat-square&logo=flutter&logoColor=white&logoWidth=20&height=28" alt="Flutter" />
-  <img src="https://img.shields.io/badge/Qt6-FF7A00?style=flat-square&logo=qt&logoColor=white&logoWidth=20&height=28" alt="Qt6" />
-  
-  <!-- Инструменты и IDE -->
-  <img src="https://img.shields.io/badge/Git-FF7A00?style=flat-square&logo=git&logoColor=white&logoWidth=20&height=28" alt="Git" />
-  <img src="https://img.shields.io/badge/GitHub-FF7A00?style=flat-square&logo=github&logoColor=white&logoWidth=20&height=28" alt="GitHub" />
-  <img src="https://img.shields.io/badge/VS_Code-FF7A00?style=flat-square&logo=visualstudiocode&logoColor=white&logoWidth=20&height=28" alt="VS Code" />
-  <img src="https://img.shields.io/badge/Visual_Studio-FF7A00?style=flat-square&logo=visualstudio&logoColor=white&logoWidth=20&height=28" alt="Visual Studio" />
+<p align="center">
+  <img src="./assets/hero-d4cba881ad71.svg" width="100%" alt="Lil KALINOV — системный разработчик и QA. Rust, Python, Go и голосовые интерфейсы Astra. Ссылки: Telegram, портфолио, SpherePrime." />
 </p>
 
----
-
-### 🟠 Connect with me
-
-<p align="left">
-  <a href="https://t.me/SpherePrime" target="_blank">
-    <img src="https://img.shields.io/badge/Telegram-FF7A00?style=flat-square&logo=telegram&logoColor=white&logoWidth=20&height=32" alt="Telegram" />
-  </a>
-  <a href="https://steamcommunity.com/id/LilKALINOV/" target="_blank">
-    <img src="https://img.shields.io/badge/Steam-FF7A00?style=flat-square&logo=steam&logoColor=white&logoWidth=20&height=32" alt="Steam" />
-  </a>
-  <a href="https://vk.com/bass.kalinov" target="_blank">
-    <img src="https://img.shields.io/badge/VK-FF7A00?style=flat-square&logo=vk&logoColor=white&logoWidth=20&height=32" alt="VK" />
-  </a>
+<p align="center">
+  <a href="https://t.me/LilKALINOV">Telegram ↗</a> &nbsp;·&nbsp;
+  <a href="https://github.com/LilKALINOV">GitHub ↗</a> &nbsp;·&nbsp;
+  <a href="https://github.com/SpherePrime">SpherePrime ↗</a>
 </p>
 
-<br>
+<p align="center">
+  <img src="./assets/intro-181a58978bad.svg" width="100%" alt="Системный разработчик и QA. Соединяю надёжное ядро с полезной механикой: скорость в Rust и Go, сервисы на Python, голос — через Astra Plugin SDK. Фокус: скорость и надёжность, сервисы и плагины, живой диалог." />
+</p>
 
-<div align="center">
-  <sub>Пишу чистый код, тестирую до конца и делаю вещи, которые работают. 🟠</sub>
-</div>
+<a href="https://github.com/LilKALINOV/astra-silero"><img src="./assets/astra-f0e3778e1701.svg" width="100%" alt="01 Astra Plugins — голос и поиск для Astra: Silero STT, DDG WebSearch, Google STT. Rust, Astra, STT, Voice. Открыть репозиторий." /></a>
+
+<a href="https://github.com/SpherePrime/PrimeProxy"><img src="./assets/primeproxy-d200a391097b.svg" width="100%" alt="02 PrimeProxy — мост там, где нет связи. Локальный MTProto-прокси, плагин прямо в Astra. Python, MTProto, Astra. Открыть репозиторий." /></a>
+
+<a href="https://github.com/SpherePrime/CLI"><img src="./assets/primerouter-eddcdb996b3a.svg" width="100%" alt="03 PrimeRouter и Prime CLI — маршрутизация LLM-провайдеров и собственный CLI. Go, Rust, SpherePrime. Открыть репозиторий." /></a>
+
+<p align="center">
+  <img src="./assets/plugins-66542e2b74b8.svg" width="100%" alt="04 Плагины Astra — голос и поиск для ассистента без вмешательства в ядро: astra-silero (Silero STT), astra-websearch-ddg (поиск DuckDuckGo), Astra-Google-STT, Astra-PrimeProxy (сетевой слой)." />
+</p>
+
+<a href="https://github.com/SpherePrime"><img src="./assets/sphereprime-ef6e3966c501.svg" width="100%" alt="05 SpherePrime — проекты организации вместе с dwertyfa: PrimeProxy (MTProto-прокси, Python), PrimeAI (AI-провайдер, TypeScript), Prime CLI (терминальный ассистент, Go). Открыть организацию." /></a>
+
+<a href="https://t.me/LilKALINOV"><img src="./assets/footer-374884224457.svg" width="100%" alt="Есть задача? Решим её вместе — от архитектуры до продакшена. Написать LilKALINOV в Telegram: @LilKALINOV" /></a>
