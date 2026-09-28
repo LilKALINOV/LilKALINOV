@@ -28,7 +28,7 @@ ART_ASSETS = {'astra.svg', 'primeproxy.svg', 'primerouter.svg'}
 # so a moved axis can never leave the two files disagreeing
 sys.path.insert(0, str(ROOT / 'scripts'))
 from build_assets import (AXIS, DIV, HEAD_EYEBROW, HEAD_SIZE, HEAD_SUB,  # noqa: E402
-                          HEAD_TITLE, RIGHT, TEXT)
+                          HEAD_TITLE, RIGHT, SPINE_X, TEXT)
 
 FONT_FILES = {
     ('sans', False): r'C:\Windows\Fonts\segoeui.ttf',
@@ -226,6 +226,8 @@ def shape_boxes(root, tags=(f'{NS}rect', f'{NS}circle', f'{NS}ellipse')):
         fill = node.get('fill') or ''
         if fill.startswith('url(#au'):
             continue  # soft aurora backdrops are meant to sit under text
+        if 'url(#sheen)' in fill or 'gws' in cls:
+            continue  # the traveling sheen sweep: a light overlay, not a surface
         box = rotate_box(box, *parse_transform(node, parents))
         boxes.append({'label': node.tag.split('}')[1] + (f'.{cls}' if cls else ''), 'box': box,
                       'style': style, 'fill': fill})
@@ -342,11 +344,13 @@ def grid_issues(root, name=''):
         # right-flushed tag rows inside the check
         if name in ART_ASSETS and x >= DIV:
             continue
-        # the accent bar is classified by shape, not by stroke: it is gradient
-        # filled, so it carries no stroke attribute at all
+        # the left accent spine is classified by shape: a thin tall rect parked
+        # at SPINE_X (the margin, clear of the pills on AXIS and copy on TEXT).
+        # It carries no stroke, so shape is the only tell. Both the base bar and
+        # its clipPath rect match, so expect both at SPINE_X.
         if w <= 6 and h > 80:
-            if abs(x - AXIS) > 0.5:
-                issues.append(f'accent bar starts at x={n_(x)}, expected AXIS {AXIS}')
+            if abs(x - SPINE_X) > 0.5:
+                issues.append(f'accent spine starts at x={n_(x)}, expected SPINE_X {SPINE_X}')
         elif h < 60 and node.get('stroke'):  # pill outline
             rows.setdefault(round(y, 1), []).append((x, x + w))
     for y, pills in sorted(rows.items()):

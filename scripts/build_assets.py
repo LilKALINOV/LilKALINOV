@@ -94,6 +94,18 @@ CARD_BAR_Y = 44
 CARD_TAG_Y = 166
 CARD_TAG_H = 25
 
+# the left accent spine, one shared element drawn in all eight assets. The old
+# per-card bar sat on AXIS=52 and swallowed the left edge of the first tag pill
+# (pills outline at 52, the bar at 52..56 down to y=191), so it both covered
+# type and existed in only three of the eight panels. Parked in the margin at
+# x=26 the spine is clear of pills (52) and copy (74), and drawing it the same
+# way in every asset is what makes the set read as even.
+SPINE_X = 26
+SPINE_W = 4
+SPINE_TOP = 66       # below the 58px top bar in hero/card, so it never crosses it
+SPINE_BOT = 32       # same inset off the bottom edge in every asset
+SPINE_SEG = 34       # a traveling light segment, two per spine
+
 # --- card illustration corridor ------------------------------------------- #
 # The rule the layout was missing: the vertical rule that splits the card's copy
 # from its illustration is a grid line with a real gutter on each side, and the
@@ -234,8 +246,8 @@ STYLE = """
  .eq{transform-box:fill-box;animation:eq 1.15s ease-in-out infinite alternate}
  .up{transform-origin:50% 100%}
  .dn{transform-origin:50% 0%}
- /* 7. accent bar scan */
- .scan{animation:scan 2.8s ease-in-out infinite alternate}
+ /* 7. light pulses riding the left accent spine */
+ .spimp{animation:spimp 5.2s linear infinite}
  /* 8. status dot */
  .blink{animation:blink 2.4s ease-in-out infinite}
  .pulse{animation:pulse 4.5s ease-in-out infinite}
@@ -276,14 +288,19 @@ STYLE = """
  @keyframes sweep{0%{transform:translateX(-230px)}58%{transform:translateX(840px)}100%{transform:translateX(840px)}}
  @keyframes ripple{0%{transform:scale(.5);opacity:.6}70%{opacity:.1}100%{transform:scale(1.85);opacity:0}}
  @keyframes eq{from{transform:scaleY(.2)}to{transform:scaleY(1)}}
- @keyframes scan{from{transform:translateY(-38px)}to{transform:translateY(147px)}}
+ @keyframes spimp{from{transform:translateY(-40px)}to{transform:translateY(calc(var(--spine-h) + 6px))}}
+ @keyframes twinkle{0%,100%{opacity:.15;scale:.6}50%{opacity:.9;scale:1.25}}
+ @keyframes drift-t{from{translate:0 0}to{translate:0 6px}}
+ .twinkle{transform-box:fill-box;transform-origin:50% 50%;animation:twinkle 4.2s ease-in-out infinite,drift-t 9s ease-in-out infinite alternate}
  @keyframes blink{0%,100%{opacity:.35}50%{opacity:1}}
  @keyframes pulse{0%,100%{opacity:.3}50%{opacity:.9}}
  @keyframes edgeflow{to{stroke-dashoffset:calc(-1 * var(--edge))}}
  @keyframes grainx{0%{transform:translate(0,0)}100%{transform:translate(-140px,90px)}}
  @keyframes enter{from{opacity:.62;transform:translateY(10px)}to{opacity:1;transform:none}}
  @keyframes enter-soft{from{opacity:.8;transform:translateY(9px)}to{opacity:1;transform:none}}
- @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transform:none!important}}
+ @keyframes gwsweep{from{transform:translateX(-420px)}to{transform:translateX(1520px)}}
+ .gws{animation:gwsweep 8.5s cubic-bezier(.45,0,.55,1) infinite}
+ @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transform:none!important;scale:1!important;translate:0 0!important}}
 """
 
 
@@ -516,11 +533,79 @@ def wordmark(fill):
             '<tspan fill="' + EMBER + '">.</tspan>')
 
 
-def shell(name, height, radius, body, title, defs_extra=''):
+def dust(height, name):
+    """An even field of twinkle dust confined to the top and bottom gutters.
+
+    Specks are parked in the two clear bands - above the first text run and
+    below the last - at evenly spaced x, so the field reads as measured rather
+    than scattered. Positions are seeded from the asset name (stable per
+    build) and only the per-speck phase varies, so the panel breathes while
+    staying regular. No speck can land on a word: the bands are the gutters.
+    """
+    seed = sum(ord(c) for c in name)
+    top0, top1 = 12, 22
+    bot0, bot1 = height - 24, height - 12
+    out = '<g opacity=".5">'
+    for band, count, x0, x1 in [
+        (top0, 7, 40, 1060),          # 7 specks across the top gutter
+        (bot0, 5, 120, 1000),         # 5 across the bottom, inset off the edges
+    ]:
+        y_lo = band
+        for i in range(count):
+            x = x0 + (x1 - x0) * i / (count - 1)
+            y = y_lo + ((seed + i * 7) % 11) / 10  # 0..1 within the 10px band
+            r = 1.1 if i % 3 else 1.6
+            delay = -((seed + i * 1.13) % 4.2)
+            out += (f'<circle class="twinkle" cx="{n(x)}" cy="{n(y)}" r="{n(r)}" '
+                    f'fill="{BLUSH}" style="animation-delay:{n(delay)}s"/>')
+    return out + '</g>'
+
+
+def spine(height, accent):
+    """The shared left accent spine: a gradient bar with a breathing glow and
+    two light pulses riding its full length.
+
+    Drawn identically in every asset (same x, same top inset, same bottom
+    inset) so the side rule reads as even across the whole set. It sits in the
+    left margin at SPINE_X=26, clear of the tag pills on AXIS=52 and the body
+    copy on TEXT=74, so it never covers a word. The gradient, the glow and the
+    pulse geometry all come from the shared constants, which is what keeps the
+    spine the same height rule in every panel.
+    """
+    top = SPINE_TOP
+    bot = height - SPINE_BOT
+    bar_h = bot - top
+    glow = (f'<rect x="{SPINE_X - 3}" y="{top}" width="{SPINE_W + 6}" height="{n(bar_h)}" '
+            f'rx="{(SPINE_W + 6) / 2}" fill="{accent}" opacity=".28" filter="url(#soft)" class="pulse"/>')
+    return (
+        f'{glow}'
+        f'<g clip-path="url(#spc)">'
+        f'<rect x="{SPINE_X}" y="{top}" width="{SPINE_W}" height="{n(bar_h)}" rx="{SPINE_W / 2}" '
+        f'fill="url(#spineg)"/>'
+        f'<rect class="spimp" x="{SPINE_X}" y="{top}" width="{SPINE_W}" height="{SPINE_SEG}" rx="{SPINE_W / 2}" '
+        f'fill="#ffffff" fill-opacity=".85" style="--spine-h:{n(bar_h)};filter:url(#soft)"/>'
+        f'<rect class="spimp" x="{SPINE_X}" y="{top}" width="{SPINE_W}" height="{SPINE_SEG}" rx="{SPINE_W / 2}" '
+        f'fill="{EMBER}" fill-opacity=".8" style="--spine-h:{n(bar_h)};animation-delay:2.6s;filter:url(#soft)"/>'
+        f'</g>'
+    )
+
+
+def shell(name, height, radius, body, title, defs_extra='', spine_color=None):
     """Assemble a complete, accessible SVG document."""
     # the travelling edge light needs the frame's own perimeter, so the dash it
     # draws and the distance it travels are one exact loop
     perim = round(2 * ((W - 4) + (height - 4)))
+    spine_def = f'<clipPath id="spc"><rect x="{SPINE_X}" y="{SPINE_TOP}" width="{SPINE_W}" height="{n(height - SPINE_TOP - SPINE_BOT)}" rx="{SPINE_W / 2}"/></clipPath>'
+    spine_grad = (f'<linearGradient id="spineg" gradientUnits="userSpaceOnUse" '
+                  f'x1="{SPINE_X}" y1="{SPINE_TOP}" x2="{SPINE_X}" y2="{n(height - SPINE_BOT)}">'
+                  f'<stop stop-color="{EMBER}"/><stop offset=".5" stop-color="{CORAL}"/>'
+                  f'<stop offset="1" stop-color="{CYAN}"/></linearGradient>')
+    if spine_color:
+        body = spine(height, spine_color) + body
+    # a shared field of drifting dust: deterministic positions (seeded on the
+    # asset name) so builds stay byte-stable, twinkling on independent phases.
+    # It lives in the frame group, behind the copy, so it never covers a word.
+    body = dust(height, name) + body
     document = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{height}" viewBox="0 0 {W} {height}" role="img" aria-labelledby="title">
 <title id="title">{escape(title)}</title>
 <defs>
@@ -546,12 +631,15 @@ def shell(name, height, radius, body, title, defs_extra=''):
   <feColorMatrix type="saturate" values="0"/>
  </filter>
  <clipPath id="frame"><rect x=".5" y=".5" width="{W - 1}" height="{height - 1}" rx="{radius}"/></clipPath>
+ {spine_def}
+ {spine_grad}
  {defs_extra}
 </defs>
 <style>{STYLE}</style>
 <g clip-path="url(#frame)" style="isolation:isolate">
 <rect x=".5" y=".5" width="{W - 1}" height="{height - 1}" rx="{radius}" fill="url(#panel)"/>
 {body}
+<g transform="skewX(-18)"><rect class="gws" x="0" y="-60" width="120" height="{height + 120}" fill="url(#sheen)" opacity=".34"/></g>
 <rect class="grainx" x="-170" y="-110" width="{W + 340}" height="{height + 220}" filter="url(#grain)" opacity=".05" style="mix-blend-mode:overlay"/>
 <rect class="edgeflow" x="2" y="2" width="{W - 4}" height="{height - 4}" rx="{max(radius - 2, 4)}" fill="none" stroke="{GLOW_EDGE}" stroke-width="2.4" filter="url(#soft)" style="stroke-dasharray:240 {perim - 240};--edge:{perim}"/>
 <rect x="1" y="1" width="{W - 2}" height="{height - 2}" rx="{radius - 1}" fill="none" stroke="{GLOW_EDGE}"/>
@@ -685,7 +773,8 @@ def build_hero():
 '''
     shell('hero.svg', HERO_H, HERO_R, body,
           'Lil KALINOV — системный разработчик и QA. Rust, Python, Go и голосовые '
-          'интерфейсы Astra. Ссылки: Telegram, портфолио, организация SpherePrime.')
+          'интерфейсы Astra. Ссылки: Telegram, портфолио, организация SpherePrime.',
+          spine_color=CORAL)
 
 
 # --------------------------------------------------------------------------- #
@@ -733,7 +822,7 @@ def build_intro():
           'Привет, я Lil KALINOV. Системный разработчик и QA. Rust и Go — для '
           'скорости, Python — для сервисов и плагинов, голосовые интерфейсы Astra — '
           'для живого диалога. Фокус: скорость и надёжность, сервисы и плагины, '
-          'живой диалог.')
+          'живой диалог.', spine_color=CORAL)
 
 
 # --------------------------------------------------------------------------- #
@@ -853,16 +942,11 @@ def build_card(filename, number, label, name, description, tags, accent, art_bui
         tags_markup += markup
         x += width + 8
 
-    accent_grad = (
-        f'<linearGradient id="accentg" x1="0" y1="0" x2="0" y2="1">'
-        f'<stop stop-color="{primary}"/><stop offset="1" stop-color="{secondary}"/></linearGradient>'
-    )
-    # the bar brackets the whole content block: eyebrow cap top sits at ~50 and
-    # the tag pills end at 191, so 44..191 leads in 6px above and lands flush
-    bar_h = CARD_TAG_Y + CARD_TAG_H - CARD_BAR_Y
-    bar_clip = f'<clipPath id="barc"><rect x="{AXIS}" y="{CARD_BAR_Y}" width="4" height="{n(bar_h)}" rx="2"/></clipPath>'
+    # the card's accent now lives on the shared left spine (see spine()), so the
+    # old bar at AXIS that swallowed the first tag pill is gone. Only the art
+    # glow gradient remains in defs.
     glow_grad, glow = aurora(f'au-{number}', ART_CX, 110, 178, 140, primary, 0.11, 'drift-c')
-    defs_extra = accent_grad + bar_clip + glow_grad
+    defs_extra = glow_grad
 
     # the corner badge is chrome, not corridor: the glyph is sized off the same
     # radius as the ring so moving one moves both
@@ -877,8 +961,6 @@ def build_card(filename, number, label, name, description, tags, accent, art_bui
 {glow}
 <rect x="0" y="0" width="{W}" height="{TOPBAR_H}" fill="#ffffff" opacity=".018"/>
 <g class="enter">
-<rect x="{AXIS}" y="{CARD_BAR_Y}" width="4" height="{n(bar_h)}" rx="2" fill="url(#accentg)"/>
-<g clip-path="url(#barc)"><rect class="scan" x="{AXIS}" y="{CARD_BAR_Y}" width="4" height="34" rx="2" fill="{secondary}" opacity=".95"/></g>
 {text(TEXT, HEAD_EYEBROW, escape(number) + ' / ' + escape(label), size=11.5, fill=primary, mono=True, tracking=2.6, weight=600)}
 {text(TEXT, HEAD_TITLE, escape(name), size=38, weight=700, tracking=-0.9)}
 {text(TEXT, HEAD_SUB, escape(description), size=17, fill=INK_MUTE)}
@@ -888,7 +970,8 @@ def build_card(filename, number, label, name, description, tags, accent, art_bui
 <g class="enter" style="animation-delay:.16s">{art_body}</g>
 {badge}
 '''
-    shell(filename, CARD_H, CARD_R, body, f'{name}: {description}', defs_extra=defs_extra)
+    shell(filename, CARD_H, CARD_R, body, f'{name}: {description}', defs_extra=defs_extra,
+          spine_color=primary)
 
 
 def build_cards():
@@ -944,7 +1027,7 @@ def build_section(filename, number, label, title, subtitle, rows, accent, blob_c
     body = section_head(number, label, title, subtitle, accent, blob_color)
     for i, (name, description, tags, colors, dot) in enumerate(rows):
         body += data_row(HEAD_RULE + i * ROW_H, name, description, tags, colors, dot, 0.1 + 0.085 * i)
-    shell(filename, height, CARD_R, body, alt)
+    shell(filename, height, CARD_R, body, alt, spine_color=accent)
 
 
 def build_sections():
@@ -1036,7 +1119,7 @@ def build_footer():
 '''
     shell('footer.svg', FOOTER_H, HERO_R, body,
           'Есть задача? Решим её вместе — от архитектуры до продакшена. '
-          'Написать LilKALINOV в Telegram: @LilKALINOV')
+          'Написать LilKALINOV в Telegram: @LilKALINOV', spine_color=CORAL)
 
 
 def version_asset(match):
