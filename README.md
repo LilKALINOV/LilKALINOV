@@ -63,7 +63,7 @@
 ### 🟠 Connect with me
 
 <p align="left">
-  <a href="https://t.me/kalinov_fan" target="_blank">
+  <a href="https://t.me/SpherePrime" target="_blank">
     <img src="https://img.shields.io/badge/Telegram-FF7A00?style=flat-square&logo=telegram&logoColor=white&logoWidth=20&height=32" alt="Telegram" />
   </a>
   <a href="https://steamcommunity.com/id/LilKALINOV/" target="_blank">
