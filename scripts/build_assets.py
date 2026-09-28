@@ -50,6 +50,7 @@ Standard library only.  Run:  python scripts/build_assets.py
 
 from __future__ import annotations
 
+import base64
 import hashlib
 import re
 from html import escape
@@ -105,6 +106,22 @@ SPINE_W = 4
 SPINE_TOP = 66       # below the 58px top bar in hero/card, so it never crosses it
 SPINE_BOT = 32       # same inset off the bottom edge in every asset
 SPINE_SEG = 34       # a traveling light segment, two per spine
+
+# the footer has no top bar, so its spine may run much longer without
+# crossing anything: the same left rule, just filling the short panel
+SPINE_TOP_SHORT = 20
+SPINE_BOT_SHORT = 20
+
+# hero link cards: one even row, so every card is the same width and the set
+# reads as measured - uneven card widths next to each other read as broken
+LINK_CARD_W = 168
+LINK_CARD_H = 46
+LINK_CARD_Y = 372
+LINK_CARD_GAP = 16
+
+# the avatar disc in the hero's top bar, where the old 4.5px dot used to be
+AVR_CX = AXIS + 5
+AVR_R = 14
 
 # --- card illustration corridor ------------------------------------------- #
 # The rule the layout was missing: the vertical rule that splits the card's copy
@@ -300,6 +317,12 @@ STYLE = """
  @keyframes enter-soft{from{opacity:.8;transform:translateY(9px)}to{opacity:1;transform:none}}
  @keyframes gwsweep{from{transform:translateX(-420px)}to{transform:translateX(1520px)}}
  .gws{animation:gwsweep 8.5s cubic-bezier(.45,0,.55,1) infinite}
+ /* 16. the link cards: a sheen masked to one card, and the arrow nudging
+     toward its target on its own cycle */
+ .lksweep{animation:lksweep 5.6s linear infinite}
+ .nudg{transform-box:fill-box;transform-origin:50% 50%;animation:nudg 2.4s ease-in-out infinite}
+ @keyframes lksweep{0%{transform:translateX(-170px)}55%{transform:translateX(190px)}100%{transform:translateX(190px)}}
+ @keyframes nudg{0%,100%{transform:translate(0,0)}50%{transform:translate(3px,-3px)}}
  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transform:none!important;scale:1!important;translate:0 0!important}}
 """
 
@@ -460,6 +483,30 @@ def pill(x, y, label, color, *, h=26, size=12, pad=14, dot=False, weight=400):
     return body, width
 
 
+def link_card(x, label, color, *, delay=0.0, mask_id='lk'):
+    """One link card: a dark chip with an accent edge, the label centred, a
+    traveling sheen masked to the card, and a ↗ arrow that nudges toward its
+    target. Every card takes the same width so a row of them reads as even.
+    """
+    w, h = LINK_CARD_W, LINK_CARD_H
+    label_w = run_width(label, 13, True, 0.4)
+    pad = (w - label_w) / 2
+    sheen = (f'<g mask="url(#{mask_id})"><rect class="lksweep" x="{n(x - 170)}" y="{LINK_CARD_Y}" '
+             f'width="120" height="{h}" fill="url(#sheen)" style="animation-delay:{n(delay)}s"/></g>')
+    chip = (f'<rect x="{n(x)}" y="{LINK_CARD_Y}" width="{w}" height="{h}" rx="{h / 2}" '
+            f'fill="{CHIP}" fill-opacity="{n(CHIP_FILL)}" stroke="{color}" stroke-opacity="{n(CHIP_EDGE)}"/>'
+            f'<rect class="pulse" x="{n(x)}" y="{LINK_CARD_Y}" width="{w}" height="{h}" rx="{h / 2}" '
+            f'fill="none" stroke="{color}" stroke-width="1.2" style="animation-delay:{n(delay + 0.5)}s"/>')
+    label = text(x + pad, LINK_CARD_Y + h / 2 + 4.5, escape(label), size=13, fill=color,
+                 mono=True, weight=600, text_length=label_w)
+    # the arrow sits in the right gutter of the card, nudging toward its target
+    ax, ay = x + w - 22, LINK_CARD_Y + h / 2
+    arrow = (f'<g class="nudg" style="animation-delay:{n(delay)}s">'
+             f'<path d="M{ax - 5} {ay + 5}L{ax + 5} {ay - 5}M{ax + 5} {ay - 5}H{ax - 4}M{ax + 5} {ay - 5}V{ay + 4}" '
+             f'fill="none" stroke="{color}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></g>')
+    return sheen + chip + label + arrow
+
+
 def orbit_caption(cx, baseline, label, size, tracking):
     """The hero's orbit annotation, on its own dark plate.
 
@@ -561,19 +608,18 @@ def dust(height, name):
     return out + '</g>'
 
 
-def spine(height, accent):
+def spine(height, accent, *, short=False):
     """The shared left accent spine: a gradient bar with a breathing glow and
     two light pulses riding its full length.
 
     Drawn identically in every asset (same x, same top inset, same bottom
     inset) so the side rule reads as even across the whole set. It sits in the
     left margin at SPINE_X=26, clear of the tag pills on AXIS=52 and the body
-    copy on TEXT=74, so it never covers a word. The gradient, the glow and the
-    pulse geometry all come from the shared constants, which is what keeps the
-    spine the same height rule in every panel.
+    copy on TEXT=74, so it never covers a word. `short` is for the footer, which
+    has no 58px top bar, so its spine may run much longer.
     """
-    top = SPINE_TOP
-    bot = height - SPINE_BOT
+    top = SPINE_TOP_SHORT if short else SPINE_TOP
+    bot = height - (SPINE_BOT_SHORT if short else SPINE_BOT)
     bar_h = bot - top
     glow = (f'<rect x="{SPINE_X - 3}" y="{top}" width="{SPINE_W + 6}" height="{n(bar_h)}" '
             f'rx="{(SPINE_W + 6) / 2}" fill="{accent}" opacity=".28" filter="url(#soft)" class="pulse"/>')
@@ -590,18 +636,20 @@ def spine(height, accent):
     )
 
 
-def shell(name, height, radius, body, title, defs_extra='', spine_color=None):
+def shell(name, height, radius, body, title, defs_extra='', spine_color=None, spine_short=False):
     """Assemble a complete, accessible SVG document."""
     # the travelling edge light needs the frame's own perimeter, so the dash it
     # draws and the distance it travels are one exact loop
     perim = round(2 * ((W - 4) + (height - 4)))
-    spine_def = f'<clipPath id="spc"><rect x="{SPINE_X}" y="{SPINE_TOP}" width="{SPINE_W}" height="{n(height - SPINE_TOP - SPINE_BOT)}" rx="{SPINE_W / 2}"/></clipPath>'
+    sp_top = SPINE_TOP_SHORT if spine_short else SPINE_TOP
+    sp_bot = height - (SPINE_BOT_SHORT if spine_short else SPINE_BOT)
+    spine_def = f'<clipPath id="spc"><rect x="{SPINE_X}" y="{sp_top}" width="{SPINE_W}" height="{n(sp_bot - sp_top)}" rx="{SPINE_W / 2}"/></clipPath>'
     spine_grad = (f'<linearGradient id="spineg" gradientUnits="userSpaceOnUse" '
-                  f'x1="{SPINE_X}" y1="{SPINE_TOP}" x2="{SPINE_X}" y2="{n(height - SPINE_BOT)}">'
+                  f'x1="{SPINE_X}" y1="{sp_top}" x2="{SPINE_X}" y2="{n(sp_bot)}">'
                   f'<stop stop-color="{EMBER}"/><stop offset=".5" stop-color="{CORAL}"/>'
                   f'<stop offset="1" stop-color="{CYAN}"/></linearGradient>')
     if spine_color:
-        body = spine(height, spine_color) + body
+        body = spine(height, spine_color, short=spine_short) + body
     # a shared field of drifting dust: deterministic positions (seeded on the
     # asset name) so builds stay byte-stable, twinkling on independent phases.
     # It lives in the frame group, behind the copy, so it never covers a word.
@@ -713,15 +761,34 @@ def build_hero():
             f'stroke-width="1.5" style="animation-delay:{n(delay)}s"/>'
         )
 
+    # the avatar disc in the top bar: the ico.jpg shipped with the repo, inlined
+    # as a data URI so the SVG stays a single self-contained file behind camo.
+    top_mid = TOPBAR_H / 2
+    ico = ASSETS / 'ico.jpg'
+    avatar_image = ''
+    if ico.exists():
+        avatar_b64 = base64.b64encode(ico.read_bytes()).decode('ascii')
+        avatar_image = (
+            f'<clipPath id="avr"><circle cx="{AVR_CX}" cy="{n(top_mid)}" r="{AVR_R}"/></clipPath>'
+            f'<image x="{n(AVR_CX - AVR_R)}" y="{n(top_mid - AVR_R)}" width="{AVR_R * 2}" height="{AVR_R * 2}" '
+            f'href="data:image/jpeg;base64,{avatar_b64}" clip-path="url(#avr)" preserveAspectRatio="xMidYMid slice"/>'
+            f'<circle class="pulse" cx="{AVR_CX}" cy="{n(top_mid)}" r="{AVR_R + 1}" fill="none" '
+            f'stroke="{EMBER}" stroke-width="1.6" filter="url(#soft)"/>'
+            f'<circle cx="{AVR_CX}" cy="{n(top_mid)}" r="{AVR_R}" fill="none" stroke="{EMBER}" stroke-opacity=".8"/>'
+        )
+
+
+
     links = ''
     x = AXIS
-    for label, color in [('Telegram ↗', CYAN), ('Портфолио ↗', CORAL), ('SpherePrime ↗', SPHERE)]:
-        # outline on AXIS with pad 22, exactly like the card tag pills, so the
-        # label lands on TEXT and both row types share one left edge. The ↗ in
-        # the label carries the "external link" signal the dot used to.
-        markup, width = pill(x, 372, label, color, h=42, size=14, pad=22, weight=600)
-        links += markup
-        x += width + 12
+    card_defs = ''
+    for i, (label, color) in enumerate([('Telegram', CYAN), ('GitHub', INK_SOFT), ('SpherePrime', SPHERE)]):
+        card_defs += (f'<mask id="lk{i}" maskUnits="userSpaceOnUse" x="{n(x)}" y="{LINK_CARD_Y}" '
+                      f'width="{LINK_CARD_W}" height="{LINK_CARD_H}">'
+                      f'<rect x="{n(x)}" y="{LINK_CARD_Y}" width="{LINK_CARD_W}" height="{LINK_CARD_H}" '
+                      f'rx="{LINK_CARD_H / 2}" fill="#fff"/></mask>')
+        links += link_card(x, label, color, delay=0.08 * i, mask_id=f'lk{i}')
+        x += LINK_CARD_W + LINK_CARD_GAP
 
     # Staggered entrance. The hero uses `enter-soft`, which never starts fully
     # transparent: a renderer that paints the SVG before the animation clock
@@ -741,13 +808,14 @@ def build_hero():
     top_base = top_mid + CAP * 13.5
     body = f'''
 {defs}
+{card_defs}
 {blobs}
 {enter(f'''
 <rect x="0" y="0" width="{W}" height="{TOPBAR_H}" fill="#ffffff" opacity=".02"/>
 <path d="M0 {TOPBAR_H}.5H{W}" stroke="{HAIRLINE}"/>
 <path d="M0 {TOPBAR_H}.5H{W}" stroke="url(#topline)" stroke-width="1.5" class="flow" style="stroke-dasharray:90 {W}"/>
-<circle cx="{AXIS + 5}" cy="{n(top_mid)}" r="4.5" fill="url(#brandx)"/>
-{text(TEXT, top_base, 'LilKALINOV <tspan fill="' + INK_MUTE + '">/</tspan> personal space', size=13.5, fill=INK_SOFT, mono=True)}
+{avatar_image}
+{text(TEXT + 40, top_base, 'LilKALINOV <tspan fill="' + INK_MUTE + '">/</tspan> personal space', size=13.5, fill=INK_SOFT, mono=True)}
 {text(RIGHT, top_base, '<tspan fill="' + CYAN + '">●</tspan> BUILD · TEST · SHIP', size=12.5, fill=INK_SOFT, mono=True, anchor='end', tracking=1)}
 ''', 0, 'enter-soft')}
 {enter(text(TEXT, 146, 'SYSTEMS / VOICE / PRIME', size=13, fill=CORAL, mono=True, tracking=4.2, weight=600), 0.06, 'enter-soft')}
@@ -773,7 +841,7 @@ def build_hero():
 '''
     shell('hero.svg', HERO_H, HERO_R, body,
           'Lil KALINOV — системный разработчик и QA. Rust, Python, Go и голосовые '
-          'интерфейсы Astra. Ссылки: Telegram, портфолио, организация SpherePrime.',
+          'интерфейсы Astra. Ссылки: Telegram, GitHub, организация SpherePrime.',
           spine_color=CORAL)
 
 
@@ -1100,7 +1168,7 @@ def build_footer():
     cta = (
         f'<rect x="{pill_x}" y="{pill_y}" width="{pill_w}" height="{pill_h}" rx="{pill_h / 2}" '
         f'fill="url(#brandx)" opacity=".16" stroke="{CORAL}" stroke-opacity=".5"/>'
-        f'<circle class="blink" cx="{pill_x + 30}" cy="{pill_y + pill_h / 2}" r="4.5" fill="{CYAN}"/>'
+        f'<text x="{n(pill_x + 30)}" y="{n(pill_y + pill_h / 2 + 6)}" fill="{BLUSH}" font-size="18" font-weight="600" text-anchor="middle">+</text>'
         + text(pill_x + 48, pill_y + pill_h / 2 + 5.5, '@LilKALINOV', size=16, fill=BLUSH,
                mono=True, weight=700, tracking=0.5)
         + f'<path d="M{RIGHT - 34} {pill_y + 17}l9 5-9 5" fill="none" stroke="{BLUSH}" '
@@ -1119,7 +1187,7 @@ def build_footer():
 '''
     shell('footer.svg', FOOTER_H, HERO_R, body,
           'Есть задача? Решим её вместе — от архитектуры до продакшена. '
-          'Написать LilKALINOV в Telegram: @LilKALINOV', spine_color=CORAL)
+          'Написать LilKALINOV в Telegram: @LilKALINOV', spine_color=CORAL, spine_short=True)
 
 
 def version_asset(match):
