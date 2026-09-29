@@ -354,6 +354,8 @@ def grid_issues(root, name=''):
         elif h < 60 and node.get('stroke'):  # pill outline
             rows.setdefault(round(y, 1), []).append((x, x + w))
     for y, pills in sorted(rows.items()):
+        if name.startswith('btn-'):
+            continue          # the pill IS the whole canvas: no panel axis to anchor to
         left = min(p[0] for p in pills)
         right = max(p[1] for p in pills)
         if abs(left - AXIS) > 0.5 and abs(right - RIGHT) > 0.5:

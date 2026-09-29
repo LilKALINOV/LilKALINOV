@@ -10,8 +10,8 @@
 </p>
 
 <p align="center">
-  <a href="https://t.me/LilKALINOV"><img src="./assets/btn-telegram-b2887b32bd9c.svg" width="460" alt="Telegram — написать LilKALINOV в Telegram" /></a>
-  <a href="https://github.com/SpherePrime"><img src="./assets/btn-sphereprime-be52f86757d2.svg" width="460" alt="SpherePrime — организация на GitHub" /></a>
+  <a href="https://t.me/LilKALINOV"><img src="./assets/btn-telegram-fd5ac291afba.svg" width="280" alt="Telegram — написать LilKALINOV в Telegram" /></a>
+  <a href="https://github.com/SpherePrime"><img src="./assets/btn-sphereprime-875e54c85e32.svg" width="280" alt="SpherePrime — организация на GitHub" /></a>
 </p>
 
 <p align="center">

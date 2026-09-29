@@ -115,10 +115,9 @@ SPINE_BOT_SHORT = 20
 # the standalone link buttons: one row with two big pills, each its own
 # Markdown <a>-wrapped <img> in the README - that is the only thing GitHub
 # makes actually clickable (anything drawn inside a panel SVG is not).
-LINKS_H = 96
-BTN_W = 540          # each button is half a strip: two sit side by side
-LINK_PILL_W = 400
-LINK_PILL_H = 76
+BTN_W = 280          # the pill is the whole button: no panel frame around it
+BTN_H = 52
+BTN_FONT = 16
 
 # the avatar: the ico.jpg shipped with the repo, inlined as a data URI so the
 # SVG stays a single self-contained file behind camo. It fills the orbital core
@@ -610,7 +609,7 @@ def spine(height, accent, *, short=False):
     )
 
 
-def shell(name, height, radius, body, title, defs_extra='', spine_color=None, spine_short=False, width=W):
+def shell(name, height, radius, body, title, defs_extra='', spine_color=None, spine_short=False, width=W, bare=False):
     """Assemble a complete, accessible SVG document."""
     # the travelling edge light needs the frame's own perimeter, so the dash it
     # draws and the distance it travels are one exact loop
@@ -627,7 +626,25 @@ def shell(name, height, radius, body, title, defs_extra='', spine_color=None, sp
     # a shared field of drifting dust: deterministic positions (seeded on the
     # asset name) so builds stay byte-stable, twinkling on independent phases.
     # It lives in the frame group, behind the copy, so it never covers a word.
-    body = dust(height, name, width) + body
+    if not bare:
+        body = dust(height, name, width) + body
+    if bare:
+        # a bare asset: the body is the whole document - no panel background,
+        # dust, grain, edge light or border. For the link buttons, where the
+        # chip must read as a standalone object, not a framed panel.
+        document = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title">
+<title id="title">{escape(title)}</title>
+<defs>
+ <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0">
+  <stop stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".42"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+ </linearGradient>
+ {defs_extra}
+</defs>
+<style>{STYLE}</style>
+{body}
+</svg>'''
+        (ASSETS / name).write_text(document, encoding='utf-8')
+        return
     document = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title">
 <title id="title">{escape(title)}</title>
 <defs>
@@ -1156,37 +1173,33 @@ def build_footer():
 
 
 def build_buttons():
-    """Two big link pills, one row, each wrapped in its own Markdown <a> on the
-    README. Anything drawn inside a panel SVG is not clickable behind GitHub's
-    camo proxy, so the only links the page actually follows live here. Each
-    button is a half-canvas panel (BTN_W) so the two sit side by side.
+    """Two compact link pills on one row, no panel frame around them: the pill
+    IS the button. Each SVG is just the rounded chip, wrapped in its own
+    Markdown <a> so GitHub actually follows the click.
     """
     for filename, label, accent, url in [
         ('btn-telegram.svg', 'Telegram', CYAN, 'https://t.me/LilKALINOV'),
         ('btn-sphereprime.svg', 'SpherePrime', SPHERE, 'https://github.com/SpherePrime'),
     ]:
-        w, h = LINK_PILL_W, LINK_PILL_H
-        x = (BTN_W - w) / 2            # centre the pill in its half-canvas panel
-        y = (LINKS_H - h) / 2
-        label_w = run_width(label, 20, True, PILL_TRACK)
-        cx = x + w / 2
-        ax = x + w - 26               # outbound arrow parked at the pill's right
-        ay = y + h / 2
-        arrow = (f'<path d="M{n(ax - 14)} {n(ay + 9)}h28M{n(ax)} {n(ay - 9)}v18" fill="none" '
-                 f'stroke="{accent}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>')
-        mask = (f'<mask id="bkm" maskUnits="userSpaceOnUse" x="{n(x)}" y="{n(y)}" '
-                f'width="{n(w)}" height="{n(h)}">'
-                f'<rect x="{n(x)}" y="{n(y)}" width="{n(w)}" height="{n(h)}" rx="{h / 2}" fill="#fff"/></mask>')
+        w, h = BTN_W, BTN_H
+        label_w = run_width(label, BTN_FONT, True, PILL_TRACK)
+        ax = w - 22
+        ay = h / 2
+        arrow = (f'<path d="M{n(ax - 10)} {n(ay + 6)}h20M{n(ax)} {n(ay - 6)}v12" fill="none" '
+                 f'stroke="{accent}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>')
+        mask = (f'<mask id="bkm" maskUnits="userSpaceOnUse" x="0" y="0" width="{n(w)}" height="{n(h)}">'
+                f'<rect x="0" y="0" width="{n(w)}" height="{n(h)}" rx="{h / 2}" fill="#fff"/></mask>')
         body = f'''
 {mask}
-<rect x="{n(x)}" y="{n(y)}" width="{n(w)}" height="{n(h)}" rx="{h / 2}" fill="{CHIP}" fill-opacity="{CHIP_FILL}" stroke="{accent}" stroke-opacity="{CHIP_EDGE}"/>
-<rect class="btsweep" x="{n(x)}" y="{n(y)}" width="180" height="{n(h)}" fill="url(#sheen)" mask="url(#bkm)"/>
-{text(cx - 12, y + h / 2 + 7, escape(label), size=20, fill=accent, mono=True, weight=700, tracking=PILL_TRACK, anchor='middle', text_length=label_w)}
+<rect x="0" y="0" width="{n(w)}" height="{n(h)}" rx="{h / 2}" fill="{CHIP}" fill-opacity=".94" stroke="{accent}" stroke-opacity=".55"/>
+<rect class="btsweep" x="0" y="0" width="120" height="{n(h)}" fill="url(#sheen)" mask="url(#bkm)"/>
+{text(w / 2 - 10, h / 2 + BTN_FONT * 0.35, escape(label), size=BTN_FONT, fill=accent, mono=True,
+     weight=700, tracking=PILL_TRACK, anchor='middle', text_length=label_w)}
 {arrow}
 '''
-        shell(filename, LINKS_H, CARD_R, body,
+        shell(filename, BTN_H, BTN_H / 2, body,
               f'Кнопка {label} — откроет {url}.',
-              spine_color=accent, spine_short=True, width=BTN_W)
+              spine_color=None, spine_short=False, width=BTN_W, bare=True)
 
 def version_asset(match):
     """Point every image at a content-hashed copy so GitHub cannot cache it."""
