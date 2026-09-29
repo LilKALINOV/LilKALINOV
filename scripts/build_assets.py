@@ -64,7 +64,7 @@ ASSETS = ROOT / 'assets'
 # canvas + grid
 # --------------------------------------------------------------------------- #
 W = 1100
-HERO_H = 460
+HERO_H = 436
 INTRO_H = 364
 CARD_H = 220
 FOOTER_H = 150
@@ -112,12 +112,13 @@ SPINE_SEG = 34       # a traveling light segment, two per spine
 SPINE_TOP_SHORT = 20
 SPINE_BOT_SHORT = 20
 
-# the standalone link buttons: two separate panels, each wrapped in its own
-# Markdown <a> on the README just below the hero - that is the only thing
-# GitHub makes actually clickable (anything drawn inside a panel SVG is not).
-LINKS_H = 100
-LINK_PILL_W = 240
-LINK_PILL_H = 44
+# the standalone link buttons: one row with two big pills, each its own
+# Markdown <a>-wrapped <img> in the README - that is the only thing GitHub
+# makes actually clickable (anything drawn inside a panel SVG is not).
+LINKS_H = 96
+BTN_W = 540          # each button is half a strip: two sit side by side
+LINK_PILL_W = 400
+LINK_PILL_H = 76
 
 # the avatar: the ico.jpg shipped with the repo, inlined as a data URI so the
 # SVG stays a single self-contained file behind camo. It fills the orbital core
@@ -150,7 +151,7 @@ BADGE_CX, BADGE_CY, BADGE_R = 1052, 44, 17
 # hero signature mark
 ORB_CX, ORB_CY = 868, 236
 NAME_SIZE = 110
-NAME_Y = 250
+NAME_Y = 208
 CORE_R = 58
 SETTLE_TRACK = -6      # the wordmark's final tracking; the entrance opens wider
 SETTLE_FROM = -1.4     # and eases into it, so the name is set rather than just placed
@@ -553,7 +554,7 @@ def wordmark(fill):
             '<tspan fill="' + EMBER + '">.</tspan>')
 
 
-def dust(height, name):
+def dust(height, name, width=W):
     """An even field of twinkle dust confined to the top and bottom gutters.
 
     Specks are parked in the two clear bands - above the first text run and
@@ -567,8 +568,8 @@ def dust(height, name):
     bot0, bot1 = height - 24, height - 12
     out = '<g opacity=".5">'
     for band, count, x0, x1 in [
-        (top0, 7, 40, 1060),          # 7 specks across the top gutter
-        (bot0, 5, 120, 1000),         # 5 across the bottom, inset off the edges
+        (top0, 7, 40, width - 40),    # 7 specks across the top gutter
+        (bot0, 5, int(width * 0.1), int(width * 0.9)),  # 5 across the bottom
     ]:
         y_lo = band
         for i in range(count):
@@ -609,11 +610,11 @@ def spine(height, accent, *, short=False):
     )
 
 
-def shell(name, height, radius, body, title, defs_extra='', spine_color=None, spine_short=False):
+def shell(name, height, radius, body, title, defs_extra='', spine_color=None, spine_short=False, width=W):
     """Assemble a complete, accessible SVG document."""
     # the travelling edge light needs the frame's own perimeter, so the dash it
     # draws and the distance it travels are one exact loop
-    perim = round(2 * ((W - 4) + (height - 4)))
+    perim = round(2 * ((width - 4) + (height - 4)))
     sp_top = SPINE_TOP_SHORT if spine_short else SPINE_TOP
     sp_bot = height - (SPINE_BOT_SHORT if spine_short else SPINE_BOT)
     spine_def = f'<clipPath id="spc"><rect x="{SPINE_X}" y="{sp_top}" width="{SPINE_W}" height="{n(sp_bot - sp_top)}" rx="{SPINE_W / 2}"/></clipPath>'
@@ -626,8 +627,8 @@ def shell(name, height, radius, body, title, defs_extra='', spine_color=None, sp
     # a shared field of drifting dust: deterministic positions (seeded on the
     # asset name) so builds stay byte-stable, twinkling on independent phases.
     # It lives in the frame group, behind the copy, so it never covers a word.
-    body = dust(height, name) + body
-    document = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{height}" viewBox="0 0 {W} {height}" role="img" aria-labelledby="title">
+    body = dust(height, name, width) + body
+    document = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-labelledby="title">
 <title id="title">{escape(title)}</title>
 <defs>
  <linearGradient id="panel" x1="0" y1="0" x2="0.35" y2="1">
@@ -639,7 +640,7 @@ def shell(name, height, radius, body, title, defs_extra='', spine_color=None, sp
  <linearGradient id="brandx" x1="0" y1="0" x2="1" y2="0">
   <stop stop-color="{CORAL}"/><stop offset="1" stop-color="{EMBER}"/>
  </linearGradient>
- <linearGradient id="topline" gradientUnits="userSpaceOnUse" x1="40" y1="0" x2="{W - 40}" y2="0">
+ <linearGradient id="topline" gradientUnits="userSpaceOnUse" x1="40" y1="0" x2="{width - 40}" y2="0">
   <stop stop-color="{CORAL}" stop-opacity="0"/><stop offset=".5" stop-color="{EMBER}" stop-opacity=".85"/><stop offset="1" stop-color="{CORAL}" stop-opacity="0"/>
  </linearGradient>
  <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0">
@@ -651,20 +652,20 @@ def shell(name, height, radius, body, title, defs_extra='', spine_color=None, sp
   <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3" stitchTiles="stitch"/>
   <feColorMatrix type="saturate" values="0"/>
  </filter>
- <clipPath id="frame"><rect x=".5" y=".5" width="{W - 1}" height="{height - 1}" rx="{radius}"/></clipPath>
+ <clipPath id="frame"><rect x=".5" y=".5" width="{width - 1}" height="{height - 1}" rx="{radius}"/></clipPath>
  {spine_def}
  {spine_grad}
  {defs_extra}
 </defs>
 <style>{STYLE}</style>
 <g clip-path="url(#frame)" style="isolation:isolate">
-<rect x=".5" y=".5" width="{W - 1}" height="{height - 1}" rx="{radius}" fill="url(#panel)"/>
+<rect x=".5" y=".5" width="{n(width - 1)}" height="{n(height - 1)}" rx="{radius}" fill="url(#panel)"/>
 {body}
 <g transform="skewX(-18)"><rect class="gws" x="0" y="-60" width="120" height="{height + 120}" fill="url(#sheen)" opacity=".34"/></g>
-<rect class="grainx" x="-170" y="-110" width="{W + 340}" height="{height + 220}" filter="url(#grain)" opacity=".05" style="mix-blend-mode:overlay"/>
-<rect class="edgeflow" x="2" y="2" width="{W - 4}" height="{height - 4}" rx="{max(radius - 2, 4)}" fill="none" stroke="{GLOW_EDGE}" stroke-width="2.4" filter="url(#soft)" style="stroke-dasharray:240 {perim - 240};--edge:{perim}"/>
-<rect x="1" y="1" width="{W - 2}" height="{height - 2}" rx="{radius - 1}" fill="none" stroke="{GLOW_EDGE}"/>
-<rect x=".5" y=".5" width="{W - 1}" height="{height - 1}" rx="{radius}" fill="none" stroke="{STROKE}"/>
+<rect class="grainx" x="-170" y="-110" width="{width + 340}" height="{height + 220}" filter="url(#grain)" opacity=".05" style="mix-blend-mode:overlay"/>
+<rect class="edgeflow" x="2" y="2" width="{width - 4}" height="{height - 4}" rx="{max(radius - 2, 4)}" fill="none" stroke="{GLOW_EDGE}" stroke-width="2.4" filter="url(#soft)" style="stroke-dasharray:240 {perim - 240};--edge:{perim}"/>
+<rect x="1" y="1" width="{width - 2}" height="{height - 2}" rx="{radius - 1}" fill="none" stroke="{GLOW_EDGE}"/>
+<rect x=".5" y=".5" width="{width - 1}" height="{height - 1}" rx="{radius}" fill="none" stroke="{STROKE}"/>
 </g>
 </svg>'''
     (ASSETS / name).write_text(document, encoding='utf-8')
@@ -783,13 +784,13 @@ def build_hero():
 {text(TEXT, top_base, 'LilKALINOV <tspan fill="' + INK_MUTE + '">/</tspan> personal space', size=13.5, fill=INK_SOFT, mono=True)}
 {text(RIGHT, top_base, '<tspan fill="' + CYAN + '">●</tspan> BUILD · TEST · SHIP', size=12.5, fill=INK_SOFT, mono=True, anchor='end', tracking=1)}
 ''', 0, 'enter-soft')}
-{enter(text(TEXT, 146, 'SYSTEMS / VOICE / PRIME', size=13, fill=CORAL, mono=True, tracking=4.2, weight=600), 0.06, 'enter-soft')}
+{enter(text(TEXT, 104, 'SYSTEMS / VOICE / PRIME', size=13, fill=CORAL, mono=True, tracking=4.2, weight=600), 0.06, 'enter-soft')}
 {enter(f'''
 {text(TEXT, NAME_Y, wordmark('url(#brand)'), size=NAME_SIZE, weight=800, tracking=SETTLE_TRACK, extra='class="settle"')}
 <g mask="url(#nm)"><rect class="sweep" x="0" y="{n(NAME_Y - 120)}" width="175" height="130" fill="url(#sheen)"/></g>
 ''', 0.1, 'enter-soft')}
-{enter(text(TEXT, 300, 'Голос, код и инфраструктура — в одном контуре.', size=25, fill=INK_SOFT), 0.18, 'enter-soft')}
-{enter(text(TEXT, 336, 'Rust-ядро. Python-сервисы. Плагины, которые работают.', size=18, fill=INK_MUTE), 0.23, 'enter-soft')}
+{enter(text(TEXT, 256, 'Голос, код и инфраструктура — в одном контуре.', size=25, fill=INK_SOFT), 0.18, 'enter-soft')}
+{enter(text(TEXT, 292, 'Rust-ядро. Python-сервисы. Плагины, которые работают.', size=18, fill=INK_MUTE), 0.23, 'enter-soft')}
 {enter(f'''
 <circle cx="{cx}" cy="{cy}" r="96" fill="none" stroke="{CYAN}" stroke-opacity=".16"/>
 <circle class="spin" cx="{cx}" cy="{cy}" r="78" fill="none" stroke="{EMBER}" stroke-opacity=".5" stroke-width="1.2" stroke-dasharray="3 14"/>
@@ -1155,36 +1156,37 @@ def build_footer():
 
 
 def build_buttons():
-    """Two standalone link panels, each wrapped in its own Markdown <a> on the
+    """Two big link pills, one row, each wrapped in its own Markdown <a> on the
     README. Anything drawn inside a panel SVG is not clickable behind GitHub's
-    camo proxy, so the only links the page actually follows live here.
+    camo proxy, so the only links the page actually follows live here. Each
+    button is a half-canvas panel (BTN_W) so the two sit side by side.
     """
     for filename, label, accent, url in [
         ('btn-telegram.svg', 'Telegram', CYAN, 'https://t.me/LilKALINOV'),
         ('btn-sphereprime.svg', 'SpherePrime', SPHERE, 'https://github.com/SpherePrime'),
     ]:
-        x, w, h = AXIS, LINK_PILL_W, LINK_PILL_H
+        w, h = LINK_PILL_W, LINK_PILL_H
+        x = (BTN_W - w) / 2            # centre the pill in its half-canvas panel
         y = (LINKS_H - h) / 2
-        label_w = run_width(label, 15, True, PILL_TRACK)
+        label_w = run_width(label, 20, True, PILL_TRACK)
         cx = x + w / 2
-        arrow_x = x + w - 22
-        arrow = (f'<path d="M{n(arrow_x - 12)} {y + h / 2 + 7}h{n(24)}'
-                 f'M{n(arrow_x)} {y + h / 2 - 7}v{n(24)}" fill="none" stroke="{accent}" '
-                 f'stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>')
+        ax = x + w - 26               # outbound arrow parked at the pill's right
+        ay = y + h / 2
+        arrow = (f'<path d="M{n(ax - 14)} {n(ay + 9)}h28M{n(ax)} {n(ay - 9)}v18" fill="none" '
+                 f'stroke="{accent}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>')
         mask = (f'<mask id="bkm" maskUnits="userSpaceOnUse" x="{n(x)}" y="{n(y)}" '
                 f'width="{n(w)}" height="{n(h)}">'
                 f'<rect x="{n(x)}" y="{n(y)}" width="{n(w)}" height="{n(h)}" rx="{h / 2}" fill="#fff"/></mask>')
         body = f'''
 {mask}
 <rect x="{n(x)}" y="{n(y)}" width="{n(w)}" height="{n(h)}" rx="{h / 2}" fill="{CHIP}" fill-opacity="{CHIP_FILL}" stroke="{accent}" stroke-opacity="{CHIP_EDGE}"/>
-<rect class="btsweep" x="{n(x)}" y="{n(y)}" width="140" height="{n(h)}" fill="url(#sheen)" mask="url(#bkm)"/>
-{text(cx, y + h / 2 + 5, escape(label), size=15, fill=accent, mono=True, weight=700, tracking=PILL_TRACK, anchor='middle', text_length=label_w)}
+<rect class="btsweep" x="{n(x)}" y="{n(y)}" width="180" height="{n(h)}" fill="url(#sheen)" mask="url(#bkm)"/>
+{text(cx - 12, y + h / 2 + 7, escape(label), size=20, fill=accent, mono=True, weight=700, tracking=PILL_TRACK, anchor='middle', text_length=label_w)}
 {arrow}
 '''
         shell(filename, LINKS_H, CARD_R, body,
               f'Кнопка {label} — откроет {url}.',
-              spine_color=accent, spine_short=True)
-
+              spine_color=accent, spine_short=True, width=BTN_W)
 
 def version_asset(match):
     """Point every image at a content-hashed copy so GitHub cannot cache it."""
