@@ -190,14 +190,14 @@ CIRCLE_K = 0.5523     # a cubic quadrant's control-point distance for a true cir
 # --------------------------------------------------------------------------- #
 # palette
 # --------------------------------------------------------------------------- #
-BASE = '#080b12'
-PANEL_TOP = '#141c2b'
-PANEL_BOT = '#0a0f19'
-HAIRLINE = '#1b2333'
-STROKE = '#222c3f'
+BASE = '#0E0E10'
+PANEL_TOP = '#18181C'
+PANEL_BOT = '#111114'
+HAIRLINE = '#27272A'
+STROKE = '#3a3a40'
 GLOW_EDGE = '#ffffff14'
 
-CHIP = '#0b1018'       # the tag chip's own surface
+CHIP = '#18181C'       # the tag chip's own surface
 # Near-opaque on purpose. These chips sit in the brightest corner of every
 # panel, and `screen` blending roughly triples the luminance there, so a
 # translucent chip lets the mesh decide the label's contrast - measured as low
@@ -206,12 +206,12 @@ CHIP = '#0b1018'       # the tag chip's own surface
 CHIP_FILL = .88
 CHIP_EDGE = .42
 
-INK = '#f3f5f9'
-INK_SOFT = '#c5cddd'
-INK_MUTE = '#8b95ab'
+INK = '#FFFFFF'
+INK_SOFT = '#D4D4D8'
+INK_MUTE = '#A1A1AA'
 # the 11px orbit caption is the smallest type here, so this must clear WCAG AA
 # (4.5:1) against BOTH ends of the panel gradient; #5f6a80 only reached 3.1:1.
-INK_FAINT = '#7e8899'
+INK_FAINT = '#8b8b93'
 
 # The orbit caption lands where two aurora blobs overlap at full strength, so
 # its real background measures L=0.048 - eight times the panel floor - and 11px
@@ -220,7 +220,7 @@ INK_FAINT = '#7e8899'
 # name, so it gets the answer the tag pills already got: its own dark surface.
 # Nearly opaque, because here the wash underneath is three times brighter than
 # anything behind a pill, and the blobs drift.
-CAPTION_SURFACE = '#080d15'
+CAPTION_SURFACE = '#0d0d10'
 CAPTION_FILL = 0.94
 CAPTION_H = 22
 CAPTION_PAD = 14
@@ -229,7 +229,7 @@ CORAL = '#ff6a3d'
 EMBER = '#ff9f6e'
 BLUSH = '#ffcab0'
 CYAN = '#22d3ee'
-VIOLET = '#8b6dff'
+VIOLET = '#818CF8'
 SPHERE = '#f472b6'
 
 RUST = ('#ff8a4c', '#ffcf87')
@@ -243,7 +243,7 @@ ADVANCE = {'mono': 0.56, 'sans': 0.52}
 # shared svg chrome
 # --------------------------------------------------------------------------- #
 STYLE = """
- text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif}
+ text{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif}
  .mono{font-family:'JetBrains Mono','Cascadia Code',Consolas,ui-monospace,'Courier New',monospace}
  /* 1. aurora blobs drifting on independent cycles */
  .drift-a{transform-box:fill-box;transform-origin:50% 50%;animation:drift-a 24s ease-in-out infinite}
@@ -799,15 +799,15 @@ def build_hero():
 <path d="M0 {TOPBAR_H}.5H{W}" stroke="url(#topline)" stroke-width="1.5" class="flow" style="stroke-dasharray:90 {W}"/>
 <circle cx="{AXIS + 5}" cy="{n(top_mid)}" r="4.5" fill="url(#brandx)"/>
 {text(TEXT, top_base, 'LilKALINOV <tspan fill="' + INK_MUTE + '">/</tspan> personal space', size=13.5, fill=INK_SOFT, mono=True)}
-{text(RIGHT, top_base, '<tspan fill="' + CYAN + '">●</tspan> BUILD · TEST · SHIP', size=12.5, fill=INK_SOFT, mono=True, anchor='end', tracking=1)}
+{text(RIGHT, top_base, '<tspan fill="' + CYAN + '">●</tspan> BUILD · QA · SHIP', size=12.5, fill=INK_SOFT, mono=True, anchor='end', tracking=1)}
 ''', 0, 'enter-soft')}
-{enter(text(TEXT, 104, 'SYSTEMS / VOICE / PRIME', size=13, fill=CORAL, mono=True, tracking=4.2, weight=600), 0.06, 'enter-soft')}
+{enter(text(TEXT, 104, 'KNICE / ASTRA / OPEN SOURCE', size=13, fill=CORAL, mono=True, tracking=4.2, weight=600), 0.06, 'enter-soft')}
 {enter(f'''
 {text(TEXT, NAME_Y, wordmark('url(#brand)'), size=NAME_SIZE, weight=800, tracking=SETTLE_TRACK, extra='class="settle"')}
 <g mask="url(#nm)"><rect class="sweep" x="0" y="{n(NAME_Y - 120)}" width="175" height="130" fill="url(#sheen)"/></g>
 ''', 0.1, 'enter-soft')}
-{enter(text(TEXT, 256, 'Голос, код и инфраструктура — в одном контуре.', size=25, fill=INK_SOFT), 0.18, 'enter-soft')}
-{enter(text(TEXT, 292, 'Rust-ядро. Python-сервисы. Плагины, которые работают.', size=18, fill=INK_MUTE), 0.23, 'enter-soft')}
+{enter(text(TEXT, 256, 'Голосовые ассистенты, QA и код — в одном контуре.', size=25, fill=INK_SOFT), 0.18, 'enter-soft')}
+{enter(text(TEXT, 292, 'KNICE TECH &amp; MINICE. Astra QA. Плагины, которые работают.', size=18, fill=INK_MUTE), 0.23, 'enter-soft')}
 {enter(f'''
 <circle cx="{cx}" cy="{cy}" r="96" fill="none" stroke="{CYAN}" stroke-opacity=".16"/>
 <circle class="spin" cx="{cx}" cy="{cy}" r="78" fill="none" stroke="{EMBER}" stroke-opacity=".5" stroke-width="1.2" stroke-dasharray="3 14"/>
@@ -822,8 +822,9 @@ def build_hero():
 ''', 0.14)}
 '''
     shell('hero.svg', HERO_H, HERO_R, body,
-          'Lil KALINOV — системный разработчик и QA. Rust, Python, Go и голосовые '
-          'интерфейсы Astra.',
+          'Lil KALINOV — администратор, QA и плагин-разработчик в студии KNICE TECH '
+          '& MINICE. Голосовые ассистенты Astra и Stella, плагины, Rust, Python, '
+          'TypeScript.',
           spine_color=CORAL)
 
 
@@ -832,16 +833,16 @@ def build_hero():
 # --------------------------------------------------------------------------- #
 def build_intro():
     grad, blob = aurora('au-i', 250, 120, 300, 150, CORAL, 0.1, 'drift-b')
-    lead = ('Соединяю надёжное ядро с полезной механикой: скорость в Rust и Go, '
-            'сервисы на Python,<br/>голос — через Astra Plugin SDK.')
+    lead = ('Админ и техподдержка в студии KNICE TECH &amp; MINICE: голосовые<br/>'
+            'ассистенты, QA и расширяемая архитектура через плагины.')
     # descriptions wrap to two lines: one long line would overrun the column
     focus = (
-        ('RUST · GO', 'Скорость и надёжность',
-         'Ядро, сетевые слои и всё, что<br/>живёт рядом с пользователем.', RUST[0]),
-        ('PYTHON', 'Сервисы и плагины',
-         'Интеграции, автоматизация и<br/>расширения для ассистента.', PY[0]),
-        ('ASTRA', 'Живой диалог',
-         'Распознавание и синтез речи,<br/>голосовые интерфейсы.', VIOLET),
+        ('KNICE & MINICE', 'Система и стабильность',
+         'Инфраструктура, жизненный цикл<br/>проектов, поддержка пользователей.', CORAL),
+        ('ASTRA · STELLA', 'QA и плагины',
+         'Бета-тесты, плагины без<br/>вмешательства в ядро.', VIOLET),
+        ('OPEN SOURCE', 'Кроссплатформа',
+         'Утилиты для Windows и Linux:<br/>чистый UI, малое потребление.', PY[0]),
     )
     col_w = (RIGHT - TEXT - 2 * COL_GAP) / 3
     cards = ''
@@ -862,17 +863,17 @@ def build_intro():
 {grad}
 {blob}
 {text(TEXT, HEAD_EYEBROW, 'ABOUT / ПРОФИЛЬ', size=11.5, fill=INK_FAINT, mono=True, tracking=2.8, weight=600)}
-{text(TEXT, HEAD_TITLE, 'Системный разработчик и QA', size=38, weight=700, tracking=-0.9)}
+{text(TEXT, HEAD_TITLE, 'Админ, QA и плагинист', size=38, weight=700, tracking=-0.9)}
 {text(TEXT, HEAD_SUB, lead, size=17, fill=INK_MUTE)}
 {ghost_number('K', HEAD_SUB, 128, CORAL, opacity=0.22)}
 <path d="M{AXIS} 200H{RIGHT}" stroke="{HAIRLINE}"/>
 {cards}
 '''
     shell('intro.svg', INTRO_H, CARD_R, body,
-          'Привет, я Lil KALINOV. Системный разработчик и QA. Rust и Go — для '
-          'скорости, Python — для сервисов и плагинов, голосовые интерфейсы Astra — '
-          'для живого диалога. Фокус: скорость и надёжность, сервисы и плагины, '
-          'живой диалог.', spine_color=CORAL)
+          'Привет, я Lil KALINOV. Администратор и техподдержка в студии KNICE TECH '
+          '& MINICE, QA и плагин-разработчик Astra, поддерживаю Stella. '
+          'В свободное время — open-source и кроссплатформенные утилиты '
+          'Windows/Linux.', spine_color=CORAL)
 
 
 # --------------------------------------------------------------------------- #
@@ -1025,15 +1026,15 @@ def build_card(filename, number, label, name, description, tags, accent, art_bui
 
 
 def build_cards():
-    build_card('astra.svg', '01', 'VOICE × ASTRA', 'Astra Plugins',
-               'Голос и поиск для Astra: Silero STT, DDG WebSearch, Google STT.',
-               ['RUST', 'ASTRA', 'STT', 'VOICE'], RUST, art_voice)
+    build_card('astra.svg', '01', 'QA × VOICE', 'Astra & Stella',
+               'QA-тестирование и плагины голосовых ассистентов — без ядра.',
+               ['QA', 'RUST', 'PLUGINS'], RUST, art_voice)
     build_card('primeproxy.svg', '02', 'NETWORK × FREEDOM', 'PrimeProxy',
-               'Мост там, где нет связи. Плагин прямо в Astra.',
+               'Обход блокировок в РФ: MTProto-плагин прямо в Astra.',
                ['PYTHON', 'MTPROTO', 'ASTRA'], PY, art_bridge)
-    build_card('primerouter.svg', '03', 'AI × ROUTING', 'PrimeRouter & CLI',
-               'Маршрутизация LLM-провайдеров и собственный CLI.',
-               ['GO', 'RUST', 'SPHEREPRIME'], GO, art_router)
+    build_card('primerouter.svg', '03', 'TOOLS × UI', 'Desktop Utilities',
+               'Легковесные нативные утилиты Windows и Linux, чистый UI.',
+               ['TAURI', 'FLUTTER', 'QT6'], TS, art_router)
 
 
 # --------------------------------------------------------------------------- #
@@ -1096,17 +1097,16 @@ def build_sections():
         'Плагины Astra: astra-silero и Astra-Google-STT — распознавание речи, '
         'astra-websearch-ddg — поиск через DuckDuckGo, Astra-PrimeProxy — сетевой слой.')
     build_section(
-        'sphereprime.svg', '05', 'SPHEREPRIME', 'Команда SpherePrime',
-        'Проекты организации, где я работаю вместе с dwertyfa.',
-        [('PrimeProxy', 'Локальный MTProto-прокси для Telegram с WebSocket-транспортом.',
-          ['PYTHON'], [PY[0]], PY[0]),
-         ('PrimeAI', 'AI-провайдер для Astra с маршрутизацией запросов через Router API.',
-          ['TYPESCRIPT'], [TS[0]], TS[0]),
-         ('Prime CLI', 'Терминальный AI-ассистент: код, MCP и несколько моделей.',
-          ['GO'], [GO[0]], GO[0])],
+        'sphereprime.svg', '05', 'PERSONAL PROJECTS', 'Личные проекты',
+        'Свои инструменты и дорожная карта открытого кода.',
+        [('PrimeProxy', 'Обход блокировок в РФ: MTProto-прокси на Python, плагин для Astra.',
+          ['PYTHON', 'MTPROTO'], [PY[0], PY[0]], PY[0]),
+         ('Desktop Utilities', 'Легковесные нативные приложения Windows и Linux: чистый UI, низкое потребление.',
+          ['TAURI', 'FLUTTER', 'QT6'], [TS[0], TS[0], TS[0]], TS[0])],
         SPHERE, SPHERE,
-        'SpherePrime: PrimeProxy — MTProto-прокси на Python, PrimeAI — AI-провайдер '
-        'на TypeScript, Prime CLI — терминальный ассистент на Go.')
+        'Личные проекты: PrimeProxy — обход блокировок в РФ (MTProto, Python, '
+        'плагин для Astra), Desktop Utilities — кроссплатформенные нативные '
+        'приложения Windows/Linux (Tauri, Flutter, Qt6).')
 
 
 # --------------------------------------------------------------------------- #
@@ -1151,7 +1151,7 @@ def build_footer():
         f'<rect x="{pill_x}" y="{pill_y}" width="{pill_w}" height="{pill_h}" rx="{pill_h / 2}" '
         f'fill="url(#brandx)" opacity=".16" stroke="{CORAL}" stroke-opacity=".5"/>'
         f'<text x="{n(pill_x + 30)}" y="{n(pill_y + pill_h / 2 + 6)}" fill="{BLUSH}" font-size="18" font-weight="600" text-anchor="middle">+</text>'
-        + text(pill_x + 48, pill_y + pill_h / 2 + 5.5, '@LilKALINOV', size=16, fill=BLUSH,
+        + text(pill_x + 48, pill_y + pill_h / 2 + 5.5, '@SpherePrime', size=16, fill=BLUSH,
                mono=True, weight=700, tracking=0.5)
         + f'<path d="M{RIGHT - 34} {pill_y + 17}l9 5-9 5" fill="none" stroke="{BLUSH}" '
           f'stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>'
@@ -1161,15 +1161,16 @@ def build_footer():
 {defs}
 <ellipse cx="250" cy="70" rx="300" ry="90" fill="url(#waveg)" opacity=".1" filter="url(#softer)"/>
 <g class="enter">
-{text(TEXT, 56, 'Есть задача?', size=26, weight=700, tracking=-0.5)}
-{text(TEXT, 82, 'Решим её вместе — от архитектуры до продакшена.', size=15.5, fill=INK_MUTE)}
+{text(TEXT, 56, 'Чистый код. Работающие вещи.', size=26, weight=700, tracking=-0.5)}
+{text(TEXT, 82, 'Telegram · Steam · VK — в карточках выше.', size=15.5, fill=INK_MUTE)}
 </g>
 <g class="enter" style="animation-delay:.12s">{cta}</g>
 {layers}
 '''
     shell('footer.svg', FOOTER_H, HERO_R, body,
-          'Есть задача? Решим её вместе — от архитектуры до продакшена. '
-          'Написать LilKALINOV в Telegram: @LilKALINOV', spine_color=CORAL, spine_short=True)
+          'Пишу чистый код, тестирую до конца и делаю вещи, которые работают. '
+          'Контакты: Telegram @SpherePrime, Steam LilKALINOV, VK bass.kalinov.',
+          spine_color=CORAL, spine_short=True)
 
 
 def build_buttons():
@@ -1178,7 +1179,7 @@ def build_buttons():
     Markdown <a> so GitHub actually follows the click.
     """
     for filename, label, accent, url in [
-        ('btn-telegram.svg', 'Telegram', CYAN, 'https://t.me/LilKALINOV'),
+        ('btn-telegram.svg', 'Telegram', CYAN, 'https://t.me/SpherePrime'),
         ('btn-sphereprime.svg', 'SpherePrime', SPHERE, 'https://github.com/SpherePrime'),
     ]:
         w, h = BTN_W, BTN_H
@@ -1234,7 +1235,7 @@ def sync_readme_and_preview():
 <title>LilKALINOV — GitHub profile preview</title>
 <style>
 :root{{color-scheme:dark}}
-body{{margin:0;background:#0b0e16;color:#e6edf3;font:16px/1.65 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}}
+body{{margin:0;background:#0E0E10;color:#f4f4f5;font:16px/1.65 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}}
 main{{max-width:1012px;margin:28px auto;padding:8px 12px}}
 img{{display:block;width:100%;height:auto;margin:0 0 10px;border-radius:6px}}
 </style></head>
