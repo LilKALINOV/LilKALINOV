@@ -112,12 +112,12 @@ SPINE_SEG = 34       # a traveling light segment, two per spine
 SPINE_TOP_SHORT = 20
 SPINE_BOT_SHORT = 20
 
-# hero link cards: one even row, so every card is the same width and the set
-# reads as measured - uneven card widths next to each other read as broken
-LINK_CARD_W = 168
-LINK_CARD_H = 46
-LINK_CARD_Y = 372
-LINK_CARD_GAP = 16
+# the standalone link buttons: two separate panels, each wrapped in its own
+# Markdown <a> on the README just below the hero - that is the only thing
+# GitHub makes actually clickable (anything drawn inside a panel SVG is not).
+LINKS_H = 100
+LINK_PILL_W = 240
+LINK_PILL_H = 44
 
 # the avatar: the ico.jpg shipped with the repo, inlined as a data URI so the
 # SVG stays a single self-contained file behind camo. It fills the orbital core
@@ -318,12 +318,8 @@ STYLE = """
  @keyframes enter-soft{from{opacity:.8;transform:translateY(9px)}to{opacity:1;transform:none}}
  @keyframes gwsweep{from{transform:translateX(-420px)}to{transform:translateX(1520px)}}
  .gws{animation:gwsweep 8.5s cubic-bezier(.45,0,.55,1) infinite}
- /* 16. the link cards: a sheen masked to one card, and the arrow nudging
-     toward its target on its own cycle */
- .lksweep{animation:lksweep 5.6s linear infinite}
- .nudg{transform-box:fill-box;transform-origin:50% 50%;animation:nudg 2.4s ease-in-out infinite}
- @keyframes lksweep{0%{transform:translateX(-170px)}55%{transform:translateX(190px)}100%{transform:translateX(190px)}}
- @keyframes nudg{0%,100%{transform:translate(0,0)}50%{transform:translate(3px,-3px)}}
+ @keyframes btsweep{0%{transform:translateX(-140px)}60%{transform:translateX(150px)}100%{transform:translateX(150px)}}
+ .btsweep{animation:btsweep 5.2s cubic-bezier(.45,0,.55,1) infinite}
  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transform:none!important;scale:1!important;translate:0 0!important}}
 """
 
@@ -482,30 +478,6 @@ def pill(x, y, label, color, *, h=26, size=12, pad=14, dot=False, weight=400):
         text_length=label_w,
     )
     return body, width
-
-
-def link_card(x, label, color, *, delay=0.0, mask_id='lk'):
-    """One link card: a dark chip with an accent edge, the label centred, a
-    traveling sheen masked to the card, and a ↗ arrow that nudges toward its
-    target. Every card takes the same width so a row of them reads as even.
-    """
-    w, h = LINK_CARD_W, LINK_CARD_H
-    label_w = run_width(label, 13, True, 0.4)
-    pad = (w - label_w) / 2
-    sheen = (f'<g mask="url(#{mask_id})"><rect class="lksweep" x="{n(x - 170)}" y="{LINK_CARD_Y}" '
-             f'width="120" height="{h}" fill="url(#sheen)" style="animation-delay:{n(delay)}s"/></g>')
-    chip = (f'<rect x="{n(x)}" y="{LINK_CARD_Y}" width="{w}" height="{h}" rx="{h / 2}" '
-            f'fill="{CHIP}" fill-opacity="{n(CHIP_FILL)}" stroke="{color}" stroke-opacity="{n(CHIP_EDGE)}"/>'
-            f'<rect class="pulse" x="{n(x)}" y="{LINK_CARD_Y}" width="{w}" height="{h}" rx="{h / 2}" '
-            f'fill="none" stroke="{color}" stroke-width="1.2" style="animation-delay:{n(delay + 0.5)}s"/>')
-    label = text(x + pad, LINK_CARD_Y + h / 2 + 4.5, escape(label), size=13, fill=color,
-                 mono=True, weight=600, text_length=label_w)
-    # the arrow sits in the right gutter of the card, nudging toward its target
-    ax, ay = x + w - 22, LINK_CARD_Y + h / 2
-    arrow = (f'<g class="nudg" style="animation-delay:{n(delay)}s">'
-             f'<path d="M{ax - 5} {ay + 5}L{ax + 5} {ay - 5}M{ax + 5} {ay - 5}H{ax - 4}M{ax + 5} {ay - 5}V{ay + 4}" '
-             f'fill="none" stroke="{color}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></g>')
-    return sheen + chip + label + arrow
 
 
 def orbit_caption(cx, baseline, label, size, tracking):
@@ -784,17 +756,6 @@ def build_hero():
 
 
 
-    links = ''
-    x = AXIS
-    card_defs = ''
-    for i, (label, color) in enumerate([('Telegram', CYAN), ('GitHub', INK_SOFT), ('SpherePrime', SPHERE)]):
-        card_defs += (f'<mask id="lk{i}" maskUnits="userSpaceOnUse" x="{n(x)}" y="{LINK_CARD_Y}" '
-                      f'width="{LINK_CARD_W}" height="{LINK_CARD_H}">'
-                      f'<rect x="{n(x)}" y="{LINK_CARD_Y}" width="{LINK_CARD_W}" height="{LINK_CARD_H}" '
-                      f'rx="{LINK_CARD_H / 2}" fill="#fff"/></mask>')
-        links += link_card(x, label, color, delay=0.08 * i, mask_id=f'lk{i}')
-        x += LINK_CARD_W + LINK_CARD_GAP
-
     # Staggered entrance. The hero uses `enter-soft`, which never starts fully
     # transparent: a renderer that paints the SVG before the animation clock
     # ticks (link previews, archiving, print) then shows a slightly dim but
@@ -813,7 +774,6 @@ def build_hero():
     top_base = top_mid + CAP * 13.5
     body = f'''
 {defs}
-{card_defs}
 {blobs}
 {enter(f'''
 <rect x="0" y="0" width="{W}" height="{TOPBAR_H}" fill="#ffffff" opacity=".02"/>
@@ -830,7 +790,6 @@ def build_hero():
 ''', 0.1, 'enter-soft')}
 {enter(text(TEXT, 300, 'Голос, код и инфраструктура — в одном контуре.', size=25, fill=INK_SOFT), 0.18, 'enter-soft')}
 {enter(text(TEXT, 336, 'Rust-ядро. Python-сервисы. Плагины, которые работают.', size=18, fill=INK_MUTE), 0.23, 'enter-soft')}
-{enter(links, 0.28, 'enter-soft')}
 {enter(f'''
 <circle cx="{cx}" cy="{cy}" r="96" fill="none" stroke="{CYAN}" stroke-opacity=".16"/>
 <circle class="spin" cx="{cx}" cy="{cy}" r="78" fill="none" stroke="{EMBER}" stroke-opacity=".5" stroke-width="1.2" stroke-dasharray="3 14"/>
@@ -846,7 +805,7 @@ def build_hero():
 '''
     shell('hero.svg', HERO_H, HERO_R, body,
           'Lil KALINOV — системный разработчик и QA. Rust, Python, Go и голосовые '
-          'интерфейсы Astra. Ссылки: Telegram, GitHub, организация SpherePrime.',
+          'интерфейсы Astra.',
           spine_color=CORAL)
 
 
@@ -1195,6 +1154,38 @@ def build_footer():
           'Написать LilKALINOV в Telegram: @LilKALINOV', spine_color=CORAL, spine_short=True)
 
 
+def build_buttons():
+    """Two standalone link panels, each wrapped in its own Markdown <a> on the
+    README. Anything drawn inside a panel SVG is not clickable behind GitHub's
+    camo proxy, so the only links the page actually follows live here.
+    """
+    for filename, label, accent, url in [
+        ('btn-telegram.svg', 'Telegram', CYAN, 'https://t.me/LilKALINOV'),
+        ('btn-sphereprime.svg', 'SpherePrime', SPHERE, 'https://github.com/SpherePrime'),
+    ]:
+        x, w, h = AXIS, LINK_PILL_W, LINK_PILL_H
+        y = (LINKS_H - h) / 2
+        label_w = run_width(label, 15, True, PILL_TRACK)
+        cx = x + w / 2
+        arrow_x = x + w - 22
+        arrow = (f'<path d="M{n(arrow_x - 12)} {y + h / 2 + 7}h{n(24)}'
+                 f'M{n(arrow_x)} {y + h / 2 - 7}v{n(24)}" fill="none" stroke="{accent}" '
+                 f'stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>')
+        mask = (f'<mask id="bkm" maskUnits="userSpaceOnUse" x="{n(x)}" y="{n(y)}" '
+                f'width="{n(w)}" height="{n(h)}">'
+                f'<rect x="{n(x)}" y="{n(y)}" width="{n(w)}" height="{n(h)}" rx="{h / 2}" fill="#fff"/></mask>')
+        body = f'''
+{mask}
+<rect x="{n(x)}" y="{n(y)}" width="{n(w)}" height="{n(h)}" rx="{h / 2}" fill="{CHIP}" fill-opacity="{CHIP_FILL}" stroke="{accent}" stroke-opacity="{CHIP_EDGE}"/>
+<rect class="btsweep" x="{n(x)}" y="{n(y)}" width="140" height="{n(h)}" fill="url(#sheen)" mask="url(#bkm)"/>
+{text(cx, y + h / 2 + 5, escape(label), size=15, fill=accent, mono=True, weight=700, tracking=PILL_TRACK, anchor='middle', text_length=label_w)}
+{arrow}
+'''
+        shell(filename, LINKS_H, CARD_R, body,
+              f'Кнопка {label} — откроет {url}.',
+              spine_color=accent, spine_short=True)
+
+
 def version_asset(match):
     """Point every image at a content-hashed copy so GitHub cannot cache it."""
     path = re.sub(r'-[0-9a-f]{12}(?=\.svg$)', '', match.group(1))
@@ -1246,8 +1237,9 @@ def main():
     build_cards()
     build_sections()
     build_footer()
+    build_buttons()
     sync_readme_and_preview()
-    print('Generated 8 SVG assets in assets/')
+    print('Generated 10 SVG assets in assets/')
 
 
 if __name__ == '__main__':

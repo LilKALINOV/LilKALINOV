@@ -514,6 +514,8 @@ def main():
         'intro.svg': [],                 # the 3 focus columns own the lower half
         'plugins.svg': [],               # ghost numeral is a text run, checked as text
         'sphereprime.svg': [],
+        'btn-telegram.svg': [],          # standalone link button, one centred pill
+        'btn-sphereprime.svg': [],
         # gap between the left copy and the CTA button: the button's own label
         # legitimately lives inside the pill, so the zone guards the gutter only
         'footer.svg': [('cta-gutter', (520, 14, 700, 82))],
