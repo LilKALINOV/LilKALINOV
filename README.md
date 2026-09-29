@@ -6,7 +6,7 @@
 -->
 
 <p align="center">
-  <img src="./assets/hero-7ffbe5d5a5fa.svg" width="100%" alt="Lil KALINOV — системный разработчик и QA. Rust, Python, Go и голосовые интерфейсы Astra." />
+  <img src="./assets/hero-7ffbe5d5a5fa.svg" width="100%" alt="Lil KALINOV — администратор, QA и плагин-разработчик в студии KNICE TECH & MINICE. Голосовые ассистенты Astra и Stella, плагины, Rust, Python, TypeScript." />
 </p>
 
 <p align="center">
@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img src="./assets/intro-74115554aa86.svg" width="100%" alt="Системный разработчик и QA. Соединяю надёжное ядро с полезной механикой: скорость в Rust и Go, сервисы на Python, голос — через Astra Plugin SDK. Фокус: скорость и надёжность, сервисы и плагины, живой диалог." />
+  <img src="./assets/intro-74115554aa86.svg" width="100%" alt="Админ, QA и плагинист. Админ и техподдержка в студии KNICE TECH & MINICE: голосовые ассистенты, QA и расширяемая архитектура через плагины. Направления: KNICE & MINICE, Astra & Stella, open source." />
 </p>
 
 <a href="https://astra.minice.ai"><img src="./assets/astra-f750fa6126f3.svg" width="100%" alt="01 Astra и Stella — QA-тестирование и плагины голосовых ассистентов без вмешательства в ядро. QA, Rust, плагины. Открыть аstra.minice.ai." /></a>
