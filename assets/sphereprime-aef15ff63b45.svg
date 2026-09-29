@@ -103,7 +103,7 @@
  @keyframes enter-soft{from{opacity:.8;transform:translateY(9px)}to{opacity:1;transform:none}}
  @keyframes gwsweep{from{transform:translateX(-420px)}to{transform:translateX(1520px)}}
  .gws{animation:gwsweep 8.5s cubic-bezier(.45,0,.55,1) infinite}
- @keyframes btsweep{0%{transform:translateX(-140px)}60%{transform:translateX(150px)}100%{transform:translateX(150px)}}
+ @keyframes btsweep{0%,32%{transform:translateX(0)}72%,100%{transform:translateX(480px)}}
  .btsweep{animation:btsweep 5.2s cubic-bezier(.45,0,.55,1) infinite}
  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transform:none!important;scale:1!important;translate:0 0!important}}
  @keyframes morph{from{d:path('M926 236C926 268.033 900.033 294 868 294C835.967 294 810 268.033 810 236C810 203.967 835.967 178 868 178C900.033 178 926 203.967 926 236Z')}to{d:path('M926 236C926 294 926 294 868 294C810 294 810 294 810 236C810 178 810 178 868 178C926 178 926 178 926 236Z')}} @keyframes settle{from{letter-spacing:-1.4px}to{letter-spacing:-6px}} @keyframes packet{from{stroke-dashoffset:0}to{stroke-dashoffset:calc(-1 * var(--len))}}</style>

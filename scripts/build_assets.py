@@ -318,7 +318,7 @@ STYLE = """
  @keyframes enter-soft{from{opacity:.8;transform:translateY(9px)}to{opacity:1;transform:none}}
  @keyframes gwsweep{from{transform:translateX(-420px)}to{transform:translateX(1520px)}}
  .gws{animation:gwsweep 8.5s cubic-bezier(.45,0,.55,1) infinite}
- @keyframes btsweep{0%{transform:translateX(-140px)}60%{transform:translateX(150px)}100%{transform:translateX(150px)}}
+ @keyframes btsweep{0%,32%{transform:translateX(0)}72%,100%{transform:translateX(480px)}}
  .btsweep{animation:btsweep 5.2s cubic-bezier(.45,0,.55,1) infinite}
  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transform:none!important;scale:1!important;translate:0 0!important}}
 """
@@ -1192,7 +1192,7 @@ def build_buttons():
         body = f'''
 {mask}
 <rect x="0" y="0" width="{n(w)}" height="{n(h)}" rx="{h / 2}" fill="{CHIP}" fill-opacity=".94" stroke="{accent}" stroke-opacity=".55"/>
-<rect class="btsweep" x="0" y="0" width="120" height="{n(h)}" fill="url(#sheen)" mask="url(#bkm)"/>
+<rect class="btsweep" x="-160" y="0" width="120" height="{n(h)}" fill="url(#sheen)" mask="url(#bkm)"/>
 {text(w / 2 - 10, h / 2 + BTN_FONT * 0.35, escape(label), size=BTN_FONT, fill=accent, mono=True,
      weight=700, tracking=PILL_TRACK, anchor='middle', text_length=label_w)}
 {arrow}
