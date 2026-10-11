@@ -12,6 +12,7 @@
 <p align="center">
   <a href="https://t.me/SpherePrime"><img src="./assets/btn-telegram-23e68dd6c1fb.svg" width="280" alt="Telegram — написать в Telegram: @SpherePrime" /></a>
   <a href="https://github.com/SpherePrime"><img src="./assets/btn-sphereprime-34c642a3ea2b.svg" width="280" alt="SpherePrime — организация на GitHub" /></a>
+  <a href="https://lilkalinov.github.io/portfolio/"><img src="./assets/btn-portfolio-b70f4343fc46.svg" width="280" alt="Портфолио — интерактивное портфолио на Three.js и Next.js" /></a>
 </p>
 
 <p align="center">
@@ -23,6 +24,8 @@
 <a href="https://github.com/Lil-KALINOV/SwiftProxy"><img src="./assets/primeproxy-dab3d18a37cd.svg" width="100%" alt="02 PrimeProxy — обход блокировок в РФ: MTProto-прокси на Python, плагин прямо в Astra. Python, MTProto, Astra. Открыть репозиторий." /></a>
 
 <a href="https://github.com/LilKALINOV?tab=repositories"><img src="./assets/primerouter-2ea171eb2a59.svg" width="100%" alt="03 Desktop Utilities — лёгкие нативные утилиты для Windows и Linux: чистый UI, низкое потребление. Tauri, Flutter, Qt6." /></a>
+
+<a href="https://github.com/SpherePrime/PrimeAi"><img src="./assets/primeai-87b3c5a8792f.svg" width="100%" alt="04 PrimeAI — ИИ-провайдер для Astra с авто-маршрутизацией через Router API, vision и поиском DuckDuckGo. TypeScript, Bun. Совместная разработка с dwertyfa." /></a>
 
 <p align="center">
   <img src="./assets/plugins-9f56ee5db3aa.svg" width="100%" alt="04 Плагины Astra — голос и поиск для ассистента без вмешательства в ядро: astra-silero (Silero STT), astra-websearch-ddg (DuckDuckGo), Astra-Google-STT, Astra-PrimeProxy (сетевой слой)." />

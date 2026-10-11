@@ -1025,6 +1025,39 @@ def build_card(filename, number, label, name, description, tags, accent, art_bui
           spine_color=primary)
 
 
+def art_primeai():
+    """PrimeAI: hub fanning requests to LLMs with route discovery and retries."""
+    primary, secondary = GO
+    hub_x, hub_y = ART_CX, 112
+    node_x, node_r = 1010, 12
+    endpoints = [(68, primary), (112, secondary), (156, VIOLET), (196, CYAN)]
+    edges, packets = '', ''
+    for i, (ey, color) in enumerate(endpoints):
+        p0 = (hub_x + 20, hub_y)
+        p1 = (900, hub_y)
+        p2 = (node_x - 50, ey)
+        p3 = (node_x - 8, ey)
+        d = f'M{p0[0]} {p0[1]}C{p1[0]} {p1[1]} {p2[0]} {p2[1]} {p3[0]} {p3[1]}'
+        edges += f'<path d="{d}" fill="none" stroke="{color}" stroke-opacity=".14" stroke-width="2.4"/>'
+        edges += (f'<path d="{d}" fill="none" stroke="{color}" stroke-width="2.4" class="flow" '
+                  f'style="animation-delay:{n(-i * 0.5)}s"/>')
+        packets += packet(d, color, cubic_len(p0, p1, p2, p3), size=4.4,
+                          delay=-i * 0.72, duration=2.9, opacity=.9)
+        edges += (f'<circle class="pulse" cx="{node_x}" cy="{ey}" r="{node_r}" fill="none" stroke="{color}" '
+                  f'stroke-width="1.2" stroke-opacity=".5" style="animation-delay:{n(-i * 0.38)}s"/>'
+                  f'<circle cx="{node_x}" cy="{ey}" r="9" fill="{color}" opacity=".14"/>'
+                  f'<circle cx="{node_x}" cy="{ey}" r="9" fill="none" stroke="{color}" stroke-opacity=".7"/>'
+                  f'<circle cx="{node_x}" cy="{ey}" r="3" fill="{color}"/>')
+    hub = (
+        f'<circle cx="{hub_x}" cy="{hub_y}" r="28" fill="none" stroke="{secondary}" '
+        f'stroke-opacity=".3" stroke-dasharray="2 9" class="spin" style="animation-duration:20s"/>'
+        f'<circle class="mesh" cx="{hub_x}" cy="{hub_y}" r="19" fill="{primary}" opacity=".2" filter="url(#soft)"/>'
+        f'<circle cx="{hub_x}" cy="{hub_y}" r="17" fill="url(#panel)" stroke="{secondary}" stroke-opacity=".8"/>'
+        f'<circle class="pulse" cx="{hub_x}" cy="{hub_y}" r="7" fill="{primary}"/>'
+    )
+    return '', edges + packets + hub
+
+
 def build_cards():
     build_card('astra.svg', '01', 'QA × VOICE', 'Astra & Stella',
                'QA-тестирование и плагины голосовых ассистентов — без ядра.',
@@ -1035,6 +1068,9 @@ def build_cards():
     build_card('primerouter.svg', '03', 'TOOLS × UI', 'Desktop Utilities',
                'Легковесные нативные утилиты Windows и Linux, чистый UI.',
                ['TAURI', 'FLUTTER', 'QT6'], TS, art_router)
+    build_card('primeai.svg', '04', 'AI × ROUTING', 'PrimeAI for Astra',
+               'ИИ-провайдер с авто-маршрутизацией и веб-поиском DuckDuckGo.',
+               ['TYPESCRIPT', 'BUN', 'ROUTER'], GO, art_primeai)
 
 
 # --------------------------------------------------------------------------- #
@@ -1181,6 +1217,7 @@ def build_buttons():
     for filename, label, accent, url in [
         ('btn-telegram.svg', 'Telegram', CYAN, 'https://t.me/SpherePrime'),
         ('btn-sphereprime.svg', 'SpherePrime', SPHERE, 'https://github.com/SpherePrime'),
+        ('btn-portfolio.svg', 'Portfolio', EMBER, 'https://lilkalinov.github.io/portfolio/'),
     ]:
         w, h = BTN_W, BTN_H
         label_w = run_width(label, BTN_FONT, True, PILL_TRACK)
@@ -1255,7 +1292,7 @@ def main():
     build_footer()
     build_buttons()
     sync_readme_and_preview()
-    print('Generated 10 SVG assets in assets/')
+    print('Generated 11 SVG assets in assets/')
 
 
 if __name__ == '__main__':
