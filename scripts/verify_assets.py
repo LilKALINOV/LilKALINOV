@@ -22,13 +22,12 @@ NS = '{http://www.w3.org/2000/svg}'
 # the only assets that draw illustration in the right-hand corridor
 CAP = 0.35          # cap height as a fraction of the em
 CSS_KEYWORDS = {'none', 'initial', 'inherit', 'unset', 'running', 'paused'}
-ART_ASSETS = {'astra.svg', 'primeproxy.svg', 'primerouter.svg'}
 
 # single source of truth: the checker reads the grid straight off the generator,
 # so a moved axis can never leave the two files disagreeing
 sys.path.insert(0, str(ROOT / 'scripts'))
-from build_assets import (AXIS, DIV, HEAD_EYEBROW, HEAD_SIZE, HEAD_SUB,  # noqa: E402
-                          HEAD_TITLE, RIGHT, SPINE_X, TEXT)
+from build_assets import (ART_ASSETS, AXIS, DIV, HEAD_EYEBROW, HEAD_SIZE,  # noqa: E402
+                          HEAD_SUB, HEAD_TITLE, RIGHT, SPINE_X, TEXT)
 
 FONT_FILES = {
     ('sans', False): r'C:\Windows\Fonts\segoeui.ttf',

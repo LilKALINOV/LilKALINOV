@@ -25,7 +25,7 @@
  <clipPath id="frame"><rect x=".5" y=".5" width="1099" height="243" rx="18"/></clipPath>
  <clipPath id="spc"><rect x="26" y="66" width="4" height="146" rx="2.0"/></clipPath>
  <linearGradient id="spineg" gradientUnits="userSpaceOnUse" x1="26" y1="66" x2="26" y2="212"><stop stop-color="#ff9f6e"/><stop offset=".5" stop-color="#ff6a3d"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
- <radialGradient id="au-04"><stop stop-color="#a78bfa" stop-opacity="0.11"/><stop offset=".55" stop-color="#a78bfa" stop-opacity="0.038"/><stop offset="1" stop-color="#a78bfa" stop-opacity="0"/></radialGradient>
+ <radialGradient id="au-02"><stop stop-color="#a78bfa" stop-opacity="0.11"/><stop offset=".55" stop-color="#a78bfa" stop-opacity="0.038"/><stop offset="1" stop-color="#a78bfa" stop-opacity="0"/></radialGradient>
 </defs>
 <style>
  text{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans',Helvetica,Arial,sans-serif}
@@ -111,10 +111,10 @@
 <rect x=".5" y=".5" width="1099" height="243" rx="18" fill="url(#panel)"/>
 <g opacity=".5"><circle class="twinkle" cx="40" cy="12.3" r="1.6" fill="#ffcab0" style="animation-delay:-3.6s"/><circle class="twinkle" cx="210" cy="13" r="1.1" fill="#ffcab0" style="animation-delay:-0.53s"/><circle class="twinkle" cx="380" cy="12.6" r="1.1" fill="#ffcab0" style="animation-delay:-1.66s"/><circle class="twinkle" cx="550" cy="12.2" r="1.6" fill="#ffcab0" style="animation-delay:-2.79s"/><circle class="twinkle" cx="720" cy="12.9" r="1.1" fill="#ffcab0" style="animation-delay:-3.92s"/><circle class="twinkle" cx="890" cy="12.5" r="1.1" fill="#ffcab0" style="animation-delay:-0.85s"/><circle class="twinkle" cx="1060" cy="12.1" r="1.6" fill="#ffcab0" style="animation-delay:-1.98s"/></g><rect x="23" y="66" width="10" height="146" rx="5.0" fill="#a78bfa" opacity=".28" filter="url(#soft)" class="pulse"/><g clip-path="url(#spc)"><rect x="26" y="66" width="4" height="146" rx="2.0" fill="url(#spineg)"/><rect class="spimp" x="26" y="66" width="4" height="34" rx="2.0" fill="#ffffff" fill-opacity=".85" style="--spine-h:146;filter:url(#soft)"/><rect class="spimp" x="26" y="66" width="4" height="34" rx="2.0" fill="#ff9f6e" fill-opacity=".8" style="--spine-h:146;animation-delay:2.6s;filter:url(#soft)"/></g>
 
-<g class="drift-c"><ellipse cx="903" cy="110" rx="178" ry="140" fill="url(#au-04)" class="mesh"/></g>
+<g class="drift-c"><ellipse cx="903" cy="110" rx="178" ry="140" fill="url(#au-02)" class="mesh"/></g>
 <rect x="0" y="0" width="1100" height="58" fill="#ffffff" opacity=".018"/>
 <g class="enter">
-<text x="74" y="58" font-size="11.5" fill="#a78bfa" font-weight="600" class="mono" letter-spacing="2.6">04 / AI × ROUTING</text>
+<text x="74" y="58" font-size="11.5" fill="#a78bfa" font-weight="600" class="mono" letter-spacing="2.6">02 / AI × ROUTING</text>
 <text x="74" y="102" font-size="38" fill="#FFFFFF" font-weight="700" letter-spacing="-0.9">PrimeAI for Astra</text>
 <text x="74" y="134" font-size="17" fill="#A1A1AA">ИИ-провайдер для Astra: Router API, авто-роутинг, веб-поиск.</text>
 <rect x="52" y="166" width="112.4" height="25" rx="12.5" fill="#a78bfa" fill-opacity=".92" stroke="#a78bfa"/><text x="74" y="182.64" font-size="11.5" fill="#0E0E10" font-weight="600" class="mono" letter-spacing="0.4" textLength="68.4" lengthAdjust="spacing">TYPESCRIPT</text><rect x="172.4" y="166" width="64.52" height="25" rx="12.5" fill="#18181C" fill-opacity="0.88" stroke="#a78bfa" stroke-opacity="0.42"/><text x="194.4" y="182.64" font-size="11.5" fill="#a78bfa" font-weight="400" class="mono" letter-spacing="0.4" textLength="20.52" lengthAdjust="spacing">BUN</text><rect x="244.92" y="166" width="85.04" height="25" rx="12.5" fill="#18181C" fill-opacity="0.88" stroke="#a78bfa" stroke-opacity="0.42"/><text x="266.92" y="182.64" font-size="11.5" fill="#a78bfa" font-weight="400" class="mono" letter-spacing="0.4" textLength="41.04" lengthAdjust="spacing">ROUTER</text>

@@ -53,9 +53,13 @@ from __future__ import annotations
 import base64
 import hashlib
 import re
+import sys
+from datetime import date
 from html import escape
-from math import cos, hypot, pi, sin
+from math import cos, hypot, pi, radians, sin
 from pathlib import Path
+
+import fetch_repos
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / 'assets'
@@ -244,10 +248,21 @@ RUST = ('#ff8a4c', '#ffcf87')
 PY = ('#4b8bf0', '#7fd7ff')
 GO = ('#00c8b8', '#6ef0dd')
 TS = ('#a78bfa', '#d6c9ff')
+JS = ('#fbbf24', '#fde68a')
 # the network card: PrimeProxy moved to the SpherePrime org and is Rust now,
 # so it can no longer borrow the Python palette — this teal pair keeps the
 # four cards in four distinct hues without inventing a new brand colour
 NET = (CYAN, '#9ff1ff')
+
+# accent per GitHub language, so a card generated straight from live data
+# still lands in the set's palette instead of inventing a colour per repo
+LANG_ACCENT = {'Rust': RUST, 'Python': PY, 'Go': GO, 'TypeScript': TS,
+               'JavaScript': JS, 'Java': NET, 'C': NET, 'C++': NET}
+
+# filenames that carry the right-hand illustration corridor. Populated by
+# build_card as cards are generated, seeded with the four standard ones so
+# the verifier can run against a fresh import too.
+ART_ASSETS = {'astra.svg', 'primeproxy.svg', 'primerouter.svg', 'primeai.svg'}
 
 ADVANCE = {'mono': 0.56, 'sans': 0.52}
 
@@ -765,7 +780,7 @@ def shell(name, height, radius, body, title, defs_extra='', spine_color=None,
 # --------------------------------------------------------------------------- #
 # hero
 # --------------------------------------------------------------------------- #
-def build_hero():
+def build_hero(stats):
     cx, cy = ORB_CX, ORB_CY
     defs, blobs = '', ''
     # the corner bloom balances the warm orb on the right with a cool light on
@@ -882,7 +897,7 @@ def build_hero():
 ''', 0.1, 'enter-soft')}
 {enter(text(TEXT, 256, 'Инструменты для ИИ-агентов. От CLI до голоса.', size=25, fill=INK_SOFT), 0.18, 'enter-soft')}
 {enter(text(TEXT, 292, 'KNICE TECH &amp; MINICE — работа и QA. SpherePrime — открытый код.', size=18, fill=INK_MUTE), 0.23, 'enter-soft')}
-{enter(text(TEXT, 330, '<tspan fill="' + CYAN + '">$</tspan> prime --status · 23 repos · 12★ · push: сегодня',
+{enter(text(TEXT, 330, '<tspan fill="' + CYAN + f'">$</tspan> prime --status · {stats["repos"]} repos · {stats["stars"]}★ · push: {stats["pushed"]}',
        size=13.5, fill=INK_MUTE, mono=True, tracking=0.8), 0.3, 'enter-soft')}
 {enter(f'''
 <circle cx="{cx}" cy="{cy}" r="96" fill="none" stroke="{CYAN}" stroke-opacity=".16"/>
@@ -898,9 +913,9 @@ def build_hero():
 ''', 0.14)}
 '''
     shell('hero.svg', HERO_H, HERO_R, body,
-          'Lil KALINOV — строит инструменты для ИИ-агентов в SpherePrime: '
-          'Prime CLI на Go, PrimeAI, PrimeProxy, голосовые плагины Astra. '
-          '23 некошеных репозитория, 12 звёзд, последний пуш — сегодня.',
+          f'Lil KALINOV — строит инструменты для ИИ-агентов в SpherePrime: Prime CLI на Go, '
+          f'PrimeAI, PrimeProxy, голосовые плагины Astra. Репозиториев {stats["repos"]}, '
+          f'звёзд {stats["stars"]}, последний пуш — {stats["pushed"]}.',
           spine_color=CORAL)
 
 
@@ -1060,6 +1075,7 @@ def art_router():
 
 def build_card(filename, number, label, name, description, tags, accent, art_builder,
                owner, meta, dot=None):
+    ART_ASSETS.add(filename)
     primary, secondary = accent
     art_defs, art_body = art_builder()
     tags_markup, x = '', AXIS
@@ -1138,23 +1154,298 @@ def art_primeai():
     return '', edges + packets + hub
 
 
-def build_cards():
-    build_card('astra.svg', '01', 'QA × VOICE', 'Astra & Stella',
-               'Голосовые плагины для ассистента: TTS, STT, поиск — без ядра.',
-               ['QA', 'RUST', 'PLUGINS'], RUST, art_voice,
-               'MINICE.AI', 'LIVE · ASTRA · STELLA', dot=CYAN)
-    build_card('primeproxy.svg', '02', 'NETWORK × FREEDOM', 'PrimeProxy',
-               'MTProto-прокси и плагин для Astra на Rust: обход блокировок в РФ.',
-               ['RUST', 'MTPROTO', 'ASTRA'], NET, art_bridge,
-               'SPHEREPRIME', '2 · RUST · MTPROTO')
-    build_card('primerouter.svg', '03', 'CLI × AGENT', 'Prime CLI',
-               'Агент для кодинга в терминале: любые модели, сессии, LSP.',
-               ['GO', 'CLI', 'LSP'], GO, art_router,
-               'SPHEREPRIME', '3 · GO · AGENTIC')
-    build_card('primeai.svg', '04', 'AI × ROUTING', 'PrimeAI for Astra',
-               'ИИ-провайдер для Astra: Router API, авто-роутинг, веб-поиск.',
-               ['TYPESCRIPT', 'BUN', 'ROUTER'], TS, art_primeai,
-               'SPHEREPRIME', '6 · TYPESCRIPT · BUN')
+# --------------------------------------------------------------------------- #
+# live repository data: the cards and sections are generated from it
+# --------------------------------------------------------------------------- #
+# curated Russian copy, keyed by repo name in lower case; anything without an
+# entry falls back to the first readable line of its README
+DESC_RU = {
+    'primeproxy': 'MTProto-прокси и плагин для Astra на Rust: обход блокировок в РФ.',
+    'cli': 'Агент для кодинга в терминале: любые модели, сессии, LSP.',
+    'primeai': 'ИИ-провайдер для Astra: Router API, авто-роутинг, веб-поиск.',
+    'prime-server': 'Router API: Fastify, PostgreSQL, Redis, админка на React.',
+    'primereplay': 'Нативное десктоп-приложение на Rust и Slint.',
+    'sphereprime-site': 'Сайт студии: React, Vite, TypeScript.',
+    'stella': 'Голосовой помощник для Windows: Flet, Telegram, русский STT.',
+    'flagshiprouter': 'Локальный OpenAI-совместимый шлюз бесплатных моделей.',
+    'skill-mcp': 'MCP-инструменты для ассистентов на JavaScript и Python.',
+    'astra-silero': 'Локальный русский TTS Silero: офлайн, пять голосов.',
+    'astra-websearch-ddg': 'Поиск DuckDuckGo из ассистента — без лимитов и ключей.',
+    'astra-google-stt': 'Распознавание речи через Google Web Speech — без API-ключа.',
+    'astra-primeproxy': 'MTProto-слой внутри ассистента: сеть как плагин.',
+    'astrabot-qwen': 'Ранний бот-ассистент на Qwen: предок Astra-плагинов.',
+    'astra-bot': 'Первый бот-ассистент: прототип голосового контура.',
+}
+# the second tag for the plugin rows, where the language tag is not enough
+PLUGIN_TAG2 = {'astra-silero': 'TTS', 'astra-websearch-ddg': 'SEARCH',
+               'astra-google-stt': 'STT', 'astra-primeproxy': 'MTPROTO'}
+# featured-card specs: the bespoke scenes (bridge, router fan) belong to these
+# repositories, so the mapping pins filename, art and link; anything else that
+# breaks into the top three gets the generic spark scene and its repo URL
+FEATURED = {
+    'primeproxy': dict(filename='primeproxy.svg', label='NETWORK × FREEDOM',
+                       name='PrimeProxy', tags=['RUST', 'MTPROTO', 'ASTRA'],
+                       accent=NET, art=art_bridge,
+                       href='https://github.com/SpherePrime/PrimeProxy', suffix='MTPROTO'),
+    'cli': dict(filename='primerouter.svg', label='CLI × AGENT',
+                name='Prime CLI', tags=['GO', 'CLI', 'LSP'],
+                accent=GO, art=art_router,
+                href='https://github.com/SpherePrime/CLI', suffix='AGENTIC'),
+    'primeai': dict(filename='primeai.svg', label='AI × ROUTING',
+                    name='PrimeAI for Astra', tags=['TYPESCRIPT', 'BUN', 'ROUTER'],
+                    accent=TS, art=art_primeai,
+                    href='https://github.com/SpherePrime/PrimeAi', suffix='BUN'),
+}
+# never featured whatever their numbers say: profile meta and scratch repos
+NOT_FEATURED = {'.github', 'lilkalinov', 'lil-kalinov', '123', 'portfolio'}
+# order of preference for the SpherePrime section rows
+SHOWCASE_ORDER = ['prime-server', 'primereplay', 'sphereprime-site', 'stella',
+                  'flagshiprouter', 'skill-mcp', 'primebd', 'primebroweser']
+
+
+def fit(source: str, limit: int) -> str:
+    """Truncate a live-data string to a word boundary that fits the layout."""
+    text = ' '.join((source or '').split())
+    if len(text) <= limit:
+        return text
+    return text[:limit].rsplit(' ', 1)[0].rstrip(' ,.:;-—') + '…'
+
+
+def load_repos() -> list[dict]:
+    """Live repository data, falling back to the cached snapshot offline."""
+    try:
+        repos = fetch_repos.fetch_all()
+    except Exception as err:                                  # noqa: BLE001
+        print(f'live fetch unavailable ({err}); using cache', file=sys.stderr)
+        repos = fetch_repos.load_cached()
+    return repos
+
+
+def compute_stats(repos: list[dict]) -> dict:
+    """The hero status line's numbers, straight from the fetched data."""
+    today = date.today()
+    days = [fetch_repos.pushed_day(r['pushed']) for r in repos]
+    days = [d for d in days if d]
+    when = 'сегодня' if days and max(days) == today else (
+        max(days).strftime('%d.%m') if days else '—')
+    return {'repos': len(repos), 'stars': sum(r['stars'] for r in repos), 'pushed': when}
+
+
+def lang_tag(repo: dict, index: int = 0, default: str = 'CODE') -> str:
+    langs = repo.get('langs') or []
+    return (langs[index] if index < len(langs) else default).upper()
+
+
+# GitHub language names have their own casing (TypeScript, JavaScript); the
+# tags are uppercased for the pills, but prose alt text should match upstream
+LANG_DISPLAY = {'typescript': 'TypeScript', 'javascript': 'JavaScript',
+                'go': 'Go', 'rust': 'Rust', 'python': 'Python', 'css': 'CSS',
+                'html': 'HTML', 'slint': 'Slint', 'shell': 'Shell'}
+
+
+def lang_display(tag: str) -> str:
+    return LANG_DISPLAY.get(tag.lower(), tag.title())
+
+
+def make_spark(accent):
+    """Generic illustration for a featured card with no bespoke scene: a core
+    with orbiting sparks and one packet looping the ring."""
+    def art():
+        primary, secondary = accent
+        cx, cy = ART_CX, 112
+        ring = (
+            f'<circle cx="{n(cx)}" cy="{cy}" r="44" fill="none" stroke="{secondary}" '
+            f'stroke-opacity=".3" stroke-dasharray="2 9" class="spin" style="animation-duration:24s"/>'
+            f'<circle class="mesh" cx="{n(cx)}" cy="{cy}" r="30" fill="{primary}" opacity=".18" filter="url(#soft)"/>'
+            f'<circle cx="{n(cx)}" cy="{cy}" r="22" fill="url(#panel)" stroke="{secondary}" stroke-opacity=".8"/>'
+            f'<circle class="pulse" cx="{n(cx)}" cy="{cy}" r="7" fill="{primary}"/>'
+        )
+        dots = ''
+        for frac in (.06, .39, .72):
+            ang = frac * 2 * pi
+            dots += (f'<circle cx="{n(cx + 64 * cos(ang))}" cy="{n(cy + 38 * sin(ang))}" '
+                     f'r="4" fill="{secondary}"/>')
+        loop = (f'M{n(cx + 70)} {cy}A70 70 0 1 1 {n(cx - 70)} {cy}A70 70 0 1 1 {n(cx + 70)} {cy}')
+        return '', ring + dots + packet(loop, primary, 2 * pi * 70, size=4.2,
+                                        delay=-0.4, duration=3.4, opacity=.9)
+    return art
+
+
+def generic_spec(repo: dict) -> dict:
+    """A featured-card spec generated entirely from live data."""
+    slug = re.sub(r'[^a-z0-9]+', '-', repo['name'].lower()).strip('-')
+    accent = LANG_ACCENT.get((repo.get('langs') or [''])[0], NET)
+    return {
+        'filename': f'card-{slug}.svg',
+        'label': 'OPEN SOURCE',
+        'name': repo['name'],
+        'desc': fit(repo.get('line') or repo['name'], 66),
+        'tags': [lang_tag(repo, i, 'OPEN') for i in range(min(3, max(1, len(repo.get('langs') or ['code']))))],
+        'accent': accent,
+        'art': make_spark(accent),
+        'href': f'https://github.com/{repo["owner"]}/{repo["name"]}',
+        'suffix': '',
+    }
+
+
+def star_word(count: int) -> str:
+    if count == 0:
+        return 'без звёзд'
+    if count % 10 == 1 and count % 100 != 11:
+        return f'{count} звезда'
+    if count % 10 in (2, 3, 4) and count % 100 not in (12, 13, 14):
+        return f'{count} звезды'
+    return f'{count} звёзд'
+
+
+def build_cards(repos: list[dict]) -> list[dict]:
+    """The four featured cards, generated from live data.
+
+    Card 01 is the Astra product itself (not a repository). Cards 02-04 are
+    the three highest-starred non-plugin, non-fork repositories: a curated
+    spec when the repo has one, a fully generated card otherwise.
+    """
+    candidates = sorted(
+        (r for r in repos if not r['plugin'] and r['name'].lower() not in NOT_FEATURED),
+        key=lambda r: (r['stars'], r['pushed']), reverse=True)
+    built = []
+    spec = dict(filename='astra.svg', label='QA × VOICE', name='Astra & Stella',
+                desc='Голосовой слой ассистента: TTS, STT и поиск — без ядра.',
+                tags=['QA', 'RUST', 'PLUGINS'], accent=RUST, art=art_voice,
+                href='https://astra.minice.ai', suffix='')
+    meta = 'LIVE · ASTRA · STELLA'
+    build_card(spec['filename'], '01', spec['label'], spec['name'], spec['desc'],
+               spec['tags'], spec['accent'], spec['art'], 'MINICE.AI', meta, dot=CYAN)
+    built.append(dict(spec, owner='MINICE.AI', meta=meta, number='01',
+                      alt=(f'01 Astra и Stella — {spec["desc"]} Продукт работает '
+                           f'вживую на astra.minice.ai.')))
+    for i, repo in enumerate(candidates[:3]):
+        spec = FEATURED.get(repo['name'].lower()) or generic_spec(repo)
+        desc = DESC_RU.get(repo['name'].lower()) or fit(repo.get('line') or repo['name'], 66)
+        meta = f"{repo['stars']} · {lang_tag(repo)}"
+        if spec['suffix']:
+            meta += f" · {spec['suffix']}"
+        owner = repo['owner'].upper()
+        build_card(spec['filename'], f'0{i + 2}', spec['label'], spec['name'], desc,
+                   spec['tags'], spec['accent'], spec['art'], owner, meta)
+        built.append(dict(spec, owner=owner, meta=meta, desc=desc, number=f'0{i + 2}',
+                          alt=(f'0{i + 2} {spec["name"]} — {desc} '
+                               f'{star_word(repo["stars"])}, {lang_display(lang_tag(repo, 0))}. '
+                               f'Открыть {spec["href"]}.')))
+    return built
+
+
+def build_sections(repos: list[dict]) -> dict:
+    """Both data sections, their rows generated from the fetched repositories."""
+    plugins = sorted((r for r in repos if r['plugin']),
+                     key=lambda r: (r['stars'], r['pushed']), reverse=True)
+    rows = []
+    for r in plugins:
+        key = r['name'].lower()
+        accent = LANG_ACCENT.get((r.get('langs') or [''])[0], RUST)
+        rows.append((
+            r['name'],
+            DESC_RU.get(key) or fit(r.get('line') or r['name'], 58),
+            [lang_tag(r), PLUGIN_TAG2.get(key, lang_tag(r, 1, 'PLUGIN'))],
+            [accent[0], accent[0]], accent[0],
+        ))
+    build_section(
+        'plugins.svg', '05', 'ASTRA PLUGINS', 'Плагины Astra',
+        f'Голосовой слой ассистента — {len(rows)} '
+        + ('плагин' if len(rows) == 1 else 'плагина' if 2 <= len(rows) <= 4 else 'плагинов')
+        + ', ноль вторжений в ядро.',
+        rows, RUST[0], RUST[0],
+        'Плагины Astra (имя начинается с astra): '
+        + '; '.join(f'{name} — {desc}' for name, desc, *_ in rows) + '.')
+
+    by_name = {r['name'].lower(): r for r in repos}
+    picks = [by_name[k] for k in SHOWCASE_ORDER if k in by_name][:4]
+    rows = []
+    for r in picks:
+        key = r['name'].lower()
+        accent = LANG_ACCENT.get((r.get('langs') or [''])[0], SPHERE)
+        rows.append((
+            r['name'],
+            DESC_RU.get(key) or fit(r.get('line') or r['name'], 58),
+            [lang_tag(r), lang_tag(r, 1, 'TOOLS')],
+            [accent[0], accent[0]], accent[0],
+        ))
+    build_section(
+        'sphereprime.svg', '06', 'SPHEREPRIME', 'SpherePrime и личное',
+        'Командная работа в организации и личные инструменты.',
+        rows, SPHERE, SPHERE,
+        'SpherePrime и личное: '
+        + '; '.join(f'{name} — {desc}' for name, desc, *_ in rows) + '.')
+    return {'plugins': plugins, 'showcase': picks}
+
+
+def compose_readme(cards: list[dict], sections: dict, stats: dict) -> str:
+    """The whole README, generated: structure, links and alt text from live data."""
+    def attr(s: str) -> str:
+        return s.replace('&', '&amp;')
+
+    def tag_list(repos: list[dict]) -> str:
+        parts = []
+        for r in repos:
+            parts.append(f"{r['name']} ({lang_display(lang_tag(r, 0, '—'))})")
+        return ', '.join(parts)
+
+    hero_alt = attr(
+        f'Lil KALINOV — строит инструменты для ИИ-агентов в SpherePrime: Prime CLI на Go, '
+        f'PrimeAI, PrimeProxy, голосовые плагины Astra. Репозиториев {stats["repos"]}, '
+        f'звёзд {stats["stars"]}, последний пуш — {stats["pushed"]}.')
+    intro_alt = attr(
+        'Строю инструменты для агентов. Админ и техподдержка в KNICE TECH & MINICE, '
+        'а в SpherePrime — свои инструменты: Prime CLI на Go, Router API и голосовые '
+        'плагины. Направления: Prime CLI, Prime-server и PrimeAi, голосовой слой Astra и Stella.')
+    plugins_alt = attr(
+        f'05 Плагины Astra — голосовой слой ассистента, {len(sections["plugins"])} плагинов '
+        f'без вторжения в ядро: ' + ', '.join(r['name'] for r in sections['plugins']) + '.')
+    showcase_alt = attr(
+        '06 SpherePrime и личное — ' + tag_list(sections['showcase']) + '.')
+
+    def card_md(card: dict) -> str:
+        return (f'<a href="{card["href"]}"><img src="./assets/{card["filename"]}" width="100%" '
+                f'alt="{attr(card["alt"])}" /></a>')
+
+    return f'''<!--
+  Every word on this page is drawn in assets/*.svg — there is no prose in this
+  file on purpose, so the design stays in one place: scripts/build_assets.py,
+  and every number comes from scripts/fetch_repos.py (live GitHub API).
+  Regenerate with:  python scripts/build_assets.py
+  Check the layout with:  python scripts/verify_assets.py
+-->
+
+<p align="center">
+  <img src="./assets/hero.svg" width="100%" alt="{hero_alt}" />
+</p>
+
+<p align="center">
+  <a href="https://t.me/SpherePrime"><img src="./assets/btn-telegram.svg" width="280" alt="Telegram — написать в Telegram: @SpherePrime" /></a>
+  <a href="https://github.com/SpherePrime"><img src="./assets/btn-sphereprime.svg" width="280" alt="SpherePrime — организация на GitHub" /></a>
+  <a href="https://lilkalinov.github.io/portfolio/"><img src="./assets/btn-portfolio.svg" width="280" alt="Портфолио — интерактивное портфолио на Three.js и Next.js" /></a>
+</p>
+
+<p align="center">
+  <img src="./assets/intro.svg" width="100%" alt="{intro_alt}" />
+</p>
+
+{card_md(cards[0])}
+
+{card_md(cards[1])}
+
+{card_md(cards[2])}
+
+{card_md(cards[3])}
+
+<p align="center">
+  <img src="./assets/plugins.svg" width="100%" alt="{plugins_alt}" />
+</p>
+
+<a href="https://github.com/SpherePrime"><img src="./assets/sphereprime.svg" width="100%" alt="{showcase_alt}" /></a>
+
+<a href="https://t.me/SpherePrime"><img src="./assets/footer.svg" width="100%" alt="Открытый код, который работает. Контакты: Telegram @SpherePrime, knice.tech, minice.ai, Discord." /></a>
+'''
 
 
 # --------------------------------------------------------------------------- #
@@ -1199,39 +1490,6 @@ def build_section(filename, number, label, title, subtitle, rows, accent, blob_c
     for i, (name, description, tags, colors, dot) in enumerate(rows):
         body += data_row(HEAD_RULE + i * ROW_H, name, description, tags, colors, dot, 0.1 + 0.085 * i)
     shell(filename, height, CARD_R, body, alt, spine_color=accent)
-
-
-def build_sections():
-    build_section(
-        'plugins.svg', '05', 'ASTRA PLUGINS', 'Плагины Astra',
-        'TTS, STT и поиск — четыре плагина, ноль вторжений в ядро.',
-        [('astra-silero', 'Локальный русский TTS Silero: офлайн, пять голосов.',
-          ['RUST', 'TTS'], [RUST[0], RUST[0]], RUST[0]),
-         ('astra-websearch-ddg', 'Поиск DuckDuckGo из ассистента — без лимитов и ключей.',
-          ['RUST', 'SEARCH'], [RUST[0], RUST[0]], RUST[0]),
-         ('Astra-Google-STT', 'Распознавание речи через Google Web Speech — без API-ключа.',
-          ['RUST', 'STT'], [RUST[0], RUST[0]], RUST[0]),
-         ('Astra-PrimeProxy', 'MTProto-слой внутри ассистента: сеть как плагин.',
-          ['RUST', 'MTPROTO'], [RUST[0], RUST[0]], RUST[0])],
-        RUST[0], RUST[0],
-        'Плагины Astra: astra-silero — локальный русский TTS Silero офлайн, '
-        'astra-websearch-ddg — поиск DuckDuckGo без лимитов, Astra-Google-STT — '
-        'распознавание речи без API-ключа, Astra-PrimeProxy — сеть как плагин.')
-    build_section(
-        'sphereprime.svg', '06', 'SPHEREPRIME', 'SpherePrime и личное',
-        'Командная работа в организации и личные инструменты.',
-        [('Prime-server', 'Router API: Fastify, PostgreSQL, Redis, админка на React.',
-          ['TYPESCRIPT', 'ROUTER'], [TS[0], TS[0]], TS[0]),
-         ('PrimeReplay', 'Нативное десктоп-приложение на Rust и Slint.',
-          ['RUST', 'SLINT'], [RUST[0], RUST[0]], RUST[0]),
-         ('SpherePrime-site', 'Сайт студии: React, Vite, TypeScript.',
-          ['REACT', 'VITE'], [TS[0], TS[0]], TS[0]),
-         ('Stella', 'Голосовой помощник для Windows: Flet, Telegram, русский STT.',
-          ['PYTHON', 'FLET'], [PY[0], PY[0]], PY[0])],
-        SPHERE, SPHERE,
-        'SpherePrime и личное: Prime-server — Router API на Fastify, PostgreSQL '
-        'и Redis, PrimeReplay — приложение на Rust и Slint, SpherePrime-site — '
-        'сайт студии, Stella — голосовой помощник для Windows на Python.')
 
 
 # --------------------------------------------------------------------------- #
@@ -1337,14 +1595,16 @@ def version_asset(match):
     return f'src="{versioned}"'
 
 
-def sync_readme_and_preview():
-    """Keep the README's image URLs, the asset folder and preview.html in step.
+def sync_readme_and_preview(readme: str | None = None):
+    """Write the generated README, hash its image URLs and rebuild preview.html.
 
     GitHub caches camo-served images aggressively; a content-hashed filename
     busts that cache the moment a design changes. The plain files stay as the
     editable source; only superseded hashed copies are removed.
     """
     readme_path = ROOT / 'README.md'
+    if readme is not None:
+        readme_path.write_text(readme, encoding='utf-8')
     readme = readme_path.read_text(encoding='utf-8')
     readme = re.sub(r'src="(\./assets/[^"?]+\.svg)(?:\?[^"]*)?"', version_asset, readme)
     readme_path.write_text(readme, encoding='utf-8')
@@ -1374,14 +1634,17 @@ img{{display:block;width:100%;height:auto;margin:0 0 10px;border-radius:6px}}
 
 def main():
     ASSETS.mkdir(exist_ok=True)
-    build_hero()
+    repos = load_repos()
+    stats = compute_stats(repos)
+    print(f'live data: {stats["repos"]} repos, {stats["stars"]}★, last push {stats["pushed"]}')
+    cards = build_cards(repos)
+    sections = build_sections(repos)
+    build_hero(stats)
     build_intro()
-    build_cards()
-    build_sections()
     build_footer()
     build_buttons()
-    sync_readme_and_preview()
-    print('Generated 11 SVG assets in assets/')
+    sync_readme_and_preview(compose_readme(cards, sections, stats))
+    print(f'Generated {len(list(ASSETS.glob("*.svg")))} canonical SVG assets + README from live data')
 
 
 if __name__ == '__main__':
