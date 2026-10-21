@@ -36,6 +36,21 @@ FONT_FILES = {
     ('mono', False): r'C:\Windows\Fonts\consola.ttf',
     ('mono', True): r'C:\Windows\Fonts\consolab.ttf',
 }
+# Linux stand-ins with the closest metrics: Liberation is metric-compatible
+# with Segoe UI's Arial-like ancestors; DejaVu runs wider, which only makes
+# the overflow checks stricter, never looser.
+LINUX_FONT_FILES = {
+    ('sans', False): '/usr/share/fonts/liberation/LiberationSans-Regular.ttf',
+    ('sans', True): '/usr/share/fonts/liberation/LiberationSans-Bold.ttf',
+    ('mono', False): '/usr/share/fonts/liberation/LiberationMono-Regular.ttf',
+    ('mono', True): '/usr/share/fonts/liberation/LiberationMono-Bold.ttf',
+}
+for _key, _win_path in FONT_FILES.items():
+    from pathlib import Path as _Path
+    if not _Path(_win_path).exists():
+        for _candidate in (LINUX_FONT_FILES[_key],):
+            if _Path(_candidate).exists():
+                FONT_FILES[_key] = _candidate
 # conservative per-character advance as a fraction of font-size
 FALLBACK_ADVANCE = {'mono': 0.55, 'sans': 0.52}
 

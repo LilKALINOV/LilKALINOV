@@ -66,7 +66,7 @@ ASSETS = ROOT / 'assets'
 W = 1100
 HERO_H = 436
 INTRO_H = 364
-CARD_H = 220
+CARD_H = 244
 FOOTER_H = 150
 HERO_R = 22
 CARD_R = 18
@@ -94,6 +94,14 @@ TOPBAR_H = 58
 CARD_BAR_Y = 44
 CARD_TAG_Y = 166
 CARD_TAG_H = 25
+
+# the live data strip along the card's bottom edge: a hairline, then owner on
+# the TEXT axis and real repository facts (stars, language, state) flush right.
+# It is what makes the card read as a repo card rather than a banner: the same
+# numbers the GitHub UI would show, drawn in the card's own voice.
+META_RULE = 208
+META_BASE = 232
+META_SIZE = 11.5
 
 # the left accent spine, one shared element drawn in all eight assets. The old
 # per-card bar sat on AXIS=52 and swallowed the left edge of the first tag pill
@@ -236,6 +244,10 @@ RUST = ('#ff8a4c', '#ffcf87')
 PY = ('#4b8bf0', '#7fd7ff')
 GO = ('#00c8b8', '#6ef0dd')
 TS = ('#a78bfa', '#d6c9ff')
+# the network card: PrimeProxy moved to the SpherePrime org and is Rust now,
+# so it can no longer borrow the Python palette — this teal pair keeps the
+# four cards in four distinct hues without inventing a new brand colour
+NET = (CYAN, '#9ff1ff')
 
 ADVANCE = {'mono': 0.56, 'sans': 0.52}
 
@@ -480,6 +492,65 @@ def pill(x, y, label, color, *, h=26, size=12, pad=14, dot=False, weight=400):
     return body, width
 
 
+def pill_solid(x, y, label, color, *, h=26, size=12, pad=14):
+    """The primary tag: a solid accent chip with dark type, no outline haze.
+
+    A card's tag row used to be four equal chips, so nothing in it read as
+    'what this actually is'. The first tag is the card's substance - the language
+    it is written in - so it gets the one filled chip in the row, and the rest
+    stay outlined. The geometry is pill()'s exactly: same width arithmetic, same
+    baseline, same stroke (invisible against the fill, but it keeps the row
+    anchored to AXIS for the verifier). Dark ink on the accent is the highest
+    contrast pairing in the palette, so the chip never leans on what is behind it.
+    """
+    width = pill_width(label, size, pad, False)
+    label_w = run_width(label, size, True, PILL_TRACK)
+    body = (
+        f'<rect x="{n(x)}" y="{n(y)}" width="{n(width)}" height="{n(h)}" rx="{n(h / 2)}" '
+        f'fill="{color}" fill-opacity=".92" stroke="{color}"/>'
+    )
+    body += text(
+        x + pad, y + h / 2 + size * 0.36, escape(label),
+        size=size, fill=BASE, mono=True, tracking=PILL_TRACK, weight=600,
+        text_length=label_w,
+    )
+    return body, width
+
+
+def star4(cx, cy, r):
+    """A four-point sparkle, drawn as a path so no font has to carry U+2605."""
+    k = r * 0.28
+    return (f'M{n(cx)} {n(cy - r)}L{n(cx + k)} {n(cy - k)}L{n(cx + r)} {n(cy)}'
+            f'L{n(cx + k)} {n(cy + k)}L{n(cx)} {n(cy + r)}L{n(cx - k)} {n(cy + k)}'
+            f'L{n(cx - r)} {n(cy)}L{n(cx - k)} {n(cy - k)}Z')
+
+
+def meta_strip(owner, meta, accent, *, dot=None):
+    """The card's bottom data strip: owner left, live facts right.
+
+    `meta` is the repository's real numbers rendered as a mono run ('2 · RUST ·
+    MTPROTO'); when `dot` is given the star is replaced by a blinking status
+    light, for the one card that is a running product rather than a repo. The
+    star is a path (star4), not a glyph - the mono stack resolves to a different
+    face on every platform and not all of them have U+2605.
+    """
+    rule = f'<path d="M{AXIS} {META_RULE}H{RIGHT}" stroke="{HAIRLINE}"/>'
+    owner_w = run_width(owner, META_SIZE, True, 1.6)
+    left = text(TEXT, META_BASE, escape(owner), size=META_SIZE, fill=INK_FAINT,
+                mono=True, tracking=1.6, weight=600, text_length=owner_w)
+    meta_w = run_width(meta, META_SIZE, True, 1.2)
+    right = text(RIGHT, META_BASE, escape(meta), size=META_SIZE, fill=INK_MUTE,
+                 mono=True, anchor='end', tracking=1.2, text_length=meta_w)
+    cy = META_BASE - CAP * META_SIZE
+    if dot:
+        mark = (f'<circle class="blink" cx="{n(RIGHT - meta_w - 14)}" cy="{n(cy)}" '
+                f'r="3.5" fill="{dot}"/>')
+    else:
+        mark = (f'<path class="pulse" d="{star4(RIGHT - meta_w - 14, cy, 6)}" '
+                f'fill="{accent}"/>')
+    return rule + f'<g class="enter" style="animation-delay:.22s">{left}{mark}{right}</g>'
+
+
 def orbit_caption(cx, baseline, label, size, tracking):
     """The hero's orbit annotation, on its own dark plate.
 
@@ -553,7 +624,7 @@ def wordmark(fill):
             '<tspan fill="' + EMBER + '">.</tspan>')
 
 
-def dust(height, name, width=W):
+def dust(height, name, width=W, bottom=True):
     """An even field of twinkle dust confined to the top and bottom gutters.
 
     Specks are parked in the two clear bands - above the first text run and
@@ -561,15 +632,17 @@ def dust(height, name, width=W):
     than scattered. Positions are seeded from the asset name (stable per
     build) and only the per-speck phase varies, so the panel breathes while
     staying regular. No speck can land on a word: the bands are the gutters.
+    `bottom=False` drops the lower band - the cards spend that gutter on their
+    live data strip, and specks behind its type would read as noise, not air.
     """
     seed = sum(ord(c) for c in name)
     top0, top1 = 12, 22
     bot0, bot1 = height - 24, height - 12
     out = '<g opacity=".5">'
-    for band, count, x0, x1 in [
-        (top0, 7, 40, width - 40),    # 7 specks across the top gutter
-        (bot0, 5, int(width * 0.1), int(width * 0.9)),  # 5 across the bottom
-    ]:
+    bands = [(top0, 7, 40, width - 40)]  # 7 specks across the top gutter
+    if bottom:
+        bands.append((bot0, 5, int(width * 0.1), int(width * 0.9)))  # 5 across the bottom
+    for band, count, x0, x1 in bands:
         y_lo = band
         for i in range(count):
             x = x0 + (x1 - x0) * i / (count - 1)
@@ -609,7 +682,8 @@ def spine(height, accent, *, short=False):
     )
 
 
-def shell(name, height, radius, body, title, defs_extra='', spine_color=None, spine_short=False, width=W, bare=False):
+def shell(name, height, radius, body, title, defs_extra='', spine_color=None,
+          spine_short=False, width=W, bare=False, bottom_dust=True):
     """Assemble a complete, accessible SVG document."""
     # the travelling edge light needs the frame's own perimeter, so the dash it
     # draws and the distance it travels are one exact loop
@@ -627,7 +701,7 @@ def shell(name, height, radius, body, title, defs_extra='', spine_color=None, sp
     # asset name) so builds stay byte-stable, twinkling on independent phases.
     # It lives in the frame group, behind the copy, so it never covers a word.
     if not bare:
-        body = dust(height, name, width) + body
+        body = dust(height, name, width, bottom=bottom_dust) + body
     if bare:
         # a bare asset: the body is the whole document - no panel background,
         # dust, grain, edge light or border. For the link buttons, where the
@@ -824,7 +898,7 @@ def build_hero():
     shell('hero.svg', HERO_H, HERO_R, body,
           'Lil KALINOV — администратор, QA и плагин-разработчик в студии KNICE TECH '
           '& MINICE. Голосовые ассистенты Astra и Stella, плагины, Rust, Python, '
-          'TypeScript.',
+          'TypeScript, Go.',
           spine_color=CORAL)
 
 
@@ -841,8 +915,8 @@ def build_intro():
          'Инфраструктура, жизненный цикл<br/>проектов, поддержка пользователей.', CORAL),
         ('ASTRA · STELLA', 'QA и плагины',
          'Бета-тесты, плагины без<br/>вмешательства в ядро.', VIOLET),
-        ('OPEN SOURCE', 'Кроссплатформа',
-         'Утилиты для Windows и Linux:<br/>чистый UI, малое потребление.', PY[0]),
+        ('OPEN SOURCE', 'Rust · TS · Go',
+         'Плагины, CLI и утилиты:<br/>публичный код и релизы.', GO[0]),
     )
     col_w = (RIGHT - TEXT - 2 * COL_GAP) / 3
     cards = ''
@@ -904,7 +978,7 @@ def art_voice():
 
 def art_bridge():
     """PrimeProxy: two banks, a gap, and traffic that keeps crossing it."""
-    primary, secondary = PY
+    primary, secondary = NET
     defs = (
         f'<linearGradient id="bank" x1="0" y1="0" x2="0" y2="1">'
         f'<stop stop-color="{secondary}" stop-opacity=".16"/>'
@@ -983,13 +1057,17 @@ def art_router():
     return '', edges + packets + hub
 
 
-def build_card(filename, number, label, name, description, tags, accent, art_builder):
+def build_card(filename, number, label, name, description, tags, accent, art_builder,
+               owner, meta, dot=None):
     primary, secondary = accent
     art_defs, art_body = art_builder()
     tags_markup, x = '', AXIS
-    for tag in tags:
+    for i, tag in enumerate(tags):
         # pad 22 puts the label on the TEXT axis while the outline stays on AXIS
-        markup, width = pill(x, CARD_TAG_Y, tag, primary, h=CARD_TAG_H, size=11.5, pad=22)
+        if i == 0:
+            markup, width = pill_solid(x, CARD_TAG_Y, tag, primary, h=CARD_TAG_H, size=11.5, pad=22)
+        else:
+            markup, width = pill(x, CARD_TAG_Y, tag, primary, h=CARD_TAG_H, size=11.5, pad=22)
         tags_markup += markup
         x += width + 8
 
@@ -1017,20 +1095,21 @@ def build_card(filename, number, label, name, description, tags, accent, art_bui
 {text(TEXT, HEAD_SUB, escape(description), size=17, fill=INK_MUTE)}
 {tags_markup}
 </g>
+{meta_strip(owner, meta, primary, dot=dot)}
 <path d="M{DIV} {CARD_BAR_Y}V{CARD_TAG_Y + CARD_TAG_H}" stroke="{HAIRLINE}"/>
 <g class="enter" style="animation-delay:.16s">{art_body}</g>
 {badge}
 '''
     shell(filename, CARD_H, CARD_R, body, f'{name}: {description}', defs_extra=defs_extra,
-          spine_color=primary)
+          spine_color=primary, bottom_dust=False)
 
 
 def art_primeai():
     """PrimeAI: hub fanning requests to LLMs with route discovery and retries."""
-    primary, secondary = GO
+    primary, secondary = TS
     hub_x, hub_y = ART_CX, 112
     node_x, node_r = 1010, 12
-    endpoints = [(68, primary), (112, secondary), (156, VIOLET), (196, CYAN)]
+    endpoints = [(68, GO[0]), (112, CYAN), (156, EMBER), (196, PY[0])]
     edges, packets = '', ''
     for i, (ey, color) in enumerate(endpoints):
         p0 = (hub_x + 20, hub_y)
@@ -1061,16 +1140,20 @@ def art_primeai():
 def build_cards():
     build_card('astra.svg', '01', 'QA × VOICE', 'Astra & Stella',
                'QA-тестирование и плагины голосовых ассистентов — без ядра.',
-               ['QA', 'RUST', 'PLUGINS'], RUST, art_voice)
+               ['QA', 'RUST', 'PLUGINS'], RUST, art_voice,
+               'MINICE.AI', 'LIVE · ASTRA · STELLA', dot=CYAN)
     build_card('primeproxy.svg', '02', 'NETWORK × FREEDOM', 'PrimeProxy',
-               'Обход блокировок в РФ: MTProto-плагин прямо в Astra.',
-               ['PYTHON', 'MTPROTO', 'ASTRA'], PY, art_bridge)
-    build_card('primerouter.svg', '03', 'TOOLS × UI', 'Desktop Utilities',
-               'Легковесные нативные утилиты Windows и Linux, чистый UI.',
-               ['TAURI', 'FLUTTER', 'QT6'], TS, art_router)
+               'MTProto-прокси и плагин для Astra на Rust: обход блокировок в РФ.',
+               ['RUST', 'MTPROTO', 'ASTRA'], NET, art_bridge,
+               'SPHEREPRIME', '2 · RUST · MTPROTO')
+    build_card('primerouter.svg', '03', 'CLI × AGENT', 'Prime CLI',
+               'Агентный ассистент в терминале: любые модели, сессии, LSP-контекст.',
+               ['GO', 'CLI', 'LSP'], GO, art_router,
+               'SPHEREPRIME', '3 · GO · AGENTIC')
     build_card('primeai.svg', '04', 'AI × ROUTING', 'PrimeAI for Astra',
-               'ИИ-провайдер с авто-маршрутизацией и веб-поиском DuckDuckGo.',
-               ['TYPESCRIPT', 'BUN', 'ROUTER'], GO, art_primeai)
+               'ИИ-провайдер для Astra: Router API, авто-маршрутизация, веб-поиск.',
+               ['TYPESCRIPT', 'BUN', 'ROUTER'], TS, art_primeai,
+               'SPHEREPRIME', '6 · TYPESCRIPT · BUN')
 
 
 # --------------------------------------------------------------------------- #
@@ -1119,30 +1202,36 @@ def build_section(filename, number, label, title, subtitle, rows, accent, blob_c
 
 def build_sections():
     build_section(
-        'plugins.svg', '04', 'ASTRA PLUGINS', 'Плагины Astra',
+        'plugins.svg', '05', 'ASTRA PLUGINS', 'Плагины Astra',
         'Голос и поиск для ассистента — без вмешательства в ядро.',
-        [('astra-silero', 'Распознавание речи Silero прямо в Astra.',
-          ['RUST', 'STT'], [RUST[0], RUST[0]], RUST[0]),
-         ('astra-websearch-ddg', 'Реальный поиск через DuckDuckGo без лимитов.',
+        [('astra-silero', 'Локальный синтез русской речи Silero — офлайн, пять голосов.',
+          ['RUST', 'TTS'], [RUST[0], RUST[0]], RUST[0]),
+         ('astra-websearch-ddg', 'Реальный веб-поиск через DuckDuckGo без лимитов.',
           ['RUST', 'SEARCH'], [RUST[0], RUST[0]], RUST[0]),
-         ('Astra-Google-STT', 'Распознавание речи через Google STT.',
+         ('Astra-Google-STT', 'Распознавание речи через Google STT — без API-ключа.',
           ['RUST', 'STT'], [RUST[0], RUST[0]], RUST[0]),
          ('Astra-PrimeProxy', 'PrimeProxy как плагин: сетевой слой прямо в ассистенте.',
           ['RUST', 'MTPROTO'], [RUST[0], RUST[0]], RUST[0])],
         RUST[0], RUST[0],
-        'Плагины Astra: astra-silero и Astra-Google-STT — распознавание речи, '
-        'astra-websearch-ddg — поиск через DuckDuckGo, Astra-PrimeProxy — сетевой слой.')
+        'Плагины Astra: astra-silero — локальный синтез русской речи Silero, '
+        'astra-websearch-ddg — поиск через DuckDuckGo, Astra-Google-STT — '
+        'распознавание речи без API-ключа, Astra-PrimeProxy — сетевой слой.')
     build_section(
-        'sphereprime.svg', '05', 'PERSONAL PROJECTS', 'Личные проекты',
-        'Свои инструменты и дорожная карта открытого кода.',
-        [('PrimeProxy', 'Обход блокировок в РФ: MTProto-прокси на Python, плагин для Astra.',
-          ['PYTHON', 'MTPROTO'], [PY[0], PY[0]], PY[0]),
-         ('Desktop Utilities', 'Легковесные нативные приложения Windows и Linux: чистый UI, низкое потребление.',
-          ['TAURI', 'FLUTTER', 'QT6'], [TS[0], TS[0], TS[0]], TS[0])],
+        'sphereprime.svg', '06', 'SPHEREPRIME', 'SpherePrime и личное',
+        'Командная работа в организации и личные инструменты.',
+        [('Prime-server', 'Свой Router API: Fastify, PostgreSQL, Redis и админка на React.',
+          ['TYPESCRIPT', 'ROUTER'], [TS[0], TS[0]], TS[0]),
+         ('PrimeReplay', 'Нативное десктоп-приложение на Rust и Slint.',
+          ['RUST', 'SLINT'], [RUST[0], RUST[0]], RUST[0]),
+         ('SpherePrime-site', 'Сайт студии на React, Vite и TypeScript.',
+          ['REACT', 'VITE'], [TS[0], TS[0]], TS[0]),
+         ('Stella', 'Голосовой помощник для Windows: русский STT, Telegram, UI на Flet.',
+          ['PYTHON', 'FLET'], [PY[0], PY[0]], PY[0])],
         SPHERE, SPHERE,
-        'Личные проекты: PrimeProxy — обход блокировок в РФ (MTProto, Python, '
-        'плагин для Astra), Desktop Utilities — кроссплатформенные нативные '
-        'приложения Windows/Linux (Tauri, Flutter, Qt6).')
+        'Работа в SpherePrime: Prime-server — Router API на Fastify, PostgreSQL '
+        'и Redis, PrimeReplay — приложение на Rust и Slint, SpherePrime-site — '
+        'сайт студии. Личное: Stella — голосовой помощник для Windows на Python '
+        'с Flet и Telegram-интеграцией.')
 
 
 # --------------------------------------------------------------------------- #
