@@ -85,7 +85,7 @@
  @keyframes btsweep{0%,32%{transform:translateX(0)}72%,100%{transform:translateX(480px)}}
  .btsweep{animation:btsweep 5.2s cubic-bezier(.45,0,.55,1) infinite}
  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transform:none!important;scale:1!important;translate:0 0!important}}
- @keyframes morph{from{d:path('M926 236C926 268.033 900.033 294 868 294C835.967 294 810 268.033 810 236C810 203.967 835.967 178 868 178C900.033 178 926 203.967 926 236Z')}to{d:path('M926 236C926 294 926 294 868 294C810 294 810 294 810 236C810 178 810 178 868 178C926 178 926 178 926 236Z')}} @keyframes settle{from{letter-spacing:-1.4px}to{letter-spacing:-6px}} @keyframes packet{from{stroke-dashoffset:0}to{stroke-dashoffset:calc(-1 * var(--len))}}</style>
+ @keyframes morph{from{d:path('M926 236C926 268.033 900.033 294 868 294C835.967 294 810 268.033 810 236C810 203.967 835.967 178 868 178C900.033 178 926 203.967 926 236Z')}to{d:path('M926 236C926 294 926 294 868 294C810 294 810 294 810 236C810 178 810 178 868 178C926 178 926 178 926 236Z')}} @keyframes settle{from{letter-spacing:-1.4px}to{letter-spacing:-6px}} @keyframes packet{from{stroke-dashoffset:0}to{stroke-dashoffset:calc(-1 * var(--len))}} @keyframes caret{0%,49%{opacity:1}50%,100%{opacity:0}} .caret{animation:caret 1.06s steps(1) infinite} @keyframes typed{from{width:88px}} .typed{animation:typed 2.8s cubic-bezier(.3,.6,.4,1) both}</style>
 
 <mask id="bkm" maskUnits="userSpaceOnUse" x="0" y="0" width="280" height="52"><rect x="0" y="0" width="280" height="52" rx="26.0" fill="#fff"/></mask>
 <rect x="0" y="0" width="280" height="52" rx="26.0" fill="#18181C" fill-opacity=".94" stroke="#22d3ee" stroke-opacity=".55"/>

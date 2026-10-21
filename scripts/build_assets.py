@@ -376,6 +376,10 @@ STYLE += (
     + f' @keyframes settle{{from{{letter-spacing:{n(SETTLE_FROM)}px}}'
       f'to{{letter-spacing:{n(SETTLE_TRACK)}px}}}}'
       ' @keyframes packet{from{stroke-dashoffset:0}to{stroke-dashoffset:calc(-1 * var(--len))}}'
+      ' @keyframes caret{0%,49%{opacity:1}50%,100%{opacity:0}}'
+      ' .caret{animation:caret 1.06s steps(1) infinite}'
+      ' @keyframes typed{from{width:88px}}'
+      ' .typed{animation:typed 2.8s cubic-bezier(.3,.6,.4,1) both}'
 )
 
 
@@ -538,6 +542,61 @@ def star4(cx, cy, r):
     return (f'M{n(cx)} {n(cy - r)}L{n(cx + k)} {n(cy - k)}L{n(cx + r)} {n(cy)}'
             f'L{n(cx + k)} {n(cy + k)}L{n(cx)} {n(cy + r)}L{n(cx - k)} {n(cy + k)}'
             f'L{n(cx - r)} {n(cy)}L{n(cx - k)} {n(cy - k)}Z')
+
+
+def code_strip(accent):
+    """Two lines of abstract syntax in the card's illustration corridor.
+
+    Token bars in the card's own palette — a keyword-length stub, an identifier
+    run, an operator — read as highlighted code without drawing a single glyph,
+    and the blinking cursor on the second line says the code is being written
+    right now. The strip parks at the corridor's bottom-left (x 758..884,
+    y 168..190): every card scene keeps clear of that corner, and the floor at
+    191 is the corridor's own boundary.
+    """
+    primary, secondary = accent
+
+    def bar(x, y, w, color, delay):
+        return (f'<rect class="pulse" x="{x}" y="{y}" width="{w}" height="4" rx="2" '
+                f'fill="{color}" opacity=".8" style="animation-delay:{n(delay)}s"/>')
+
+    return (
+        bar(766, 172, 26, EMBER, 0) + bar(796, 172, 42, primary, -0.7)
+        + bar(842, 172, 14, secondary, -1.3)
+        + bar(766, 183, 46, secondary, -0.4) + bar(816, 183, 22, primary, -1.1)
+        + f'<rect class="caret" x="842" y="177" width="5" height="13" fill="{EMBER}" opacity=".9"/>'
+    )
+
+
+def concert_stage(accent):
+    """The plugin panel as a small stage, drawn behind the data rows.
+
+    Two light cones drop from the top edge (a wide faint wash with a bright
+    core inside), an equaliser breathes beside the head block, an ON AIR chip
+    names what the panel is, and a release stream — a light running the head
+    rule with one packet riding it — carries the rows' releases left to right.
+    The cones are polygons, so they are light rather than chrome: plain alpha
+    at .06-.09 keeps the ghost numeral beneath them readable.
+    """
+    primary, secondary = accent, EMBER
+    beams = (
+        f'<polygon points="640,0 560,{HEAD_RULE} 720,{HEAD_RULE}" fill="{CORAL}" opacity=".06"/>'
+        f'<polygon points="640,0 600,{HEAD_RULE} 680,{HEAD_RULE}" fill="{CORAL}" opacity=".08"/>'
+        f'<polygon points="880,0 800,{HEAD_RULE} 960,{HEAD_RULE}" fill="{VIOLET}" opacity=".07"/>'
+        f'<polygon points="880,0 840,{HEAD_RULE} 920,{HEAD_RULE}" fill="{VIOLET}" opacity=".09"/>'
+    )
+    eq = ''
+    for i in range(8):
+        h = 10 + (i * 79 % 29)          # deterministic variety, 10..38
+        eq += (f'<rect class="eq up" x="{720 + i * 8}" y="{n(134 - h)}" width="5" height="{h}" '
+               f'rx="2.5" fill="{primary}" opacity="{".85" if i % 2 else ".55"}" '
+               f'style="animation-duration:{n(0.9 + (i % 4) * 0.17)}s;animation-delay:{n(-i * 0.13)}s"/>')
+    chip = pill(810, 78, 'ON AIR', primary, h=22, size=10, pad=13)[0]
+    stream = (f'<path d="M{AXIS} {HEAD_RULE}H{RIGHT}" stroke="{secondary}" stroke-opacity=".5" '
+              f'stroke-width="1.2" class="flow"/>'
+              + packet(f'M{AXIS} {HEAD_RULE}H{RIGHT}', EMBER, RIGHT - AXIS, size=3.6,
+                       delay=-2.0, duration=7.0, opacity=.85))
+    return beams + eq + chip + stream
 
 
 def meta_strip(owner, meta, accent, *, dot=None):
@@ -879,6 +938,19 @@ def build_hero(stats):
     # to INK_MUTE so the two halves of the slug still separate.
     top_mid = TOPBAR_H / 2
     top_base = top_mid + CAP * 13.5
+
+    # the terminal chip: the status line lives in a real terminal window —
+    # traffic lights, a cyan prompt, and a typewriter reveal driven by a clip
+    # rect whose width animates from 88px (a readable mid-typing frame, which
+    # is also what a renderer that never ticks the clock shows) to the full
+    # run; a caret blinks at the end of the line on its own clock.
+    status = f'prime --status · {stats["repos"]} repos · {stats["stars"]}★ · push: {stats["pushed"]}'
+    status_run = run_width('$ ' + status, 13.5, True, 0.8)
+    chip_x, chip_y, chip_h = 60, 306, 46
+    chip_w = 82 + status_run
+    caret_x = 122 + status_run + 8
+    chip_text = '<tspan fill="' + CYAN + '">$</tspan> ' + status
+
     body = f'''
 {defs}
 {blobs}
@@ -897,8 +969,15 @@ def build_hero(stats):
 ''', 0.1, 'enter-soft')}
 {enter(text(TEXT, 256, 'Инструменты для ИИ-агентов. От CLI до голоса.', size=25, fill=INK_SOFT), 0.18, 'enter-soft')}
 {enter(text(TEXT, 292, 'KNICE TECH &amp; MINICE — работа и QA. SpherePrime — открытый код.', size=18, fill=INK_MUTE), 0.23, 'enter-soft')}
-{enter(text(TEXT, 330, '<tspan fill="' + CYAN + f'">$</tspan> prime --status · {stats["repos"]} repos · {stats["stars"]}★ · push: {stats["pushed"]}',
-       size=13.5, fill=INK_MUTE, mono=True, tracking=0.8), 0.3, 'enter-soft')}
+{enter(f'''
+<rect x="{chip_x}" y="{chip_y}" width="{n(chip_w)}" height="{chip_h}" rx="11" fill="{PANEL_BOT}" fill-opacity=".92" stroke="{STROKE}"/>
+<circle cx="78" cy="329" r="4.5" fill="#ff5f57" opacity=".9"/>
+<circle cx="92" cy="329" r="4.5" fill="#febc2e" opacity=".9"/>
+<circle cx="106" cy="329" r="4.5" fill="#28c840" opacity=".9"/>
+<clipPath id="typed"><rect x="122" y="316" width="{n(status_run + 16)}" height="24" class="typed"/></clipPath>
+<g clip-path="url(#typed)">{text(122, 334, chip_text, size=13.5, fill=INK_SOFT, mono=True, tracking=0.8, text_length=status_run)}</g>
+<rect class="caret" x="{n(caret_x)}" y="322" width="7" height="14" fill="{EMBER}" opacity=".9"/>
+''', 0.3, 'enter-soft')}
 {enter(f'''
 <circle cx="{cx}" cy="{cy}" r="96" fill="none" stroke="{CYAN}" stroke-opacity=".16"/>
 <circle class="spin" cx="{cx}" cy="{cy}" r="78" fill="none" stroke="{EMBER}" stroke-opacity=".5" stroke-width="1.2" stroke-dasharray="3 14"/>
@@ -1074,7 +1153,7 @@ def art_router():
 
 
 def build_card(filename, number, label, name, description, tags, accent, art_builder,
-               owner, meta, dot=None):
+               owner, meta, dot=None, code=True):
     ART_ASSETS.add(filename)
     primary, secondary = accent
     art_defs, art_body = art_builder()
@@ -1115,6 +1194,7 @@ def build_card(filename, number, label, name, description, tags, accent, art_bui
 {meta_strip(owner, meta, primary, dot=dot)}
 <path d="M{DIV} {CARD_BAR_Y}V{CARD_TAG_Y + CARD_TAG_H}" stroke="{HAIRLINE}"/>
 <g class="enter" style="animation-delay:.16s">{art_body}</g>
+<g class="enter" style="animation-delay:.22s">{code_strip(accent) if code else ''}</g>
 {badge}
 '''
     shell(filename, CARD_H, CARD_R, body, f'{name}: {description}', defs_extra=defs_extra,
@@ -1356,7 +1436,7 @@ def build_sections(repos: list[dict]) -> dict:
         + ', ноль вторжений в ядро.',
         rows, RUST[0], RUST[0],
         'Плагины Astra (имя начинается с astra): '
-        + '; '.join(f'{name} — {desc}' for name, desc, *_ in rows) + '.')
+        + '; '.join(f'{name} — {desc}' for name, desc, *_ in rows) + '.', stage=True)
 
     by_name = {r['name'].lower(): r for r in repos}
     picks = [by_name[k] for k in SHOWCASE_ORDER if k in by_name][:4]
@@ -1484,9 +1564,11 @@ def data_row(y, name, description, tags, colors, dot, delay):
     return f'<g class="enter" style="animation-delay:{n(delay)}s">{inner}</g>'
 
 
-def build_section(filename, number, label, title, subtitle, rows, accent, blob_color, alt):
+def build_section(filename, number, label, title, subtitle, rows, accent, blob_color, alt, stage=False):
     height = HEAD_RULE + len(rows) * ROW_H + 34
     body = section_head(number, label, title, subtitle, accent, blob_color)
+    if stage:
+        body += concert_stage(accent)
     for i, (name, description, tags, colors, dot) in enumerate(rows):
         body += data_row(HEAD_RULE + i * ROW_H, name, description, tags, colors, dot, 0.1 + 0.085 * i)
     shell(filename, height, CARD_R, body, alt, spine_color=accent)

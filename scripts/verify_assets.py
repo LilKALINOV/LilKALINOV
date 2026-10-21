@@ -26,8 +26,8 @@ CSS_KEYWORDS = {'none', 'initial', 'inherit', 'unset', 'running', 'paused'}
 # single source of truth: the checker reads the grid straight off the generator,
 # so a moved axis can never leave the two files disagreeing
 sys.path.insert(0, str(ROOT / 'scripts'))
-from build_assets import (ART_ASSETS, AXIS, DIV, HEAD_EYEBROW, HEAD_SIZE,  # noqa: E402
-                          HEAD_SUB, HEAD_TITLE, RIGHT, SPINE_X, TEXT)
+from build_assets import (ART_ASSETS, AXIS, DIV, HEAD_EYEBROW, HEAD_RULE,  # noqa: E402
+                          HEAD_SIZE, HEAD_SUB, HEAD_TITLE, RIGHT, SPINE_X, TEXT)
 
 FONT_FILES = {
     ('sans', False): r'C:\Windows\Fonts\segoeui.ttf',
@@ -365,7 +365,10 @@ def grid_issues(root, name=''):
         if w <= 6 and h > 80:
             if abs(x - SPINE_X) > 0.5:
                 issues.append(f'accent spine starts at x={n_(x)}, expected SPINE_X {SPINE_X}')
-        elif h < 60 and node.get('stroke'):  # pill outline
+        elif h < 60 and node.get('stroke') and y >= HEAD_RULE - 1:
+            # pill outline. Head-zone chips (a stage's ON AIR badge, y < the
+            # head rule) are chrome, not data rows, so they are exempt from
+            # the anchor rule; every real tag row sits below the rule.
             rows.setdefault(round(y, 1), []).append((x, x + w))
     for y, pills in sorted(rows.items()):
         if name.startswith('btn-'):
