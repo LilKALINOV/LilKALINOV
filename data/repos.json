@@ -52,6 +52,18 @@
   "plugin": true
  },
  {
+  "name": "LilKALINOV",
+  "owner": "LilKALINOV",
+  "stars": 0,
+  "pushed": "2026-10-21T08:39:39Z",
+  "langs": [
+   "Python",
+   "HTML"
+  ],
+  "line": "Every word on this page is drawn in assets/.svg — there is no prose in this",
+  "plugin": false
+ },
+ {
   "name": "Prime-server",
   "owner": "SpherePrime",
   "stars": 0,
@@ -77,18 +89,6 @@
    "HTML"
   ],
   "line": "",
-  "plugin": false
- },
- {
-  "name": "LilKALINOV",
-  "owner": "LilKALINOV",
-  "stars": 0,
-  "pushed": "2026-10-21T02:24:13Z",
-  "langs": [
-   "Python",
-   "HTML"
-  ],
-  "line": "Every word on this page is drawn in assets/.svg — there is no prose in this",
   "plugin": false
  },
  {

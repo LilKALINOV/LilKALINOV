@@ -11,9 +11,9 @@
 </p>
 
 <p align="center">
-  <a href="https://t.me/SpherePrime"><img src="./assets/btn-telegram-17f656511497.svg" width="280" alt="Telegram — написать в Telegram: @SpherePrime" /></a>
-  <a href="https://github.com/SpherePrime"><img src="./assets/btn-sphereprime-b05cdaf97840.svg" width="280" alt="SpherePrime — организация на GitHub" /></a>
-  <a href="https://lilkalinov.github.io/portfolio/"><img src="./assets/btn-portfolio-26263aeca0a7.svg" width="280" alt="Портфолио — интерактивное портфолио на Three.js и Next.js" /></a>
+  <a href="https://t.me/SpherePrime"><img src="./assets/btn-telegram-8b5fe97ca2d4.svg" width="260" alt="Telegram — написать в Telegram: @SpherePrime" /></a>
+  <a href="https://github.com/SpherePrime"><img src="./assets/btn-sphereprime-a832a5d6e009.svg" width="260" alt="SpherePrime — организация на GitHub" /></a>
+  <a href="https://lilkalinov.github.io/portfolio/"><img src="./assets/btn-portfolio-4b714bc6b7e5.svg" width="260" alt="Портфолио — интерактивное портфолио на Three.js и Next.js" /></a>
 </p>
 
 <p align="center">

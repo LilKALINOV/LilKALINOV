@@ -127,8 +127,8 @@ SPINE_BOT_SHORT = 20
 # the standalone link buttons: one row with two big pills, each its own
 # Markdown <a>-wrapped <img> in the README - that is the only thing GitHub
 # makes actually clickable (anything drawn inside a panel SVG is not).
-BTN_W = 280          # the pill is the whole button: no panel frame around it
-BTN_H = 52
+BTN_W = 260          # the card is the whole button: no panel frame around it
+BTN_H = 62
 BTN_FONT = 16
 
 # the avatar: the ico.jpg shipped with the repo, inlined as a data URI so the
@@ -1501,9 +1501,9 @@ def compose_readme(cards: list[dict], sections: dict, stats: dict) -> str:
 </p>
 
 <p align="center">
-  <a href="https://t.me/SpherePrime"><img src="./assets/btn-telegram.svg" width="280" alt="Telegram — написать в Telegram: @SpherePrime" /></a>
-  <a href="https://github.com/SpherePrime"><img src="./assets/btn-sphereprime.svg" width="280" alt="SpherePrime — организация на GitHub" /></a>
-  <a href="https://lilkalinov.github.io/portfolio/"><img src="./assets/btn-portfolio.svg" width="280" alt="Портфолио — интерактивное портфолио на Three.js и Next.js" /></a>
+  <a href="https://t.me/SpherePrime"><img src="./assets/btn-telegram.svg" width="{BTN_W}" alt="Telegram — написать в Telegram: @SpherePrime" /></a>
+  <a href="https://github.com/SpherePrime"><img src="./assets/btn-sphereprime.svg" width="{BTN_W}" alt="SpherePrime — организация на GitHub" /></a>
+  <a href="https://lilkalinov.github.io/portfolio/"><img src="./assets/btn-portfolio.svg" width="{BTN_W}" alt="Портфолио — интерактивное портфолио на Three.js и Next.js" /></a>
 </p>
 
 <p align="center">
@@ -1639,32 +1639,33 @@ def build_footer():
 
 
 def build_buttons():
-    """Two compact link pills on one row, no panel frame around them: the pill
-    IS the button. Each SVG is just the rounded chip, wrapped in its own
-    Markdown <a> so GitHub actually follows the click.
+    """Three compact link cards on one row, no panel frame around them: the
+    card IS the button, wrapped in its own Markdown <a> so GitHub follows the
+    click. The look is a control-panel switch, not a pill: a left accent bar,
+    a breathing LED, the destination's name over its address in two lines,
+    and a chevron pointing out.
     """
-    for filename, label, accent, url in [
-        ('btn-telegram.svg', 'Telegram', CYAN, 'https://t.me/SpherePrime'),
-        ('btn-sphereprime.svg', 'SpherePrime', SPHERE, 'https://github.com/SpherePrime'),
-        ('btn-portfolio.svg', 'Portfolio', EMBER, 'https://lilkalinov.github.io/portfolio/'),
+    for filename, label, sub, accent, url in [
+        ('btn-telegram.svg', 'Telegram', 't.me/SpherePrime', CYAN, 'https://t.me/SpherePrime'),
+        ('btn-sphereprime.svg', 'SpherePrime', 'github.com/SpherePrime', SPHERE, 'https://github.com/SpherePrime'),
+        ('btn-portfolio.svg', 'Portfolio', 'lilkalinov.github.io', EMBER, 'https://lilkalinov.github.io/portfolio/'),
     ]:
         w, h = BTN_W, BTN_H
-        label_w = run_width(label, BTN_FONT, True, PILL_TRACK)
-        ax = w - 22
-        ay = h / 2
-        arrow = (f'<path d="M{n(ax - 10)} {n(ay + 6)}h20M{n(ax)} {n(ay - 6)}v12" fill="none" '
-                 f'stroke="{accent}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>')
+        sub_w = run_width(sub, 10, True, 0.5)
         mask = (f'<mask id="bkm" maskUnits="userSpaceOnUse" x="0" y="0" width="{n(w)}" height="{n(h)}">'
-                f'<rect x="0" y="0" width="{n(w)}" height="{n(h)}" rx="{h / 2}" fill="#fff"/></mask>')
+                f'<rect x="0" y="0" width="{n(w)}" height="{n(h)}" rx="12" fill="#fff"/></mask>')
         body = f'''
 {mask}
-<rect x="0" y="0" width="{n(w)}" height="{n(h)}" rx="{h / 2}" fill="{CHIP}" fill-opacity=".94" stroke="{accent}" stroke-opacity=".55"/>
+<rect x="0" y="0" width="{n(w)}" height="{n(h)}" rx="12" fill="{CHIP}" fill-opacity=".94" stroke="{accent}" stroke-opacity=".55"/>
+<rect x="0" y="6" width="4" height="{n(h - 12)}" rx="2" fill="{accent}" opacity=".9"/>
+<circle class="blink" cx="30" cy="{n(h / 2)}" r="4" fill="{accent}"/>
+{text(46, h / 2 - 5, escape(label), size=15.5, fill=INK, weight=700)}
+{text(46, h / 2 + 14, escape(sub), size=10, fill=INK_MUTE, mono=True, tracking=0.5, text_length=sub_w)}
+<path d="M{n(w - 30)} {n(h / 2 - 6)}l9 6-9 6" fill="none" stroke="{accent}" stroke-width="2"
+ stroke-linecap="round" stroke-linejoin="round"/>
 <rect class="btsweep" x="-160" y="0" width="120" height="{n(h)}" fill="url(#sheen)" mask="url(#bkm)"/>
-{text(w / 2 - 10, h / 2 + BTN_FONT * 0.35, escape(label), size=BTN_FONT, fill=accent, mono=True,
-     weight=700, tracking=PILL_TRACK, anchor='middle', text_length=label_w)}
-{arrow}
 '''
-        shell(filename, BTN_H, BTN_H / 2, body,
+        shell(filename, BTN_H, 12, body,
               f'Кнопка {label} — откроет {url}.',
               spine_color=None, spine_short=False, width=BTN_W, bare=True)
 
@@ -1705,7 +1706,10 @@ def sync_readme_and_preview(readme: str | None = None):
 :root{{color-scheme:dark}}
 body{{margin:0;background:#0E0E10;color:#f4f4f5;font:16px/1.65 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}}
 main{{max-width:1012px;margin:28px auto;padding:8px 12px}}
-img{{display:block;width:100%;height:auto;margin:0 0 10px;border-radius:6px}}
+img{{display:block;height:auto;margin:0 0 10px;border-radius:6px;max-width:100%}}
+/* GitHub keeps the width attribute on link buttons and lays them inline;
+   mirror that here so the preview shows what the profile shows */
+p[align="center"] img{{display:inline-block;vertical-align:middle;margin:0 4px 10px}}
 </style></head>
 <body>
 <main>{body}</main>
