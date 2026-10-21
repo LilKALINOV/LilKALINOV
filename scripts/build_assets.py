@@ -1500,10 +1500,12 @@ def build_row_card(filename, name, desc, accent, lang, stars, url):
 
 def build_directory(repos: list[dict]) -> list[dict]:
     """The open-source index: every public non-fork repository, one clickable
-    row each. The meta repository hosting this very page is the only skip.
+    row each. Skipped: the meta repository hosting this page, the portfolio
+    (already a link button up top) and the org's .github profile repo.
     """
     picks = sorted(
-        (r for r in repos if r['name'].lower() not in {'lilkalinov', 'lil-kalinov'}),
+        (r for r in repos
+         if r['name'].lower() not in {'lilkalinov', 'lil-kalinov', 'portfolio', '.github'}),
         key=lambda r: (r['stars'], r['pushed']), reverse=True)
     grad, blob = aurora('au-dx', 780, 60, 290, 120, SPHERE, 0.14, 'drift-c')
     head = (
