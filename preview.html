@@ -6,10 +6,9 @@
 body{margin:0;background:#0E0E10;color:#f4f4f5;font:16px/1.65 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
 main{max-width:1012px;margin:28px auto;padding:8px 12px}
 img{display:block;width:100%;height:auto;margin:0 0 10px;border-radius:6px}
-/* the button row is a borderless thirds table, exactly as GitHub renders it */
-main table{width:100%;border-collapse:collapse;margin:0 0 10px}
-main td{padding:0;vertical-align:top}
-main td img{margin:0}
+/* link buttons are inline thirds inside one centered paragraph, with the
+   gaps hidden by HTML comments - exactly how GitHub renders the README */
+img[src*="assets/btn-"]{display:inline-block;width:33.33%;vertical-align:middle;margin:0}
 </style></head>
 <body>
 <main><!--
@@ -25,14 +24,9 @@ main td img{margin:0}
 </p>
 
 <p align="center">
-<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
-<td width="33.33%">
-  <a href="https://t.me/SpherePrime"><img src="./assets/btn-telegram-5a4fb8f4b203.svg" width="100%" alt="Telegram — написать в Telegram: @SpherePrime" /></a></td>
-<td width="33.33%">
-  <a href="https://github.com/SpherePrime"><img src="./assets/btn-sphereprime-ef6a02b916ea.svg" width="100%" alt="SpherePrime — организация на GitHub" /></a></td>
-<td width="33.34%">
-  <a href="https://lilkalinov.github.io/portfolio/"><img src="./assets/btn-portfolio-de77173ea7c5.svg" width="100%" alt="Портфолио — интерактивное портфолио на Three.js и Next.js" /></a></td>
-</tr></table>
+  <a href="https://t.me/SpherePrime"><img src="./assets/btn-telegram-5a4fb8f4b203.svg" width="33.33%" alt="Telegram — написать в Telegram: @SpherePrime" /></a><!--
+--><a href="https://github.com/SpherePrime"><img src="./assets/btn-sphereprime-ef6a02b916ea.svg" width="33.33%" alt="SpherePrime — организация на GitHub" /></a><!--
+--><a href="https://lilkalinov.github.io/portfolio/"><img src="./assets/btn-portfolio-de77173ea7c5.svg" width="33.34%" alt="Портфолио — интерактивное портфолио на Three.js и Next.js" /></a>
 </p>
 
 <p align="center">
@@ -52,16 +46,21 @@ main td img{margin:0}
 </p>
 
 <p align="center">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr><td><img src="./assets/directory-91034255d62d.svg" width="100%" alt="06 Открытые репозитории — все 7 публичных некошеных репозиториев Lil KALINOV и SpherePrime; каждая строка — ссылка на свой репозиторий." /></td></tr><tr><td><a href="https://github.com/SpherePrime/PrimeAi"><img src="./assets/row-primeai-de648f71fdb6.svg" width="100%" alt="PrimeAi — ИИ-провайдер для Astra: Router API, авто-роутинг, веб-поиск.. 6 звёзд, TypeScript. Открыть https://github.com/SpherePrime/PrimeAi."></a></td></tr>
-<tr><td><a href="https://github.com/SpherePrime/CLI"><img src="./assets/row-cli-d689acb5cff0.svg" width="100%" alt="CLI — Агент для кодинга в терминале: любые модели, сессии, LSP.. 3 звезды, Go. Открыть https://github.com/SpherePrime/CLI."></a></td></tr>
-<tr><td><a href="https://github.com/SpherePrime/PrimeProxy"><img src="./assets/row-primeproxy-cf3291c3378f.svg" width="100%" alt="PrimeProxy — MTProto-прокси и плагин для Astra на Rust: обход блокировок в РФ.. 2 звезды, Rust. Открыть https://github.com/SpherePrime/PrimeProxy."></a></td></tr>
-<tr><td><a href="https://github.com/LilKALINOV/Astra-Google-STT"><img src="./assets/row-astra-google-stt-5f344f879812.svg" width="100%" alt="Astra-Google-STT — Распознавание речи через Google Web Speech — без API-ключа.. 1 звезда, Rust. Открыть https://github.com/LilKALINOV/Astra-Google-STT."></a></td></tr>
-<tr><td><a href="https://github.com/SpherePrime/Astra-PrimeProxy"><img src="./assets/row-astra-primeproxy-ff7c3c27972a.svg" width="100%" alt="Astra-PrimeProxy — MTProto-слой внутри ассистента: сеть как плагин.. без звёзд, Rust. Открыть https://github.com/SpherePrime/Astra-PrimeProxy."></a></td></tr>
-<tr><td><a href="https://github.com/LilKALINOV/astra-silero"><img src="./assets/row-astra-silero-8b37dc35ccd5.svg" width="100%" alt="astra-silero — Локальный русский TTS Silero: офлайн, пять голосов.. без звёзд, Rust. Открыть https://github.com/LilKALINOV/astra-silero."></a></td></tr>
-<tr><td><a href="https://github.com/LilKALINOV/astra-websearch-ddg"><img src="./assets/row-astra-websearch-ddg-5e0584190831.svg" width="100%" alt="astra-websearch-ddg — Поиск DuckDuckGo из ассистента — без лимитов и ключей.. без звёзд, Rust. Открыть https://github.com/LilKALINOV/astra-websearch-ddg."></a></td></tr>
-</table>
+  <img src="./assets/directory-91034255d62d.svg" width="100%" alt="06 Открытые репозитории — все 7 публичных некошеных репозиториев Lil KALINOV и SpherePrime; каждая строка — ссылка на свой репозиторий." />
 </p>
+<p align="center"><a href="https://github.com/SpherePrime/PrimeAi"><img src="./assets/row-primeai-ad927ff3741e.svg" width="100%" alt="PrimeAi — ИИ-провайдер для Astra: Router API, авто-роутинг, веб-поиск. 6 звёзд, TypeScript. Открыть https://github.com/SpherePrime/PrimeAi."></a></p>
+
+<p align="center"><a href="https://github.com/SpherePrime/CLI"><img src="./assets/row-cli-cf6f808b5c60.svg" width="100%" alt="CLI — Агент для кодинга в терминале: любые модели, сессии, LSP. 3 звезды, Go. Открыть https://github.com/SpherePrime/CLI."></a></p>
+
+<p align="center"><a href="https://github.com/SpherePrime/PrimeProxy"><img src="./assets/row-primeproxy-d830785c3167.svg" width="100%" alt="PrimeProxy — MTProto-прокси и плагин для Astra на Rust: обход блокировок в РФ. 2 звезды, Rust. Открыть https://github.com/SpherePrime/PrimeProxy."></a></p>
+
+<p align="center"><a href="https://github.com/LilKALINOV/Astra-Google-STT"><img src="./assets/row-astra-google-stt-987497ae3511.svg" width="100%" alt="Astra-Google-STT — Распознавание речи через Google Web Speech — без API-ключа. 1 звезда, Rust. Открыть https://github.com/LilKALINOV/Astra-Google-STT."></a></p>
+
+<p align="center"><a href="https://github.com/SpherePrime/Astra-PrimeProxy"><img src="./assets/row-astra-primeproxy-0c7679573cca.svg" width="100%" alt="Astra-PrimeProxy — MTProto-слой внутри ассистента: сеть как плагин. без звёзд, Rust. Открыть https://github.com/SpherePrime/Astra-PrimeProxy."></a></p>
+
+<p align="center"><a href="https://github.com/LilKALINOV/astra-silero"><img src="./assets/row-astra-silero-a2e58d623201.svg" width="100%" alt="astra-silero — Локальный русский TTS Silero: офлайн, пять голосов. без звёзд, Rust. Открыть https://github.com/LilKALINOV/astra-silero."></a></p>
+
+<p align="center"><a href="https://github.com/LilKALINOV/astra-websearch-ddg"><img src="./assets/row-astra-websearch-ddg-a59f6434abf2.svg" width="100%" alt="astra-websearch-ddg — Поиск DuckDuckGo из ассистента — без лимитов и ключей. без звёзд, Rust. Открыть https://github.com/LilKALINOV/astra-websearch-ddg."></a></p>
 
 <a href="https://t.me/SpherePrime"><img src="./assets/footer-b884a545a946.svg" width="100%" alt="Открытый код, который работает. Контакты: Telegram @SpherePrime, knice.tech, minice.ai, Discord." /></a></main>
 </body></html>

@@ -1494,7 +1494,7 @@ def build_row_card(filename, name, desc, accent, lang, stars, url):
         + pill(RIGHT - pw, cap_c - 12, lang, primary, h=24, size=11, pad=14)[0]
     )
     shell(filename, h, CARD_R, f'<g class="enter">{body}</g>',
-          f'{name} — {desc}. Открыть {url}.',
+          f'{name} — {desc.rstrip(".")}. Открыть {url}.',
           spine_color=primary, spine_short=True, dust_on=False)
 
 
@@ -1556,9 +1556,9 @@ def compose_readme(cards: list[dict], sections: dict, directory: list[dict], sta
         'тестировщиком Astra, сейчас — со-основатель SpherePrime: строим всё в '
         'одном, от CLI и Desktop для ИИ до утилит. Сейчас в работе PrimeDesktop '
         'и Prime CLI; Astra растёт от наших плагинов.')
-    directory_rows = '\n'.join(
-        f'<tr><td><a href="{r["url"]}"><img src="./assets/{r["filename"]}" width="100%" '
-        f'alt="{attr(r["name"] + " — " + r["desc"] + ". " + star_word(r["stars"]) + ", " + r["lang"] + ". Открыть " + r["url"] + ".")}"></a></td></tr>'
+    directory_rows = '\n\n'.join(
+        f'<p align="center"><a href="{r["url"]}"><img src="./assets/{r["filename"]}" width="100%" '
+        f'alt="{attr(r["name"] + " — " + r["desc"].rstrip(".") + ". " + star_word(r["stars"]) + ", " + r["lang"] + ". Открыть " + r["url"] + ".")}"></a></p>'
         for r in directory)
     plugins_alt = attr(
         f'05 Плагины Astra — голосовой слой ассистента, {len(sections["plugins"])} '
@@ -1585,14 +1585,9 @@ def compose_readme(cards: list[dict], sections: dict, directory: list[dict], sta
 </p>
 
 <p align="center">
-<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
-<td width="33.33%">
-  <a href="https://t.me/SpherePrime"><img src="./assets/btn-telegram.svg" width="100%" alt="Telegram — написать в Telegram: @SpherePrime" /></a></td>
-<td width="33.33%">
-  <a href="https://github.com/SpherePrime"><img src="./assets/btn-sphereprime.svg" width="100%" alt="SpherePrime — организация на GitHub" /></a></td>
-<td width="33.34%">
-  <a href="https://lilkalinov.github.io/portfolio/"><img src="./assets/btn-portfolio.svg" width="100%" alt="Портфолио — интерактивное портфолио на Three.js и Next.js" /></a></td>
-</tr></table>
+  <a href="https://t.me/SpherePrime"><img src="./assets/btn-telegram.svg" width="33.33%" alt="Telegram — написать в Telegram: @SpherePrime" /></a><!--
+--><a href="https://github.com/SpherePrime"><img src="./assets/btn-sphereprime.svg" width="33.33%" alt="SpherePrime — организация на GitHub" /></a><!--
+--><a href="https://lilkalinov.github.io/portfolio/"><img src="./assets/btn-portfolio.svg" width="33.34%" alt="Портфолио — интерактивное портфолио на Three.js и Next.js" /></a>
 </p>
 
 <p align="center">
@@ -1612,10 +1607,9 @@ def compose_readme(cards: list[dict], sections: dict, directory: list[dict], sta
 </p>
 
 <p align="center">
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr><td><img src="./assets/directory.svg" width="100%" alt="{dir_alt}" /></td></tr>{directory_rows}
-</table>
+  <img src="./assets/directory.svg" width="100%" alt="{dir_alt}" />
 </p>
+{directory_rows}
 
 <a href="https://t.me/SpherePrime"><img src="./assets/footer.svg" width="100%" alt="Открытый код, который работает. Контакты: Telegram @SpherePrime, knice.tech, minice.ai, Discord." /></a>
 '''
@@ -1802,10 +1796,9 @@ def sync_readme_and_preview(readme: str | None = None):
 body{{margin:0;background:#0E0E10;color:#f4f4f5;font:16px/1.65 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}}
 main{{max-width:1012px;margin:28px auto;padding:8px 12px}}
 img{{display:block;width:100%;height:auto;margin:0 0 10px;border-radius:6px}}
-/* the button row is a borderless thirds table, exactly as GitHub renders it */
-main table{{width:100%;border-collapse:collapse;margin:0 0 10px}}
-main td{{padding:0;vertical-align:top}}
-main td img{{margin:0}}
+/* link buttons are inline thirds inside one centered paragraph, with the
+   gaps hidden by HTML comments - exactly how GitHub renders the README */
+img[src*="assets/btn-"]{{display:inline-block;width:33.33%;vertical-align:middle;margin:0}}
 </style></head>
 <body>
 <main>{body}</main>
