@@ -69,7 +69,7 @@ ASSETS = ROOT / 'assets'
 # --------------------------------------------------------------------------- #
 W = 1100
 HERO_H = 436
-INTRO_H = 364
+INTRO_H = 400
 CARD_H = 244
 FOOTER_H = 150
 HERO_R = 22
@@ -1005,47 +1005,68 @@ def build_hero(stats):
 # intro / about
 # --------------------------------------------------------------------------- #
 def build_intro():
+    """The journey card: how the path actually went, and what is being built now.
+
+    Three stages on one rail - Stella, Astra, SpherePrime - because this
+    really is a sequence, then the current-work line beneath it: PrimeDesktop
+    and Prime CLI, and the studio's own bar for what is worth building.
+    """
     grad, blob = aurora('au-i', 250, 120, 300, 150, CORAL, 0.1, 'drift-b')
-    lead = ('Админ и техподдержка в KNICE TECH &amp; MINICE. В SpherePrime —<br/>'
-            'свои инструменты: CLI, роутер, прокси и голосовые плагины.')
-    # descriptions wrap to two lines: one long line would overrun the column
-    focus = (
-        ('NOW SHIPPING', 'Prime CLI',
-         'Go-агент в терминале:<br/>модели, сессии, LSP.', GO[0]),
-        ('SPHEREPRIME', 'PrimeAi · Router',
-         'ИИ-провайдер и Router API:<br/>роутинг, ключи, стримы.', TS[0]),
-        ('VOICE LAYER', 'Плагины Astra',
-         'TTS, STT и поиск —<br/>плагины без ядра.', RUST[0]),
+    lead = ('Модифицировал голосового помощника Stella, затем был главным<br/>'
+            'тестировщиком Astra. Теперь — со-основатель SpherePrime.')
+    journey = (
+        ('1', 'STELLA', 'Первые шаги',
+         'Модифицировал голосового<br/>помощника Stella.', PY[0]),
+        ('2', 'ASTRA', 'Главный тестировщик',
+         'Вёл QA голосового<br/>помощника Astra.', RUST[0]),
+        ('3', 'SPHEREPRIME', 'Со-основатель',
+         'С другом основал студию:<br/>строим всё в одном.', SPHERE),
     )
     col_w = (RIGHT - TEXT - 2 * COL_GAP) / 3
-    cards = ''
-    for i, (label, name, desc, color) in enumerate(focus):
+    # the rail runs through all three stage nodes: the journey is a sequence,
+    # so the line is information, not decoration
+    rail_y = 228
+    dots = [TEXT + i * (col_w + COL_GAP) + 5 for i in range(3)]
+    rail = (f'<path d="M{dots[0]} {rail_y}H{dots[2]}" stroke="{STROKE}" stroke-dasharray="2 8"/>')
+    stages = ''
+    for i, (num, label, name, desc, color) in enumerate(journey):
         x = TEXT + i * (col_w + COL_GAP)
         anim = f'class="enter" style="animation-delay:{n(0.09 * i + 0.12)}s"'
         inner = (
-            f'<circle cx="{n(x + 5)}" cy="226" r="5" fill="{color}"/>'
-            + text(x, 258, escape(label), size=11, fill=color, mono=True, tracking=1.8, weight=600)
-            + text(x, 288, escape(name), size=20, weight=600)
-            + text(x, 312, desc, size=14.5, fill=INK_MUTE)
+            f'<circle cx="{n(x + 5)}" cy="{rail_y}" r="11" fill="none" stroke="{color}" stroke-opacity=".35"/>'
+            f'<circle cx="{n(x + 5)}" cy="{rail_y}" r="6" fill="{BASE}" stroke="{color}" stroke-width="2"/>'
+            f'<circle cx="{n(x + 5)}" cy="{rail_y}" r="2.5" fill="{color}"/>'
+            + text(x, 262, escape(num) + ' · ' + escape(label), size=11, fill=color,
+                   mono=True, tracking=1.8, weight=600)
+            + text(x, 292, escape(name), size=20, weight=600)
+            + text(x, 316, desc, size=14.5, fill=INK_MUTE)
         )
-        cards += (
-            f'<path d="M{n(x - COL_GAP / 2)} 214V330" stroke="{HAIRLINE}"/>' if i else ''
+        stages += (
+            f'<path d="M{n(x - COL_GAP / 2)} 216V352" stroke="{HAIRLINE}"/>' if i else ''
         ) + f'<g {anim}>{inner}</g>'
 
-    body = f'''
+    body = f"""
 {grad}
 {blob}
-{text(TEXT, HEAD_EYEBROW, 'ABOUT / ПРОФИЛЬ', size=11.5, fill=INK_FAINT, mono=True, tracking=2.8, weight=600)}
-{text(TEXT, HEAD_TITLE, 'Строю инструменты для агентов', size=38, weight=700, tracking=-0.9)}
+{text(TEXT, HEAD_EYEBROW, 'ABOUT / ПУТЬ', size=11.5, fill=INK_FAINT, mono=True, tracking=2.8, weight=600)}
+{text(TEXT, HEAD_TITLE, 'Путь: от Stella к SpherePrime', size=38, weight=700, tracking=-0.9)}
 {text(TEXT, HEAD_SUB, lead, size=17, fill=INK_MUTE)}
 {ghost_number('K', HEAD_SUB, 128, CORAL, opacity=0.22)}
-<path d="M{AXIS} 200H{RIGHT}" stroke="{HAIRLINE}"/>
-{cards}
-'''
+<path d="M{AXIS} 206H{RIGHT}" stroke="{HAIRLINE}"/>
+{rail}
+{stages}
+<g class="enter" style="animation-delay:.4s">
+<circle class="blink" cx="{AXIS + 5}" cy="368" r="4.5" fill="{GO[0]}"/>
+{text(TEXT, 372, 'СЕЙЧАС', size=11.5, fill=GO[0], mono=True, tracking=2.6, weight=600)}
+{text(146, 372, 'PrimeDesktop и Prime CLI — в работе. Код и планы — в SpherePrime/CLI.', size=15, fill=INK_SOFT)}
+</g>
+"""
     shell('intro.svg', INTRO_H, CARD_R, body,
-          'Lil KALINOV: админ и техподдержка в KNICE TECH & MINICE, а в '
-          'SpherePrime — свои инструменты: Prime CLI на Go, Router API и '
-          'голосовые плагины для Astra и Stella.', spine_color=CORAL)
+          'Lil KALINOV: путь от модификации голосового помощника Stella через роль '
+          'главного тестировщика Astra к SpherePrime — со-основатель, строим всё в '
+          'одном: CLI, Desktop-приложения для ИИ, утилиты. Сейчас в работе '
+          'PrimeDesktop и Prime CLI; Astra растёт от наших плагинов.',
+          spine_color=CORAL, bottom_dust=False)
 
 
 # --------------------------------------------------------------------------- #
@@ -1281,8 +1302,12 @@ FEATURED = {
                     accent=TS, art=art_primeai,
                     href='https://github.com/SpherePrime/PrimeAi', suffix='BUN'),
 }
+# Discord-боты по имени начинаются с astra, но голосовым плагинам Astra не
+# являются — в секцию плагинов их не берём
+PLUGIN_EXCLUDE = {'astrabot-qwen', 'astra-bot'}
 # never featured whatever their numbers say: profile meta and scratch repos
-NOT_FEATURED = {'.github', 'lilkalinov', 'lil-kalinov', '123', 'portfolio'}
+NOT_FEATURED = ({'.github', 'lilkalinov', 'lil-kalinov', '123', 'portfolio'}
+                | PLUGIN_EXCLUDE)
 # order of preference for the SpherePrime section rows; private repositories
 # simply never arrive from the fetcher, so the list degrades gracefully
 SHOWCASE_ORDER = ['portfolio', 'prime-server', 'primereplay', 'sphereprime-site',
@@ -1432,7 +1457,7 @@ def build_cards(repos: list[dict]) -> list[dict]:
 
 def build_sections(repos: list[dict]) -> dict:
     """Both data sections, their rows generated from the fetched repositories."""
-    plugins = sorted((r for r in repos if r['plugin']),
+    plugins = sorted((r for r in repos if r['plugin'] and r['name'].lower() not in PLUGIN_EXCLUDE),
                      key=lambda r: (r['stars'], r['pushed']), reverse=True)
     rows = []
     for r in plugins:
@@ -1491,9 +1516,10 @@ def compose_readme(cards: list[dict], sections: dict, stats: dict) -> str:
         f'PrimeAI, PrimeProxy, голосовые плагины Astra. Репозиториев {stats["repos"]}, '
         f'звёзд {stats["stars"]}, последний пуш — {stats["pushed"]}.')
     intro_alt = attr(
-        'Строю инструменты для агентов. Админ и техподдержка в KNICE TECH & MINICE, '
-        'а в SpherePrime — свои инструменты: Prime CLI на Go, PrimeAi с Router API '
-        'и голосовые плагины. Направления: Prime CLI, PrimeAi, голосовой слой Astra.')
+        'Путь: модифицировал голосового помощника Stella, затем был главным '
+        'тестировщиком Astra, сейчас — со-основатель SpherePrime: строим всё в '
+        'одном, от CLI и Desktop для ИИ до утилит. Сейчас в работе PrimeDesktop '
+        'и Prime CLI; Astra растёт от наших плагинов.')
     plugins_alt = attr(
         f'05 Плагины Astra — голосовой слой ассистента, {len(sections["plugins"])} '
         + plural_ru(len(sections['plugins']), 'плагин', 'плагина', 'плагинов')

@@ -22,7 +22,7 @@
 </p>
 
 <p align="center">
-  <img src="./assets/intro-4aa928380536.svg" width="100%" alt="Строю инструменты для агентов. Админ и техподдержка в KNICE TECH &amp; MINICE, а в SpherePrime — свои инструменты: Prime CLI на Go, PrimeAi с Router API и голосовые плагины. Направления: Prime CLI, PrimeAi, голосовой слой Astra." />
+  <img src="./assets/intro-8653b81e527a.svg" width="100%" alt="Путь: модифицировал голосового помощника Stella, затем был главным тестировщиком Astra, сейчас — со-основатель SpherePrime: строим всё в одном, от CLI и Desktop для ИИ до утилит. Сейчас в работе PrimeDesktop и Prime CLI; Astra растёт от наших плагинов." />
 </p>
 
 <a href="https://astra.minice.ai"><img src="./assets/astra-dcc5d8be4923.svg" width="100%" alt="01 Astra и Stella — Голосовой слой ассистента: TTS, STT и поиск — без ядра. Продукт работает вживую на astra.minice.ai." /></a>
