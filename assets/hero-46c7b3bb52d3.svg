@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1100" height="436" viewBox="0 0 1100 436" role="img" aria-labelledby="title">
-<title id="title">Lil KALINOV — строит инструменты для ИИ-агентов в SpherePrime: Prime CLI на Go, PrimeAI, PrimeProxy, голосовые плагины Astra. Репозиториев 23, звёзд 12, последний пуш — сегодня.</title>
+<title id="title">Lil KALINOV — строит инструменты для ИИ-агентов в SpherePrime: Prime CLI на Go, PrimeAI, PrimeProxy, голосовые плагины Astra. Репозиториев 10, звёзд 12, последний пуш — сегодня.</title>
 <defs>
  <linearGradient id="panel" x1="0" y1="0" x2="0.35" y2="1">
   <stop stop-color="#18181C"/><stop offset="1" stop-color="#111114"/>
@@ -133,7 +133,7 @@
 <circle cx="92" cy="329" r="4.5" fill="#febc2e" opacity=".9"/>
 <circle cx="106" cy="329" r="4.5" fill="#28c840" opacity=".9"/>
 <clipPath id="typed"><rect x="122" y="316" width="425.64" height="24" class="typed"/></clipPath>
-<g clip-path="url(#typed)"><text x="122" y="334" font-size="13.5" fill="#D4D4D8" class="mono" letter-spacing="0.8" textLength="409.64" lengthAdjust="spacing"><tspan fill="#22d3ee">$</tspan> prime --status · 23 repos · 12★ · push: сегодня</text></g>
+<g clip-path="url(#typed)"><text x="122" y="334" font-size="13.5" fill="#D4D4D8" class="mono" letter-spacing="0.8" textLength="409.64" lengthAdjust="spacing"><tspan fill="#22d3ee">$</tspan> prime --status · 10 repos · 12★ · push: сегодня</text></g>
 <rect class="caret" x="539.64" y="322" width="7" height="14" fill="#ff9f6e" opacity=".9"/>
 </g>
 <g class="enter" style="animation-delay:0.14s">

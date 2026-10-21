@@ -56,12 +56,6 @@ FALLBACK = [
      'pushed': '2026-09-10T14:53:09Z', 'line': 'Free, keyless speech-to-text for Astra'},
     {'name': 'Astra-PrimeProxy', 'owner': ORG, 'stars': 0, 'langs': ['Rust', 'HTML', 'JavaScript'],
      'pushed': '2026-09-23T21:04:03Z', 'line': ''},
-    {'name': 'AstraBot-qwen', 'owner': OWNER, 'stars': 0, 'langs': ['JavaScript'],
-     'pushed': '2026-08-28T03:39:01Z', 'line': ''},
-    {'name': 'Astra-bot', 'owner': OWNER, 'stars': 0, 'langs': ['JavaScript'],
-     'pushed': '2026-08-14T16:53:10Z', 'line': ''},
-    {'name': 'Stella', 'owner': OWNER, 'stars': 0, 'langs': ['Python'],
-     'pushed': '2026-09-26T04:42:01Z', 'line': 'Stella - голосовой помощник для Windows'},
 ]
 
 
@@ -102,10 +96,17 @@ def readme_line(owner: str, name: str) -> str:
 
 
 def fetch_all() -> list[dict]:
-    """Live non-fork repos of both accounts, deduped with the org copy winning."""
+    """Live non-fork repos of both accounts, deduped with the org copy winning.
+
+    The authenticated search does return the account's private repositories,
+    so the public-only filter is explicit: anything marked private (or any
+    non-public visibility) is dropped before it can reach the page.
+    """
     entries: dict[str, dict] = {}
     for query in (f'user:{OWNER}', f'org:{ORG}'):
         for r in search(query):
+            if r.get('private') or r.get('visibility', 'public') != 'public':
+                continue
             entry = {
                 'name': r['name'],
                 'owner': r['owner']['login'],

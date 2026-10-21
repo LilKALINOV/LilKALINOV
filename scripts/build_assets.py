@@ -1012,9 +1012,9 @@ def build_intro():
     focus = (
         ('NOW SHIPPING', 'Prime CLI',
          'Go-агент в терминале:<br/>модели, сессии, LSP.', GO[0]),
-        ('SPHEREPRIME', 'Prime-server + PrimeAi',
-         'Router API и провайдер:<br/>роутинг, ключи, стримы.', TS[0]),
-        ('VOICE LAYER', 'Astra · Stella',
+        ('SPHEREPRIME', 'PrimeAi · Router',
+         'ИИ-провайдер и Router API:<br/>роутинг, ключи, стримы.', TS[0]),
+        ('VOICE LAYER', 'Плагины Astra',
          'TTS, STT и поиск —<br/>плагины без ядра.', RUST[0]),
     )
     col_w = (RIGHT - TEXT - 2 * COL_GAP) / 3
@@ -1258,6 +1258,8 @@ DESC_RU = {
     'astra-primeproxy': 'MTProto-слой внутри ассистента: сеть как плагин.',
     'astrabot-qwen': 'Ранний бот-ассистент на Qwen: предок Astra-плагинов.',
     'astra-bot': 'Первый бот-ассистент: прототип голосового контура.',
+    'portfolio': 'Интерактивное портфолио: Three.js, Next.js, космическая тема.',
+    '.github': 'Профиль организации: метаданные и шаблоны SpherePrime.',
 }
 # the second tag for the plugin rows, where the language tag is not enough
 PLUGIN_TAG2 = {'astra-silero': 'TTS', 'astra-websearch-ddg': 'SEARCH',
@@ -1281,9 +1283,14 @@ FEATURED = {
 }
 # never featured whatever their numbers say: profile meta and scratch repos
 NOT_FEATURED = {'.github', 'lilkalinov', 'lil-kalinov', '123', 'portfolio'}
-# order of preference for the SpherePrime section rows
-SHOWCASE_ORDER = ['prime-server', 'primereplay', 'sphereprime-site', 'stella',
-                  'flagshiprouter', 'skill-mcp', 'primebd', 'primebroweser']
+# order of preference for the SpherePrime section rows; private repositories
+# simply never arrive from the fetcher, so the list degrades gracefully
+SHOWCASE_ORDER = ['portfolio', 'prime-server', 'primereplay', 'sphereprime-site',
+                  'stella', 'flagshiprouter', 'skill-mcp', 'primebd', 'primebroweser',
+                  '.github']
+# never in the showcase: the repo that hosts this very page, and anything
+# already carrying a featured card or the plugin section
+SHOWCASE_EXCLUDE = {'lilkalinov', 'lil-kalinov'} | set(FEATURED)
 
 
 def fit(source: str, limit: int) -> str:
@@ -1371,14 +1378,19 @@ def generic_spec(repo: dict) -> dict:
     }
 
 
+def plural_ru(count: int, one: str, few: str, many: str) -> str:
+    """Русские словоформы для счётчика: 1 плагин, 2 плагина, 5 плагинов."""
+    if count % 10 == 1 and count % 100 != 11:
+        return one
+    if count % 10 in (2, 3, 4) and count % 100 not in (12, 13, 14):
+        return few
+    return many
+
+
 def star_word(count: int) -> str:
     if count == 0:
         return 'без звёзд'
-    if count % 10 == 1 and count % 100 != 11:
-        return f'{count} звезда'
-    if count % 10 in (2, 3, 4) and count % 100 not in (12, 13, 14):
-        return f'{count} звезды'
-    return f'{count} звёзд'
+    return f'{count} {plural_ru(count, "звезда", "звезды", "звёзд")}'
 
 
 def build_cards(repos: list[dict]) -> list[dict]:
@@ -1435,14 +1447,15 @@ def build_sections(repos: list[dict]) -> dict:
     build_section(
         'plugins.svg', '05', 'ASTRA PLUGINS', 'Плагины Astra',
         f'Голосовой слой ассистента — {len(rows)} '
-        + ('плагин' if len(rows) == 1 else 'плагина' if 2 <= len(rows) <= 4 else 'плагинов')
+        + plural_ru(len(rows), 'плагин', 'плагина', 'плагинов')
         + ', ноль вторжений в ядро.',
         rows, RUST[0], RUST[0],
         'Плагины Astra (имя начинается с astra): '
         + '; '.join(f'{name} — {desc}' for name, desc, *_ in rows) + '.', stage=True)
 
     by_name = {r['name'].lower(): r for r in repos}
-    picks = [by_name[k] for k in SHOWCASE_ORDER if k in by_name][:4]
+    picks = [by_name[k] for k in SHOWCASE_ORDER
+             if k in by_name and not by_name[k]['plugin'] and k not in SHOWCASE_EXCLUDE][:4]
     rows = []
     for r in picks:
         key = r['name'].lower()
@@ -1470,7 +1483,7 @@ def compose_readme(cards: list[dict], sections: dict, stats: dict) -> str:
     def tag_list(repos: list[dict]) -> str:
         parts = []
         for r in repos:
-            parts.append(f"{r['name']} ({lang_display(lang_tag(r, 0, '—'))})")
+            parts.append(f"{r['name']} ({lang_display(lang_tag(r, 0, 'ORG'))})")
         return ', '.join(parts)
 
     hero_alt = attr(
@@ -1479,11 +1492,12 @@ def compose_readme(cards: list[dict], sections: dict, stats: dict) -> str:
         f'звёзд {stats["stars"]}, последний пуш — {stats["pushed"]}.')
     intro_alt = attr(
         'Строю инструменты для агентов. Админ и техподдержка в KNICE TECH & MINICE, '
-        'а в SpherePrime — свои инструменты: Prime CLI на Go, Router API и голосовые '
-        'плагины. Направления: Prime CLI, Prime-server и PrimeAi, голосовой слой Astra и Stella.')
+        'а в SpherePrime — свои инструменты: Prime CLI на Go, PrimeAi с Router API '
+        'и голосовые плагины. Направления: Prime CLI, PrimeAi, голосовой слой Astra.')
     plugins_alt = attr(
-        f'05 Плагины Astra — голосовой слой ассистента, {len(sections["plugins"])} плагинов '
-        f'без вторжения в ядро: ' + ', '.join(r['name'] for r in sections['plugins']) + '.')
+        f'05 Плагины Astra — голосовой слой ассистента, {len(sections["plugins"])} '
+        + plural_ru(len(sections['plugins']), 'плагин', 'плагина', 'плагинов')
+        + ' без вторжения в ядро: ' + ', '.join(r['name'] for r in sections['plugins']) + '.')
     showcase_alt = attr(
         '06 SpherePrime и личное — ' + tag_list(sections['showcase']) + '.')
 

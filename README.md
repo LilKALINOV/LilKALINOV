@@ -7,7 +7,7 @@
 -->
 
 <p align="center">
-  <img src="./assets/hero-64b679dda955.svg" width="100%" alt="Lil KALINOV — строит инструменты для ИИ-агентов в SpherePrime: Prime CLI на Go, PrimeAI, PrimeProxy, голосовые плагины Astra. Репозиториев 23, звёзд 12, последний пуш — сегодня." />
+  <img src="./assets/hero-46c7b3bb52d3.svg" width="100%" alt="Lil KALINOV — строит инструменты для ИИ-агентов в SpherePrime: Prime CLI на Go, PrimeAI, PrimeProxy, голосовые плагины Astra. Репозиториев 10, звёзд 12, последний пуш — сегодня." />
 </p>
 
 <p align="center">
@@ -22,7 +22,7 @@
 </p>
 
 <p align="center">
-  <img src="./assets/intro-bdfc4227f234.svg" width="100%" alt="Строю инструменты для агентов. Админ и техподдержка в KNICE TECH &amp; MINICE, а в SpherePrime — свои инструменты: Prime CLI на Go, Router API и голосовые плагины. Направления: Prime CLI, Prime-server и PrimeAi, голосовой слой Astra и Stella." />
+  <img src="./assets/intro-4aa928380536.svg" width="100%" alt="Строю инструменты для агентов. Админ и техподдержка в KNICE TECH &amp; MINICE, а в SpherePrime — свои инструменты: Prime CLI на Go, PrimeAi с Router API и голосовые плагины. Направления: Prime CLI, PrimeAi, голосовой слой Astra." />
 </p>
 
 <a href="https://astra.minice.ai"><img src="./assets/astra-dcc5d8be4923.svg" width="100%" alt="01 Astra и Stella — Голосовой слой ассистента: TTS, STT и поиск — без ядра. Продукт работает вживую на astra.minice.ai." /></a>
@@ -34,9 +34,9 @@
 <a href="https://github.com/SpherePrime/PrimeProxy"><img src="./assets/primeproxy-11f325c66af4.svg" width="100%" alt="04 PrimeProxy — MTProto-прокси и плагин для Astra на Rust: обход блокировок в РФ. 2 звезды, Rust. Открыть https://github.com/SpherePrime/PrimeProxy." /></a>
 
 <p align="center">
-  <img src="./assets/plugins-3aa9737300c3.svg" width="100%" alt="05 Плагины Astra — голосовой слой ассистента, 6 плагинов без вторжения в ядро: Astra-Google-STT, Astra-PrimeProxy, astra-silero, astra-websearch-ddg, AstraBot-qwen, Astra-bot." />
+  <img src="./assets/plugins-6d898d8c061b.svg" width="100%" alt="05 Плагины Astra — голосовой слой ассистента, 4 плагина без вторжения в ядро: Astra-Google-STT, Astra-PrimeProxy, astra-silero, astra-websearch-ddg." />
 </p>
 
-<a href="https://github.com/SpherePrime"><img src="./assets/sphereprime-33ce76b34e89.svg" width="100%" alt="06 SpherePrime и личное — Prime-server (TypeScript), PrimeReplay (Rust), SpherePrime-site (TypeScript), Stella (Python)." /></a>
+<a href="https://github.com/SpherePrime"><img src="./assets/sphereprime-6b7f1cce64ad.svg" width="100%" alt="06 SpherePrime и личное — portfolio (TypeScript), .github (Org)." /></a>
 
 <a href="https://t.me/SpherePrime"><img src="./assets/footer-b884a545a946.svg" width="100%" alt="Открытый код, который работает. Контакты: Telegram @SpherePrime, knice.tech, minice.ai, Discord." /></a>
