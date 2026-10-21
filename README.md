@@ -11,9 +11,14 @@
 </p>
 
 <p align="center">
-  <a href="https://t.me/SpherePrime"><img src="./assets/btn-telegram-8b5fe97ca2d4.svg" width="260" alt="Telegram — написать в Telegram: @SpherePrime" /></a>
-  <a href="https://github.com/SpherePrime"><img src="./assets/btn-sphereprime-a832a5d6e009.svg" width="260" alt="SpherePrime — организация на GitHub" /></a>
-  <a href="https://lilkalinov.github.io/portfolio/"><img src="./assets/btn-portfolio-4b714bc6b7e5.svg" width="260" alt="Портфолио — интерактивное портфолио на Three.js и Next.js" /></a>
+<table width="100%" border="0" cellspacing="0" cellpadding="0"><tr>
+<td width="33.33%">
+  <a href="https://t.me/SpherePrime"><img src="./assets/btn-telegram-5a4fb8f4b203.svg" width="100%" alt="Telegram — написать в Telegram: @SpherePrime" /></a></td>
+<td width="33.33%">
+  <a href="https://github.com/SpherePrime"><img src="./assets/btn-sphereprime-ef6a02b916ea.svg" width="100%" alt="SpherePrime — организация на GitHub" /></a></td>
+<td width="33.34%">
+  <a href="https://lilkalinov.github.io/portfolio/"><img src="./assets/btn-portfolio-de77173ea7c5.svg" width="100%" alt="Портфолио — интерактивное портфолио на Three.js и Next.js" /></a></td>
+</tr></table>
 </p>
 
 <p align="center">
