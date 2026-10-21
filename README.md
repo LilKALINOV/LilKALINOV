@@ -34,9 +34,21 @@
 <a href="https://github.com/SpherePrime/PrimeProxy"><img src="./assets/primeproxy-11f325c66af4.svg" width="100%" alt="04 PrimeProxy — MTProto-прокси и плагин для Astra на Rust: обход блокировок в РФ. 2 звезды, Rust. Открыть https://github.com/SpherePrime/PrimeProxy." /></a>
 
 <p align="center">
-  <img src="./assets/plugins-6d898d8c061b.svg" width="100%" alt="05 Плагины Astra — голосовой слой ассистента, 4 плагина без вторжения в ядро: Astra-Google-STT, Astra-PrimeProxy, astra-silero, astra-websearch-ddg." />
+  <a href="https://github.com/LilKALINOV?tab=repositories&q=astra"><img src="./assets/plugins-6d898d8c061b.svg" width="100%" alt="05 Плагины Astra — голосовой слой ассистента, 4 плагина без вторжения в ядро: Astra-Google-STT, Astra-PrimeProxy, astra-silero, astra-websearch-ddg." /></a>
 </p>
 
-<a href="https://github.com/SpherePrime"><img src="./assets/sphereprime-6b7f1cce64ad.svg" width="100%" alt="06 SpherePrime и личное — portfolio (TypeScript), .github (Org)." /></a>
+<p align="center">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td><img src="./assets/directory-ab69d7a1b3fc.svg" width="100%" alt="06 Открытые репозитории — все 9 публичных некошеных репозиториев Lil KALINOV и SpherePrime; каждая строка — ссылка на свой репозиторий." /></td></tr><tr><td><a href="https://github.com/SpherePrime/PrimeAi"><img src="./assets/row-primeai-de648f71fdb6.svg" width="100%" alt="PrimeAi — ИИ-провайдер для Astra: Router API, авто-роутинг, веб-поиск.. 6 звёзд, TypeScript. Открыть https://github.com/SpherePrime/PrimeAi."></a></td></tr>
+<tr><td><a href="https://github.com/SpherePrime/CLI"><img src="./assets/row-cli-d689acb5cff0.svg" width="100%" alt="CLI — Агент для кодинга в терминале: любые модели, сессии, LSP.. 3 звезды, Go. Открыть https://github.com/SpherePrime/CLI."></a></td></tr>
+<tr><td><a href="https://github.com/SpherePrime/PrimeProxy"><img src="./assets/row-primeproxy-cf3291c3378f.svg" width="100%" alt="PrimeProxy — MTProto-прокси и плагин для Astra на Rust: обход блокировок в РФ.. 2 звезды, Rust. Открыть https://github.com/SpherePrime/PrimeProxy."></a></td></tr>
+<tr><td><a href="https://github.com/LilKALINOV/Astra-Google-STT"><img src="./assets/row-astra-google-stt-5f344f879812.svg" width="100%" alt="Astra-Google-STT — Распознавание речи через Google Web Speech — без API-ключа.. 1 звезда, Rust. Открыть https://github.com/LilKALINOV/Astra-Google-STT."></a></td></tr>
+<tr><td><a href="https://github.com/LilKALINOV/portfolio"><img src="./assets/row-portfolio-52a7d3d7a37b.svg" width="100%" alt="portfolio — Интерактивное портфолио: Three.js, Next.js, космическая тема.. без звёзд, TypeScript. Открыть https://github.com/LilKALINOV/portfolio."></a></td></tr>
+<tr><td><a href="https://github.com/SpherePrime/.github"><img src="./assets/row-github-1d36bf365981.svg" width="100%" alt=".github — Профиль организации: метаданные и шаблоны SpherePrime.. без звёзд, Repo. Открыть https://github.com/SpherePrime/.github."></a></td></tr>
+<tr><td><a href="https://github.com/SpherePrime/Astra-PrimeProxy"><img src="./assets/row-astra-primeproxy-ff7c3c27972a.svg" width="100%" alt="Astra-PrimeProxy — MTProto-слой внутри ассистента: сеть как плагин.. без звёзд, Rust. Открыть https://github.com/SpherePrime/Astra-PrimeProxy."></a></td></tr>
+<tr><td><a href="https://github.com/LilKALINOV/astra-silero"><img src="./assets/row-astra-silero-8b37dc35ccd5.svg" width="100%" alt="astra-silero — Локальный русский TTS Silero: офлайн, пять голосов.. без звёзд, Rust. Открыть https://github.com/LilKALINOV/astra-silero."></a></td></tr>
+<tr><td><a href="https://github.com/LilKALINOV/astra-websearch-ddg"><img src="./assets/row-astra-websearch-ddg-5e0584190831.svg" width="100%" alt="astra-websearch-ddg — Поиск DuckDuckGo из ассистента — без лимитов и ключей.. без звёзд, Rust. Открыть https://github.com/LilKALINOV/astra-websearch-ddg."></a></td></tr>
+</table>
+</p>
 
 <a href="https://t.me/SpherePrime"><img src="./assets/footer-b884a545a946.svg" width="100%" alt="Открытый код, который работает. Контакты: Telegram @SpherePrime, knice.tech, minice.ai, Discord." /></a>

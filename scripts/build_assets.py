@@ -760,7 +760,7 @@ def spine(height, accent, *, short=False):
 
 
 def shell(name, height, radius, body, title, defs_extra='', spine_color=None,
-          spine_short=False, width=W, bare=False, bottom_dust=True):
+          spine_short=False, width=W, bare=False, bottom_dust=True, dust_on=True):
     """Assemble a complete, accessible SVG document."""
     # the travelling edge light needs the frame's own perimeter, so the dash it
     # draws and the distance it travels are one exact loop
@@ -777,7 +777,7 @@ def shell(name, height, radius, body, title, defs_extra='', spine_color=None,
     # a shared field of drifting dust: deterministic positions (seeded on the
     # asset name) so builds stay byte-stable, twinkling on independent phases.
     # It lives in the frame group, behind the copy, so it never covers a word.
-    if not bare:
+    if not bare and dust_on:
         body = dust(height, name, width, bottom=bottom_dust) + body
     if bare:
         # a bare asset: the body is the whole document - no panel background,
@@ -1469,38 +1469,72 @@ def build_sections(repos: list[dict]) -> dict:
             [lang_tag(r), PLUGIN_TAG2.get(key, lang_tag(r, 1, 'PLUGIN'))],
             [accent[0], accent[0]], accent[0],
         ))
-    build_section(
-        'plugins.svg', '05', 'ASTRA PLUGINS', 'Плагины Astra',
-        f'Голосовой слой ассистента — {len(rows)} '
-        + plural_ru(len(rows), 'плагин', 'плагина', 'плагинов')
-        + ', ноль вторжений в ядро.',
-        rows, RUST[0], RUST[0],
-        'Плагины Astra (имя начинается с astra): '
-        + '; '.join(f'{name} — {desc}' for name, desc, *_ in rows) + '.', stage=True)
+    return {'plugins': plugins}
 
-    by_name = {r['name'].lower(): r for r in repos}
-    picks = [by_name[k] for k in SHOWCASE_ORDER
-             if k in by_name and not by_name[k]['plugin'] and k not in SHOWCASE_EXCLUDE][:4]
-    rows = []
+
+def build_row_card(filename, name, desc, accent, lang, stars, url):
+    """One clickable directory row: a mini panel linking to its repository.
+
+    GitHub does not make regions inside an image clickable, so the directory
+    is one header image plus one image per repository, each wrapped in its
+    own Markdown link — that is the only way a row opens exactly its repo.
+    """
+    h = 84
+    primary = accent[0] if isinstance(accent, tuple) else accent
+    pw = pill_width(lang, 11, 14, False)
+    stars_txt = str(stars) + ' ·'
+    st_w = run_width(stars_txt, 11.5, True, 0.5)
+    cap_c = 34 - CAP * 18
+    body = (
+        f'<circle cx="{AXIS + 5}" cy="{n(cap_c)}" r="4.5" fill="{primary}"/>'
+        + text(TEXT, 34, escape(name), size=18, weight=600)
+        + text(TEXT, 56, escape(desc), size=14, fill=INK_MUTE)
+        + text(RIGHT - pw - 20, 32, escape(stars_txt), size=11.5, fill=INK_MUTE,
+               mono=True, anchor='end', tracking=0.5, text_length=st_w)
+        + pill(RIGHT - pw, cap_c - 12, lang, primary, h=24, size=11, pad=14)[0]
+    )
+    shell(filename, h, CARD_R, f'<g class="enter">{body}</g>',
+          f'{name} — {desc}. Открыть {url}.',
+          spine_color=primary, spine_short=True, dust_on=False)
+
+
+def build_directory(repos: list[dict]) -> list[dict]:
+    """The open-source index: every public non-fork repository, one clickable
+    row each. The meta repository hosting this very page is the only skip.
+    """
+    picks = sorted(
+        (r for r in repos if r['name'].lower() not in {'lilkalinov', 'lil-kalinov'}),
+        key=lambda r: (r['stars'], r['pushed']), reverse=True)
+    grad, blob = aurora('au-dx', 780, 60, 290, 120, SPHERE, 0.14, 'drift-c')
+    head = (
+        grad + blob
+        + text(TEXT, HEAD_EYEBROW, '06 / OPEN INDEX', size=11.5, fill=SPHERE,
+               mono=True, tracking=2.6, weight=600)
+        + text(TEXT, HEAD_TITLE, 'Открытые репозитории', size=38, weight=700, tracking=-0.9)
+        + text(TEXT, HEAD_SUB, f'Все {len(picks)} '
+               + plural_ru(len(picks), 'публичный репозиторий', 'публичных репозитория',
+                           'публичных репозиториев')
+               + ' — клик по строке открывает его.', size=17, fill=INK_MUTE)
+        + ghost_number('06', HEAD_SUB, 116, SPHERE, opacity=0.3)
+    )
+    shell('directory.svg', 172, CARD_R, f'<g class="enter">{head}</g>',
+          f'Открытые репозитории: все {len(picks)} публичных некошеных репозиториев '
+          'Lil KALINOV и SpherePrime, каждая строка — ссылка.',
+          spine_color=SPHERE, dust_on=False)
+    out = []
     for r in picks:
         key = r['name'].lower()
         accent = LANG_ACCENT.get((r.get('langs') or [''])[0], SPHERE)
-        rows.append((
-            r['name'],
-            DESC_RU.get(key) or fit(r.get('line') or r['name'], 58),
-            [lang_tag(r), lang_tag(r, 1, 'TOOLS')],
-            [accent[0], accent[0]], accent[0],
-        ))
-    build_section(
-        'sphereprime.svg', '06', 'SPHEREPRIME', 'SpherePrime и личное',
-        'Командная работа в организации и личные инструменты.',
-        rows, SPHERE, SPHERE,
-        'SpherePrime и личное: '
-        + '; '.join(f'{name} — {desc}' for name, desc, *_ in rows) + '.')
-    return {'plugins': plugins, 'showcase': picks}
+        desc = DESC_RU.get(key) or fit(r.get('line') or r['name'], 64)
+        url = f'https://github.com/{r["owner"]}/{r["name"]}'
+        fn = 'row-' + re.sub(r'[^a-z0-9]+', '-', key).strip('-') + '.svg'
+        build_row_card(fn, r['name'], desc, accent, lang_tag(r, 0, 'REPO'), r['stars'], url)
+        out.append({'filename': fn, 'url': url, 'name': r['name'], 'desc': desc,
+                    'stars': r['stars'], 'lang': lang_display(lang_tag(r, 0, 'REPO'))})
+    return out
 
 
-def compose_readme(cards: list[dict], sections: dict, stats: dict) -> str:
+def compose_readme(cards: list[dict], sections: dict, directory: list[dict], stats: dict) -> str:
     """The whole README, generated: structure, links and alt text from live data."""
     def attr(s: str) -> str:
         return s.replace('&', '&amp;')
@@ -1520,12 +1554,17 @@ def compose_readme(cards: list[dict], sections: dict, stats: dict) -> str:
         'тестировщиком Astra, сейчас — со-основатель SpherePrime: строим всё в '
         'одном, от CLI и Desktop для ИИ до утилит. Сейчас в работе PrimeDesktop '
         'и Prime CLI; Astra растёт от наших плагинов.')
+    directory_rows = '\n'.join(
+        f'<tr><td><a href="{r["url"]}"><img src="./assets/{r["filename"]}" width="100%" '
+        f'alt="{attr(r["name"] + " — " + r["desc"] + ". " + star_word(r["stars"]) + ", " + r["lang"] + ". Открыть " + r["url"] + ".")}"></a></td></tr>'
+        for r in directory)
     plugins_alt = attr(
         f'05 Плагины Astra — голосовой слой ассистента, {len(sections["plugins"])} '
         + plural_ru(len(sections['plugins']), 'плагин', 'плагина', 'плагинов')
         + ' без вторжения в ядро: ' + ', '.join(r['name'] for r in sections['plugins']) + '.')
-    showcase_alt = attr(
-        '06 SpherePrime и личное — ' + tag_list(sections['showcase']) + '.')
+    dir_alt = attr(
+        f'06 Открытые репозитории — все {len(directory)} публичных некошеных '
+        'репозиториев Lil KALINOV и SpherePrime; каждая строка — ссылка на свой репозиторий.')
 
     def card_md(card: dict) -> str:
         return (f'<a href="{card["href"]}"><img src="./assets/{card["filename"]}" width="100%" '
@@ -1567,10 +1606,14 @@ def compose_readme(cards: list[dict], sections: dict, stats: dict) -> str:
 {card_md(cards[3])}
 
 <p align="center">
-  <img src="./assets/plugins.svg" width="100%" alt="{plugins_alt}" />
+  <a href="https://github.com/LilKALINOV?tab=repositories&q=astra"><img src="./assets/plugins.svg" width="100%" alt="{plugins_alt}" /></a>
 </p>
 
-<a href="https://github.com/SpherePrime"><img src="./assets/sphereprime.svg" width="100%" alt="{showcase_alt}" /></a>
+<p align="center">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr><td><img src="./assets/directory.svg" width="100%" alt="{dir_alt}" /></td></tr>{directory_rows}
+</table>
+</p>
 
 <a href="https://t.me/SpherePrime"><img src="./assets/footer.svg" width="100%" alt="Открытый код, который работает. Контакты: Telegram @SpherePrime, knice.tech, minice.ai, Discord." /></a>
 '''
@@ -1776,11 +1819,12 @@ def main():
     print(f'live data: {stats["repos"]} repos, {stats["stars"]}★, last push {stats["pushed"]}')
     cards = build_cards(repos)
     sections = build_sections(repos)
+    directory = build_directory(repos)
     build_hero(stats)
     build_intro()
     build_footer()
     build_buttons()
-    sync_readme_and_preview(compose_readme(cards, sections, stats))
+    sync_readme_and_preview(compose_readme(cards, sections, directory, stats))
     print(f'Generated {len(list(ASSETS.glob("*.svg")))} canonical SVG assets + README from live data')
 
 
