@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1100" height="436" viewBox="0 0 1100 436" role="img" aria-labelledby="title">
-<title id="title">Lil KALINOV — администратор, QA и плагин-разработчик в студии KNICE TECH &amp; MINICE. Голосовые ассистенты Astra и Stella, плагины, Rust, Python, TypeScript, Go.</title>
+<title id="title">Lil KALINOV — строит инструменты для ИИ-агентов в SpherePrime: Prime CLI на Go, PrimeAI, PrimeProxy, голосовые плагины Astra. 23 некошеных репозитория, 12 звёзд, последний пуш — сегодня.</title>
 <defs>
  <linearGradient id="panel" x1="0" y1="0" x2="0.35" y2="1">
   <stop stop-color="#18181C"/><stop offset="1" stop-color="#111114"/>
@@ -120,13 +120,14 @@
 <text x="74" y="33.725" font-size="13.5" fill="#D4D4D8" class="mono">LilKALINOV <tspan fill="#A1A1AA">/</tspan> personal space</text>
 <text x="1048" y="33.725" font-size="12.5" fill="#D4D4D8" class="mono" text-anchor="end" letter-spacing="1"><tspan fill="#22d3ee">●</tspan> BUILD · QA · SHIP</text>
 </g>
-<g class="enter-soft" style="animation-delay:0.06s"><text x="74" y="104" font-size="13" fill="#ff6a3d" font-weight="600" class="mono" letter-spacing="4.2">KNICE / ASTRA / OPEN SOURCE</text></g>
+<g class="enter-soft" style="animation-delay:0.06s"><text x="74" y="104" font-size="13" fill="#ff6a3d" font-weight="600" class="mono" letter-spacing="4.2">KNICE · MINICE · SPHEREPRIME</text></g>
 <g class="enter-soft" style="animation-delay:0.1s">
 <text x="74" y="208" font-size="110" fill="#FFFFFF" font-weight="800" letter-spacing="-6" class="settle"><tspan fill="#FFFFFF">Lil</tspan><tspan fill="url(#brand)"> KALINOV</tspan><tspan fill="#ff9f6e">.</tspan></text>
 <g mask="url(#nm)"><rect class="sweep" x="0" y="88" width="175" height="130" fill="url(#sheen)"/></g>
 </g>
-<g class="enter-soft" style="animation-delay:0.18s"><text x="74" y="256" font-size="25" fill="#D4D4D8">Голосовые ассистенты, QA и код — в одном контуре.</text></g>
-<g class="enter-soft" style="animation-delay:0.23s"><text x="74" y="292" font-size="18" fill="#A1A1AA">KNICE TECH &amp; MINICE. Astra QA. Плагины, которые работают.</text></g>
+<g class="enter-soft" style="animation-delay:0.18s"><text x="74" y="256" font-size="25" fill="#D4D4D8">Инструменты для ИИ-агентов. От CLI до голоса.</text></g>
+<g class="enter-soft" style="animation-delay:0.23s"><text x="74" y="292" font-size="18" fill="#A1A1AA">KNICE TECH &amp; MINICE — работа и QA. SpherePrime — открытый код.</text></g>
+<g class="enter-soft" style="animation-delay:0.3s"><text x="74" y="330" font-size="13.5" fill="#A1A1AA" class="mono" letter-spacing="0.8"><tspan fill="#22d3ee">$</tspan> prime --status · 23 repos · 12★ · push: сегодня</text></g>
 <g class="enter" style="animation-delay:0.14s">
 <circle cx="868" cy="236" r="96" fill="none" stroke="#22d3ee" stroke-opacity=".16"/>
 <circle class="spin" cx="868" cy="236" r="78" fill="none" stroke="#ff9f6e" stroke-opacity=".5" stroke-width="1.2" stroke-dasharray="3 14"/>

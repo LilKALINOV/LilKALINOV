@@ -875,13 +875,15 @@ def build_hero():
 {text(TEXT, top_base, 'LilKALINOV <tspan fill="' + INK_MUTE + '">/</tspan> personal space', size=13.5, fill=INK_SOFT, mono=True)}
 {text(RIGHT, top_base, '<tspan fill="' + CYAN + '">●</tspan> BUILD · QA · SHIP', size=12.5, fill=INK_SOFT, mono=True, anchor='end', tracking=1)}
 ''', 0, 'enter-soft')}
-{enter(text(TEXT, 104, 'KNICE / ASTRA / OPEN SOURCE', size=13, fill=CORAL, mono=True, tracking=4.2, weight=600), 0.06, 'enter-soft')}
+{enter(text(TEXT, 104, 'KNICE · MINICE · SPHEREPRIME', size=13, fill=CORAL, mono=True, tracking=4.2, weight=600), 0.06, 'enter-soft')}
 {enter(f'''
 {text(TEXT, NAME_Y, wordmark('url(#brand)'), size=NAME_SIZE, weight=800, tracking=SETTLE_TRACK, extra='class="settle"')}
 <g mask="url(#nm)"><rect class="sweep" x="0" y="{n(NAME_Y - 120)}" width="175" height="130" fill="url(#sheen)"/></g>
 ''', 0.1, 'enter-soft')}
-{enter(text(TEXT, 256, 'Голосовые ассистенты, QA и код — в одном контуре.', size=25, fill=INK_SOFT), 0.18, 'enter-soft')}
-{enter(text(TEXT, 292, 'KNICE TECH &amp; MINICE. Astra QA. Плагины, которые работают.', size=18, fill=INK_MUTE), 0.23, 'enter-soft')}
+{enter(text(TEXT, 256, 'Инструменты для ИИ-агентов. От CLI до голоса.', size=25, fill=INK_SOFT), 0.18, 'enter-soft')}
+{enter(text(TEXT, 292, 'KNICE TECH &amp; MINICE — работа и QA. SpherePrime — открытый код.', size=18, fill=INK_MUTE), 0.23, 'enter-soft')}
+{enter(text(TEXT, 330, '<tspan fill="' + CYAN + '">$</tspan> prime --status · 23 repos · 12★ · push: сегодня',
+       size=13.5, fill=INK_MUTE, mono=True, tracking=0.8), 0.3, 'enter-soft')}
 {enter(f'''
 <circle cx="{cx}" cy="{cy}" r="96" fill="none" stroke="{CYAN}" stroke-opacity=".16"/>
 <circle class="spin" cx="{cx}" cy="{cy}" r="78" fill="none" stroke="{EMBER}" stroke-opacity=".5" stroke-width="1.2" stroke-dasharray="3 14"/>
@@ -896,9 +898,9 @@ def build_hero():
 ''', 0.14)}
 '''
     shell('hero.svg', HERO_H, HERO_R, body,
-          'Lil KALINOV — администратор, QA и плагин-разработчик в студии KNICE TECH '
-          '& MINICE. Голосовые ассистенты Astra и Stella, плагины, Rust, Python, '
-          'TypeScript, Go.',
+          'Lil KALINOV — строит инструменты для ИИ-агентов в SpherePrime: '
+          'Prime CLI на Go, PrimeAI, PrimeProxy, голосовые плагины Astra. '
+          '23 некошеных репозитория, 12 звёзд, последний пуш — сегодня.',
           spine_color=CORAL)
 
 
@@ -907,16 +909,16 @@ def build_hero():
 # --------------------------------------------------------------------------- #
 def build_intro():
     grad, blob = aurora('au-i', 250, 120, 300, 150, CORAL, 0.1, 'drift-b')
-    lead = ('Админ и техподдержка в студии KNICE TECH &amp; MINICE: голосовые<br/>'
-            'ассистенты, QA и расширяемая архитектура через плагины.')
+    lead = ('Админ и техподдержка в KNICE TECH &amp; MINICE. В SpherePrime —<br/>'
+            'свои инструменты: CLI, роутер, прокси и голосовые плагины.')
     # descriptions wrap to two lines: one long line would overrun the column
     focus = (
-        ('KNICE & MINICE', 'Система и стабильность',
-         'Инфраструктура, жизненный цикл<br/>проектов, поддержка пользователей.', CORAL),
-        ('ASTRA · STELLA', 'QA и плагины',
-         'Бета-тесты, плагины без<br/>вмешательства в ядро.', VIOLET),
-        ('OPEN SOURCE', 'Rust · TS · Go',
-         'Плагины, CLI и утилиты:<br/>публичный код и релизы.', GO[0]),
+        ('NOW SHIPPING', 'Prime CLI',
+         'Go-агент в терминале:<br/>модели, сессии, LSP.', GO[0]),
+        ('SPHEREPRIME', 'Prime-server + PrimeAi',
+         'Router API и провайдер:<br/>роутинг, ключи, стримы.', TS[0]),
+        ('VOICE LAYER', 'Astra · Stella',
+         'TTS, STT и поиск —<br/>плагины без ядра.', RUST[0]),
     )
     col_w = (RIGHT - TEXT - 2 * COL_GAP) / 3
     cards = ''
@@ -937,17 +939,16 @@ def build_intro():
 {grad}
 {blob}
 {text(TEXT, HEAD_EYEBROW, 'ABOUT / ПРОФИЛЬ', size=11.5, fill=INK_FAINT, mono=True, tracking=2.8, weight=600)}
-{text(TEXT, HEAD_TITLE, 'Админ, QA и плагинист', size=38, weight=700, tracking=-0.9)}
+{text(TEXT, HEAD_TITLE, 'Строю инструменты для агентов', size=38, weight=700, tracking=-0.9)}
 {text(TEXT, HEAD_SUB, lead, size=17, fill=INK_MUTE)}
 {ghost_number('K', HEAD_SUB, 128, CORAL, opacity=0.22)}
 <path d="M{AXIS} 200H{RIGHT}" stroke="{HAIRLINE}"/>
 {cards}
 '''
     shell('intro.svg', INTRO_H, CARD_R, body,
-          'Привет, я Lil KALINOV. Администратор и техподдержка в студии KNICE TECH '
-          '& MINICE, QA и плагин-разработчик Astra, поддерживаю Stella. '
-          'В свободное время — open-source и кроссплатформенные утилиты '
-          'Windows/Linux.', spine_color=CORAL)
+          'Lil KALINOV: админ и техподдержка в KNICE TECH & MINICE, а в '
+          'SpherePrime — свои инструменты: Prime CLI на Go, Router API и '
+          'голосовые плагины для Astra и Stella.', spine_color=CORAL)
 
 
 # --------------------------------------------------------------------------- #
@@ -1139,7 +1140,7 @@ def art_primeai():
 
 def build_cards():
     build_card('astra.svg', '01', 'QA × VOICE', 'Astra & Stella',
-               'QA-тестирование и плагины голосовых ассистентов — без ядра.',
+               'Голосовые плагины для ассистента: TTS, STT, поиск — без ядра.',
                ['QA', 'RUST', 'PLUGINS'], RUST, art_voice,
                'MINICE.AI', 'LIVE · ASTRA · STELLA', dot=CYAN)
     build_card('primeproxy.svg', '02', 'NETWORK × FREEDOM', 'PrimeProxy',
@@ -1147,11 +1148,11 @@ def build_cards():
                ['RUST', 'MTPROTO', 'ASTRA'], NET, art_bridge,
                'SPHEREPRIME', '2 · RUST · MTPROTO')
     build_card('primerouter.svg', '03', 'CLI × AGENT', 'Prime CLI',
-               'Агентный ассистент в терминале: любые модели, сессии, LSP-контекст.',
+               'Агент для кодинга в терминале: любые модели, сессии, LSP.',
                ['GO', 'CLI', 'LSP'], GO, art_router,
                'SPHEREPRIME', '3 · GO · AGENTIC')
     build_card('primeai.svg', '04', 'AI × ROUTING', 'PrimeAI for Astra',
-               'ИИ-провайдер для Astra: Router API, авто-маршрутизация, веб-поиск.',
+               'ИИ-провайдер для Astra: Router API, авто-роутинг, веб-поиск.',
                ['TYPESCRIPT', 'BUN', 'ROUTER'], TS, art_primeai,
                'SPHEREPRIME', '6 · TYPESCRIPT · BUN')
 
@@ -1203,35 +1204,34 @@ def build_section(filename, number, label, title, subtitle, rows, accent, blob_c
 def build_sections():
     build_section(
         'plugins.svg', '05', 'ASTRA PLUGINS', 'Плагины Astra',
-        'Голос и поиск для ассистента — без вмешательства в ядро.',
-        [('astra-silero', 'Локальный синтез русской речи Silero — офлайн, пять голосов.',
+        'TTS, STT и поиск — четыре плагина, ноль вторжений в ядро.',
+        [('astra-silero', 'Локальный русский TTS Silero: офлайн, пять голосов.',
           ['RUST', 'TTS'], [RUST[0], RUST[0]], RUST[0]),
-         ('astra-websearch-ddg', 'Реальный веб-поиск через DuckDuckGo без лимитов.',
+         ('astra-websearch-ddg', 'Поиск DuckDuckGo из ассистента — без лимитов и ключей.',
           ['RUST', 'SEARCH'], [RUST[0], RUST[0]], RUST[0]),
-         ('Astra-Google-STT', 'Распознавание речи через Google STT — без API-ключа.',
+         ('Astra-Google-STT', 'Распознавание речи через Google Web Speech — без API-ключа.',
           ['RUST', 'STT'], [RUST[0], RUST[0]], RUST[0]),
-         ('Astra-PrimeProxy', 'PrimeProxy как плагин: сетевой слой прямо в ассистенте.',
+         ('Astra-PrimeProxy', 'MTProto-слой внутри ассистента: сеть как плагин.',
           ['RUST', 'MTPROTO'], [RUST[0], RUST[0]], RUST[0])],
         RUST[0], RUST[0],
-        'Плагины Astra: astra-silero — локальный синтез русской речи Silero, '
-        'astra-websearch-ddg — поиск через DuckDuckGo, Astra-Google-STT — '
-        'распознавание речи без API-ключа, Astra-PrimeProxy — сетевой слой.')
+        'Плагины Astra: astra-silero — локальный русский TTS Silero офлайн, '
+        'astra-websearch-ddg — поиск DuckDuckGo без лимитов, Astra-Google-STT — '
+        'распознавание речи без API-ключа, Astra-PrimeProxy — сеть как плагин.')
     build_section(
         'sphereprime.svg', '06', 'SPHEREPRIME', 'SpherePrime и личное',
         'Командная работа в организации и личные инструменты.',
-        [('Prime-server', 'Свой Router API: Fastify, PostgreSQL, Redis и админка на React.',
+        [('Prime-server', 'Router API: Fastify, PostgreSQL, Redis, админка на React.',
           ['TYPESCRIPT', 'ROUTER'], [TS[0], TS[0]], TS[0]),
          ('PrimeReplay', 'Нативное десктоп-приложение на Rust и Slint.',
           ['RUST', 'SLINT'], [RUST[0], RUST[0]], RUST[0]),
-         ('SpherePrime-site', 'Сайт студии на React, Vite и TypeScript.',
+         ('SpherePrime-site', 'Сайт студии: React, Vite, TypeScript.',
           ['REACT', 'VITE'], [TS[0], TS[0]], TS[0]),
-         ('Stella', 'Голосовой помощник для Windows: русский STT, Telegram, UI на Flet.',
+         ('Stella', 'Голосовой помощник для Windows: Flet, Telegram, русский STT.',
           ['PYTHON', 'FLET'], [PY[0], PY[0]], PY[0])],
         SPHERE, SPHERE,
-        'Работа в SpherePrime: Prime-server — Router API на Fastify, PostgreSQL '
+        'SpherePrime и личное: Prime-server — Router API на Fastify, PostgreSQL '
         'и Redis, PrimeReplay — приложение на Rust и Slint, SpherePrime-site — '
-        'сайт студии. Личное: Stella — голосовой помощник для Windows на Python '
-        'с Flet и Telegram-интеграцией.')
+        'сайт студии, Stella — голосовой помощник для Windows на Python.')
 
 
 # --------------------------------------------------------------------------- #
@@ -1286,15 +1286,15 @@ def build_footer():
 {defs}
 <ellipse cx="250" cy="70" rx="300" ry="90" fill="url(#waveg)" opacity=".1" filter="url(#softer)"/>
 <g class="enter">
-{text(TEXT, 56, 'Чистый код. Работающие вещи.', size=26, weight=700, tracking=-0.5)}
-{text(TEXT, 82, 'Telegram · Steam · VK — в карточках выше.', size=15.5, fill=INK_MUTE)}
+{text(TEXT, 56, 'Открытый код, который работает.', size=26, weight=700, tracking=-0.5)}
+{text(TEXT, 82, 'Telegram · knice.tech · minice.ai · Discord', size=15.5, fill=INK_MUTE)}
 </g>
 <g class="enter" style="animation-delay:.12s">{cta}</g>
 {layers}
 '''
     shell('footer.svg', FOOTER_H, HERO_R, body,
-          'Пишу чистый код, тестирую до конца и делаю вещи, которые работают. '
-          'Контакты: Telegram @SpherePrime, Steam LilKALINOV, VK bass.kalinov.',
+          'Открытый код, который работает. Контакты: Telegram @SpherePrime, '
+          'knice.tech, minice.ai, Discord.',
           spine_color=CORAL, spine_short=True)
 
 

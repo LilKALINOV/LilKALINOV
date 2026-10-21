@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1100" height="244" viewBox="0 0 1100 244" role="img" aria-labelledby="title">
-<title id="title">PrimeAI for Astra: ИИ-провайдер для Astra: Router API, авто-маршрутизация, веб-поиск.</title>
+<title id="title">PrimeAI for Astra: ИИ-провайдер для Astra: Router API, авто-роутинг, веб-поиск.</title>
 <defs>
  <linearGradient id="panel" x1="0" y1="0" x2="0.35" y2="1">
   <stop stop-color="#18181C"/><stop offset="1" stop-color="#111114"/>
@@ -116,7 +116,7 @@
 <g class="enter">
 <text x="74" y="58" font-size="11.5" fill="#a78bfa" font-weight="600" class="mono" letter-spacing="2.6">04 / AI × ROUTING</text>
 <text x="74" y="102" font-size="38" fill="#FFFFFF" font-weight="700" letter-spacing="-0.9">PrimeAI for Astra</text>
-<text x="74" y="134" font-size="17" fill="#A1A1AA">ИИ-провайдер для Astra: Router API, авто-маршрутизация, веб-поиск.</text>
+<text x="74" y="134" font-size="17" fill="#A1A1AA">ИИ-провайдер для Astra: Router API, авто-роутинг, веб-поиск.</text>
 <rect x="52" y="166" width="112.4" height="25" rx="12.5" fill="#a78bfa" fill-opacity=".92" stroke="#a78bfa"/><text x="74" y="182.64" font-size="11.5" fill="#0E0E10" font-weight="600" class="mono" letter-spacing="0.4" textLength="68.4" lengthAdjust="spacing">TYPESCRIPT</text><rect x="172.4" y="166" width="64.52" height="25" rx="12.5" fill="#18181C" fill-opacity="0.88" stroke="#a78bfa" stroke-opacity="0.42"/><text x="194.4" y="182.64" font-size="11.5" fill="#a78bfa" font-weight="400" class="mono" letter-spacing="0.4" textLength="20.52" lengthAdjust="spacing">BUN</text><rect x="244.92" y="166" width="85.04" height="25" rx="12.5" fill="#18181C" fill-opacity="0.88" stroke="#a78bfa" stroke-opacity="0.42"/><text x="266.92" y="182.64" font-size="11.5" fill="#a78bfa" font-weight="400" class="mono" letter-spacing="0.4" textLength="41.04" lengthAdjust="spacing">ROUTER</text>
 </g>
 <path d="M52 208H1048" stroke="#27272A"/><g class="enter" style="animation-delay:.22s"><text x="74" y="232" font-size="11.5" fill="#8b8b93" font-weight="600" class="mono" letter-spacing="1.6" textLength="88.44" lengthAdjust="spacing">SPHEREPRIME</text><path class="pulse" d="M881.2 221.975L882.88 226.295L887.2 227.975L882.88 229.655L881.2 233.975L879.52 229.655L875.2 227.975L879.52 226.295Z" fill="#a78bfa"/><text x="1048" y="232" font-size="11.5" fill="#A1A1AA" class="mono" text-anchor="end" letter-spacing="1.2" textLength="152.8" lengthAdjust="spacing">6 · TYPESCRIPT · BUN</text></g>
