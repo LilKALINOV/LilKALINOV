@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="540" height="392" viewBox="0 0 540 392" role="img" aria-labelledby="t">
+<title id="t">Astra Silero — локальный синтез русской речи для Astra на базе Silero TTS. Открыть репозиторий.</title>
+<defs>
+ <clipPath id="clip"><rect width="540" height="392" rx="6"/></clipPath>
+ <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M0 .5H2M.5 0V2" stroke="#ecebe5" stroke-opacity=".14"/></pattern>
+ 
+</defs>
+<style>
+text{font-family:'Segoe UI','Helvetica Neue',Helvetica,Arial,system-ui,sans-serif}
+.mono{font-family:'Cascadia Mono','JetBrains Mono',Consolas,'SF Mono',Menlo,'Courier New',monospace}
+.fb{transform-box:fill-box;transform-origin:center}
+.fbl{transform-box:fill-box;transform-origin:left center}
+.fbb{transform-box:fill-box;transform-origin:center bottom}
+.pivot{transform-box:view-box;transform-origin:0 0}
+
+@keyframes reveal{from{transform:translateY(105%)}to{transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes eq{0%,100%{transform:scaleY(.2)}50%{transform:scaleY(1)}}
+@keyframes draw{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes marquee{to{transform:translateX(var(--shift))}}
+@keyframes flicker{0%,100%{opacity:.12}40%{opacity:.12}42%{opacity:1}78%{opacity:1}80%{opacity:.12}}
+@keyframes pulse{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes ripple{0%{transform:scale(.7);opacity:0}15%{opacity:.6}100%{transform:scale(1.8);opacity:0}}
+@keyframes register{0%{transform:translateX(0)}100%{transform:translateX(var(--run))}}
+
+.reveal{animation:reveal 1.1s cubic-bezier(.77,0,.18,1) both}
+.rise{animation:rise .9s cubic-bezier(.19,1,.22,1) both}
+.fade{animation:fade 1.2s ease both}
+.blink{animation:blink 1.1s steps(1,end) infinite}
+.eq{animation:eq 1.5s cubic-bezier(.45,0,.55,1) infinite}
+.draw{stroke-dasharray:100;animation:draw 1.8s cubic-bezier(.65,0,.35,1) both}
+.grow{animation:grow 1.4s cubic-bezier(.77,0,.18,1) both}
+.flicker{animation:flicker 7s steps(1,end) infinite}
+.pulse{animation:pulse 2.6s ease-in-out infinite}
+.spin{animation:spin 40s linear infinite}
+.ripple{animation:ripple 3.4s cubic-bezier(.2,.6,.3,1) infinite}
+.register{animation:register 10s cubic-bezier(.77,0,.18,1) infinite alternate}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+@keyframes sl1{0%,4%{opacity:0;transform:translateY(6px)}7%,91%{opacity:1;transform:none}94%,100%{opacity:0;transform:none}}.sl1{animation:sl1 9s cubic-bezier(.2,.8,.2,1) infinite}@keyframes sl2{0%,30%{opacity:0;transform:translateY(6px)}33%,91%{opacity:1;transform:none}94%,100%{opacity:0;transform:none}}.sl2{animation:sl2 9s cubic-bezier(.2,.8,.2,1) infinite}</style>
+<rect width="540" height="392" rx="6" fill="#121211"/><path d="M12 22V12H22M12 370V380H22M528 22V12H518M528 370V380H518" fill="none" stroke="#57554f" stroke-width="1.2"/><path d="M28 50H512" stroke="#2d2c29"/><g style="--run:428px"><rect class="register" style="animation-delay:-4.40s" x="28" y="49" width="56" height="2" fill="#ff5b14"/></g><text x="28.0" y="36.0" font-size="11" fill="#8d8b85" font-weight="600" letter-spacing="1.6" class="mono">06 — ASTRA PLUGIN · RUST / PY</text><rect x=".5" y=".5" width="539" height="391" rx="6" fill="none" stroke="#2d2c29"/><g transform="translate(502 32)"><path d="M-7 7L7 -7M-2.8000000000000003 -7H7V2.8000000000000003" fill="none" stroke="#ecebe5" stroke-width="1.6" stroke-linecap="square"/></g><rect x="28" y="66" width="484" height="170" fill="#0e0e0d"/><clipPath id="plate"><rect x="28" y="66" width="484" height="170"/></clipPath><g clip-path="url(#plate)"><rect x="28" y="66" width="484" height="170" fill="url(#grid)"/>
+<circle cx="52" cy="86" r="3" fill="#ff5b14"/>
+<text x="62.0" y="90.0" font-size="9" fill="#8d8b85" class="mono">TEXT-TO-SPEECH (RU) · SILERO V4</text>
+<text x="496.0" y="90.0" font-size="9" fill="#ff5b14" font-weight="700" text-anchor="end" class="mono">100% OFFLINE</text>
+<line x1="44" y1="98" x2="496" y2="98" stroke="#2d2c29"/>
+
+<rect x="44" y="106" width="144" height="96" fill="#0e0e0d" stroke="#2d2c29"/>
+<rect x="44" y="106" width="144" height="20" fill="#121211" stroke="#2d2c29"/>
+<text x="54.0" y="120.0" font-size="8" fill="#8d8b85" font-weight="700" class="mono">TEXT BUFFER (RU)</text>
+<text x="54.0" y="144.0" font-size="8.5" fill="#57554f" class="mono">astra.speak(</text>
+<g class="sl1">
+  <text x="54.0" y="164.0" font-size="11" fill="#ecebe5" font-weight="700" class="mono">«Ассистент готов»</text>
+</g>
+<text x="54.0" y="182.0" font-size="8.5" fill="#57554f" class="mono">)</text>
+<text x="54.0" y="194.0" font-size="7.5" fill="#8d8b85" class="mono">lang: ru · tokens: 3</text>
+
+<path d="M188 152H208" stroke="#2d2c29" stroke-width="1.6" stroke-dasharray="2 3"/>
+<rect x="-3" y="-3" width="6" height="6" fill="#ecebe5"><animateMotion dur="1.8s" repeatCount="indefinite" path="M188 152H208"/></rect>
+
+<rect x="208" y="134" width="36" height="36" fill="#0e0e0d" stroke="#ff5b14" stroke-width="1.4"/>
+<text x="226.0" y="129.0" font-size="7.5" fill="#57554f" font-weight="700" text-anchor="middle" class="mono">NEURAL</text>
+<circle cx="218" cy="144" r="2" fill="#ff5b14"/><circle cx="226" cy="144" r="2" fill="#57554f"/><circle cx="234" cy="144" r="2" fill="#ecebe5"/><circle cx="218" cy="152" r="2" fill="#57554f"/><circle cx="226" cy="152" r="2" fill="#ff5b14"/><circle cx="234" cy="152" r="2" fill="#ff5b14"/><circle cx="218" cy="160" r="2" fill="#ecebe5"/><circle cx="226" cy="160" r="2" fill="#ff5b14"/><circle cx="234" cy="160" r="2" fill="#ecebe5"/>
+<text x="226.0" y="182.0" font-size="7.5" fill="#57554f" font-weight="700" text-anchor="middle" class="mono">VOCODER</text>
+
+<path d="M244 152H264" stroke="#2d2c29" stroke-width="1.6" stroke-dasharray="2 3"/>
+<rect x="-3" y="-3" width="6" height="6" fill="#ff5b14"><animateMotion dur="1.8s" repeatCount="indefinite" path="M244 152H264"/></rect>
+
+<rect x="264" y="106" width="232" height="96" fill="#0e0e0d" stroke="#2d2c29"/>
+<rect x="264" y="106" width="232" height="20" fill="#121211" stroke="#2d2c29"/>
+<text x="274.0" y="120.0" font-size="8" fill="#ff5b14" font-weight="700" class="mono">AUDIO OUT · 24 kHz</text>
+<text x="486.0" y="120.0" font-size="7.5" fill="#8d8b85" text-anchor="end" class="mono">0ms NETWORK</text>
+<line x1="274" y1="156" x2="486" y2="156" stroke="#2d2c29" stroke-dasharray="2 4"/>
+<g class="sl2">
+  <path d="M276.0 156.0 L279.0 155.2 L282.0 153.2 L285.0 150.6 L288.0 148.7 L291.0 148.2 L294.0 149.9 L297.0 153.6 L300.0 158.8 L303.0 164.4 L306.0 169.0 L309.0 171.4 L312.0 171.0 L315.0 167.7 L318.0 162.2 L321.0 155.7 L324.0 149.6 L327.0 145.2 L330.0 143.3 L333.0 144.0 L336.0 146.8 L339.0 150.7 L342.0 154.6 L345.0 157.4 L348.0 158.5 L351.0 158.0 L354.0 156.3 L357.0 154.5 L360.0 153.5 L363.0 154.0 L366.0 156.2 L369.0 159.8 L372.0 163.9 L375.0 167.2 L378.0 168.8 L381.0 167.8 L384.0 164.2 L387.0 158.6 L390.0 152.1 L393.0 146.0 L396.0 141.9 L399.0 140.4 L402.0 141.8 L405.0 145.8 L408.0 151.1 L411.0 156.6 L414.0 161.0 L417.0 163.5 L420.0 163.7 L423.0 162.2 L426.0 159.7 L429.0 157.4 L432.0 156.1 L435.0 156.3 L438.0 158.0 L441.0 160.5 L444.0 162.8 L447.0 163.9 L450.0 163.0 L453.0 160.0 L456.0 155.1 L459.0 149.6 L462.0 144.5 L465.0 141.1 L468.0 140.5 L471.0 142.8 L474.0 147.6 L477.0 153.9 L480.0 160.3 L483.0 165.4" fill="none" stroke="#ff5b14" stroke-width="1.8"/>
+</g>
+<text x="274.0" y="192.0" font-size="8" fill="#8d8b85" class="mono">ON-DEVICE · SILERO NEURAL SYNTH</text>
+
+<line x1="44" y1="214" x2="496" y2="214" stroke="#2d2c29"/>
+<text x="44.0" y="230.0" font-size="8" fill="#57554f" class="mono">LOCAL INFERENCE · ZERO CLOUD API · ZERO TELEMETRY</text>
+<text x="496.0" y="230.0" font-size="8" fill="#8d8b85" text-anchor="end" class="mono">STATUS: READY</text></g><rect x="28" y="66" width="484" height="170" fill="none" stroke="#2d2c29"/><text x="512.0" y="254.0" font-size="10" fill="#8d8b85" font-weight="600" text-anchor="end" letter-spacing="1.6" class="mono">FIG. 06</text><clipPath id="ttl"><rect x="24" y="256" width="420" height="42"/></clipPath><g clip-path="url(#ttl)"><g class="reveal" style="animation-delay:0.15s"><text x="28.0" y="288.0" font-size="32" fill="#ecebe5" font-weight="800" letter-spacing="-0.96">Astra Silero</text></g></g><g class="rise" style="animation-delay:0.35s"><text x="28.0" y="316.0" font-size="15" fill="#8d8b85">Локальный оффлайн-синтез русской речи для Astra</text></g><g class="rise" style="animation-delay:0.45s"><text x="28.0" y="338.0" font-size="15" fill="#8d8b85">на базе нейросети Silero TTS прямо на устройстве.</text></g><path d="M28 342H512" stroke="#2d2c29"/><g class="fade" style="animation-delay:0.60s"><text x="28.0" y="366.0" font-size="12" fill="#8d8b85" class="mono">Rust</text><text x="66.8" y="366.0" font-size="12" fill="#ff5b14" class="mono">/</text><text x="84.0" y="366.0" font-size="12" fill="#8d8b85" class="mono">Python</text><text x="137.2" y="366.0" font-size="12" fill="#ff5b14" class="mono">/</text><text x="154.4" y="366.0" font-size="12" fill="#8d8b85" class="mono">Silero TTS</text><text x="236.4" y="366.0" font-size="12" fill="#ff5b14" class="mono">/</text><text x="253.6" y="366.0" font-size="12" fill="#8d8b85" class="mono">On-device</text></g>
+</svg>

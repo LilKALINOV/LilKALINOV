@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="540" height="392" viewBox="0 0 540 392" role="img" aria-labelledby="t">
+<title id="t">Astra-Google-STT — распознавание речи прямо внутри Astra. Rust. Открыть репозиторий.</title>
+<defs>
+ <clipPath id="clip"><rect width="540" height="392" rx="6"/></clipPath>
+ <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M0 .5H2M.5 0V2" stroke="#ecebe5" stroke-opacity=".14"/></pattern>
+ 
+</defs>
+<style>
+text{font-family:'Segoe UI','Helvetica Neue',Helvetica,Arial,system-ui,sans-serif}
+.mono{font-family:'Cascadia Mono','JetBrains Mono',Consolas,'SF Mono',Menlo,'Courier New',monospace}
+.fb{transform-box:fill-box;transform-origin:center}
+.fbl{transform-box:fill-box;transform-origin:left center}
+.fbb{transform-box:fill-box;transform-origin:center bottom}
+.pivot{transform-box:view-box;transform-origin:0 0}
+
+@keyframes reveal{from{transform:translateY(105%)}to{transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+@keyframes eq{0%,100%{transform:scaleY(.2)}50%{transform:scaleY(1)}}
+@keyframes draw{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes marquee{to{transform:translateX(var(--shift))}}
+@keyframes flicker{0%,100%{opacity:.12}40%{opacity:.12}42%{opacity:1}78%{opacity:1}80%{opacity:.12}}
+@keyframes pulse{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes ripple{0%{transform:scale(.7);opacity:0}15%{opacity:.6}100%{transform:scale(1.8);opacity:0}}
+@keyframes register{0%{transform:translateX(0)}100%{transform:translateX(var(--run))}}
+
+.reveal{animation:reveal 1.1s cubic-bezier(.77,0,.18,1) both}
+.rise{animation:rise .9s cubic-bezier(.19,1,.22,1) both}
+.fade{animation:fade 1.2s ease both}
+.blink{animation:blink 1.1s steps(1,end) infinite}
+.eq{animation:eq 1.5s cubic-bezier(.45,0,.55,1) infinite}
+.draw{stroke-dasharray:100;animation:draw 1.8s cubic-bezier(.65,0,.35,1) both}
+.grow{animation:grow 1.4s cubic-bezier(.77,0,.18,1) both}
+.flicker{animation:flicker 7s steps(1,end) infinite}
+.pulse{animation:pulse 2.6s ease-in-out infinite}
+.spin{animation:spin 40s linear infinite}
+.ripple{animation:ripple 3.4s cubic-bezier(.2,.6,.3,1) infinite}
+.register{animation:register 10s cubic-bezier(.77,0,.18,1) infinite alternate}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+@keyframes st1{0%,2%{opacity:0;transform:translateY(6px)}5%,91%{opacity:1;transform:none}94%,100%{opacity:0;transform:none}}.st1{animation:st1 8s cubic-bezier(.2,.8,.2,1) infinite}@keyframes st2{0%,28%{opacity:0;transform:translateY(6px)}31%,91%{opacity:1;transform:none}94%,100%{opacity:0;transform:none}}.st2{animation:st2 8s cubic-bezier(.2,.8,.2,1) infinite}</style>
+<rect width="540" height="392" rx="6" fill="#121211"/><path d="M12 22V12H22M12 370V380H22M528 22V12H518M528 370V380H518" fill="none" stroke="#57554f" stroke-width="1.2"/><path d="M28 50H512" stroke="#2d2c29"/><g style="--run:428px"><rect class="register" style="animation-delay:-1.70s" x="28" y="49" width="56" height="2" fill="#ff5b14"/></g><text x="28.0" y="36.0" font-size="11" fill="#8d8b85" font-weight="600" letter-spacing="1.6" class="mono">05 — ASTRA PLUGIN · RUST</text><rect x=".5" y=".5" width="539" height="391" rx="6" fill="none" stroke="#2d2c29"/><g transform="translate(502 32)"><path d="M-7 7L7 -7M-2.8000000000000003 -7H7V2.8000000000000003" fill="none" stroke="#ecebe5" stroke-width="1.6" stroke-linecap="square"/></g><rect x="28" y="66" width="484" height="170" fill="#0e0e0d"/><clipPath id="plate"><rect x="28" y="66" width="484" height="170"/></clipPath><g clip-path="url(#plate)"><rect x="28" y="66" width="484" height="170" fill="url(#grid)"/>
+<circle cx="52" cy="86" r="3" fill="#ff5b14"/>
+<text x="62.0" y="90.0" font-size="9" fill="#8d8b85" class="mono">MIC IN · 48 kHz / 16-BIT PCM</text>
+<text x="496.0" y="90.0" font-size="9" fill="#ff5b14" font-weight="700" text-anchor="end" class="mono">STREAMING ACTIVE</text>
+<line x1="44" y1="98" x2="496" y2="98" stroke="#2d2c29"/>
+
+<rect x="44" y="106" width="136" height="96" fill="#0e0e0d" stroke="#2d2c29"/>
+<rect x="44" y="106" width="136" height="20" fill="#121211" stroke="#2d2c29"/>
+<text x="54.0" y="120.0" font-size="8" fill="#8d8b85" font-weight="700" class="mono">AUDIO INPUT STREAM</text>
+<rect class="fb eq" style="animation-delay:0.00s;animation-duration:0.85s" x="58" y="147.0" width="8" height="14" rx="2" fill="#8d8b85"/><rect class="fb eq" style="animation-delay:1.21s;animation-duration:1.00s" x="74" y="140.0" width="8" height="28" rx="2" fill="#8d8b85"/><rect class="fb eq" style="animation-delay:1.02s;animation-duration:1.15s" x="90" y="131.0" width="8" height="46" rx="2" fill="#ecebe5"/><rect class="fb eq" style="animation-delay:0.83s;animation-duration:1.30s" x="106" y="120.0" width="8" height="68" rx="2" fill="#ff5b14"/><rect class="fb eq" style="animation-delay:0.64s;animation-duration:1.45s" x="122" y="128.0" width="8" height="52" rx="2" fill="#ecebe5"/><rect class="fb eq" style="animation-delay:0.45s;animation-duration:0.85s" x="138" y="137.0" width="8" height="34" rx="2" fill="#8d8b85"/><rect class="fb eq" style="animation-delay:0.26s;animation-duration:1.00s" x="154" y="145.0" width="8" height="18" rx="2" fill="#8d8b85"/>
+<text x="54.0" y="192.0" font-size="8" fill="#57554f" class="mono">VAD: VOICE DETECTED</text>
+
+<path d="M180 152H216" stroke="#2d2c29" stroke-width="1.6" stroke-dasharray="3 3"/>
+<rect x="-3" y="-3" width="6" height="6" fill="#ff5b14"><animateMotion dur="1.6s" repeatCount="indefinite" path="M180 152H216"/></rect>
+<text x="198.0" y="144.0" font-size="7.5" fill="#57554f" text-anchor="middle" class="mono">HTTP/2</text>
+
+<rect x="216" y="106" width="280" height="96" fill="#0e0e0d" stroke="#2d2c29"/>
+<rect x="216" y="106" width="280" height="22" fill="#121211" stroke="#2d2c29"/>
+<text x="228.0" y="121.0" font-size="8.5" fill="#ff5b14" font-weight="800" class="mono">GOOGLE WEB SPEECH</text>
+<rect x="420" y="111" width="66" height="12" rx="2" fill="#0e0e0d" stroke="#2d2c29"/>
+<text x="453.0" y="120.0" font-size="7.5" fill="#8d8b85" text-anchor="middle" class="mono">KEYLESS / FREE</text>
+
+<text x="228.0" y="144.0" font-size="8" fill="#57554f" font-weight="700" class="mono">INPUT_STREAM:</text>
+<g class="st1">
+  <text x="228.0" y="164.0" font-size="12" fill="#ecebe5" font-weight="700" class="mono">«открой проект Prime»</text>
+  <rect class="pulse" x="400" y="153" width="6" height="13" fill="#ff5b14"/>
+</g>
+<g class="st2">
+  <text x="228.0" y="190.0" font-size="8.5" fill="#8d8b85" class="mono">status: 200 · conf: 0.99 · 28ms</text>
+</g>
+
+<line x1="44" y1="214" x2="496" y2="214" stroke="#2d2c29"/>
+<text x="44.0" y="230.0" font-size="8" fill="#57554f" class="mono">ASTRA AUDIO PIPELINE · DIRECT WEBSOCKET / TLS</text>
+<text x="496.0" y="230.0" font-size="8" fill="#8d8b85" text-anchor="end" class="mono">ZERO LATENCY</text></g><rect x="28" y="66" width="484" height="170" fill="none" stroke="#2d2c29"/><text x="512.0" y="254.0" font-size="10" fill="#8d8b85" font-weight="600" text-anchor="end" letter-spacing="1.6" class="mono">FIG. 05</text><clipPath id="ttl"><rect x="24" y="256" width="420" height="42"/></clipPath><g clip-path="url(#ttl)"><g class="reveal" style="animation-delay:0.15s"><text x="28.0" y="288.0" font-size="32" fill="#ecebe5" font-weight="800" letter-spacing="-0.96">Astra-Google-STT</text></g></g><g class="rise" style="animation-delay:0.35s"><text x="28.0" y="316.0" font-size="15" fill="#8d8b85">Keyless распознавание речи в Astra на базе</text></g><g class="rise" style="animation-delay:0.45s"><text x="28.0" y="338.0" font-size="15" fill="#8d8b85">Google Web Speech API без ключей и регистрации.</text></g><path d="M28 342H512" stroke="#2d2c29"/><g class="fade" style="animation-delay:0.60s"><text x="28.0" y="366.0" font-size="12" fill="#8d8b85" class="mono">Rust</text><text x="66.8" y="366.0" font-size="12" fill="#ff5b14" class="mono">/</text><text x="84.0" y="366.0" font-size="12" fill="#8d8b85" class="mono">Web Speech API</text><text x="194.8" y="366.0" font-size="12" fill="#ff5b14" class="mono">/</text><text x="212.0" y="366.0" font-size="12" fill="#8d8b85" class="mono">Audio</text><text x="258.0" y="366.0" font-size="12" fill="#ff5b14" class="mono">/</text><text x="275.2" y="366.0" font-size="12" fill="#8d8b85" class="mono">Astra SDK</text></g>
+</svg>

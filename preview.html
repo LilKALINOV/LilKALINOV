@@ -1,66 +1,70 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LilKALINOV — GitHub profile preview</title>
+<html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LilKALINOV — preview</title>
 <style>
-:root{color-scheme:dark}
-body{margin:0;background:#0E0E10;color:#f4f4f5;font:16px/1.65 'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-main{max-width:1012px;margin:28px auto;padding:8px 12px}
-img{display:block;width:100%;height:auto;margin:0 0 10px;border-radius:6px}
-/* link buttons are inline thirds inside one centered paragraph, with the
-   gaps hidden by HTML comments - exactly how GitHub renders the README */
-img[src*="assets/btn-"]{display:inline-block;width:33.33%;vertical-align:middle;margin:0}
-</style></head>
-<body>
-<main><!--
-  Every word on this page is drawn in assets/*.svg — there is no prose in this
-  file on purpose, so the design stays in one place: scripts/build_assets.py,
-  and every number comes from scripts/fetch_repos.py (live GitHub API).
-  Regenerate with:  python scripts/build_assets.py
-  Check the layout with:  python scripts/verify_assets.py
--->
-
-<p align="center">
-  <img src="./assets/hero-46c7b3bb52d3.svg" width="100%" alt="Lil KALINOV — строит инструменты для ИИ-агентов в SpherePrime: Prime CLI на Go, PrimeAI, PrimeProxy, голосовые плагины Astra. Репозиториев 10, звёзд 12, последний пуш — сегодня." />
+body{margin:0;background:#0d1117;color:#e6edf3;font:16px/1.5 -apple-system,"Segoe UI",sans-serif}
+main{max-width:1012px;margin:24px auto;padding:24px;border:1px solid #30363d;border-radius:6px}
+img{max-width:100%;height:auto}
+p{margin:0 0 16px}
+</style>
+<main><p align="center">
+  <img src="./assets/hero-ba4d0abbeefe.svg" width="100%" alt="LilKALINOV — со-основатель SpherePrime, Lead QA Astra: софт для ИИ-агентов, тестирование и открытый код." />
 </p>
 
 <p align="center">
-  <a href="https://t.me/SpherePrime"><img src="./assets/btn-telegram-5a4fb8f4b203.svg" width="33.33%" alt="Telegram — написать в Telegram: @SpherePrime" /></a><!--
---><a href="https://github.com/SpherePrime"><img src="./assets/btn-sphereprime-ef6a02b916ea.svg" width="33.33%" alt="SpherePrime — организация на GitHub" /></a><!--
---><a href="https://lilkalinov.github.io/portfolio/"><img src="./assets/btn-portfolio-de77173ea7c5.svg" width="33.34%" alt="Портфолио — интерактивное портфолио на Three.js и Next.js" /></a>
+  <a href="https://t.me/SpherePrime"><img src="./assets/link-telegram-883697c81a97.svg" width="32%" alt="Telegram — t.me/SpherePrime" /></a>
+  <a href="https://github.com/SpherePrime"><img src="./assets/link-sphereprime-09c2be3a973c.svg" width="32%" alt="SpherePrime — github.com/SpherePrime" /></a>
+  <a href="https://lilkalinov.github.io/portfolio/"><img src="./assets/link-portfolio-0fc81ce8df0a.svg" width="32%" alt="Портфолио — lilkalinov.github.io/portfolio" /></a>
 </p>
 
 <p align="center">
-  <img src="./assets/intro-8653b81e527a.svg" width="100%" alt="Путь: модифицировал голосового помощника Stella, затем был главным тестировщиком Astra, сейчас — со-основатель SpherePrime: строим всё в одном, от CLI и Desktop для ИИ до утилит. Сейчас в работе PrimeDesktop и Prime CLI; Astra растёт от наших плагинов." />
-</p>
-
-<a href="https://astra.minice.ai"><img src="./assets/astra-dcc5d8be4923.svg" width="100%" alt="01 Astra и Stella — Голосовой слой ассистента: TTS, STT и поиск — без ядра. Продукт работает вживую на astra.minice.ai." /></a>
-
-<a href="https://github.com/SpherePrime/PrimeAi"><img src="./assets/primeai-d1f22b6034f6.svg" width="100%" alt="02 PrimeAI for Astra — ИИ-провайдер для Astra: Router API, авто-роутинг, веб-поиск. 6 звёзд, TypeScript. Открыть https://github.com/SpherePrime/PrimeAi." /></a>
-
-<a href="https://github.com/SpherePrime/CLI"><img src="./assets/primerouter-7adf30dc4522.svg" width="100%" alt="03 Prime CLI — Агент для кодинга в терминале: любые модели, сессии, LSP. 3 звезды, Go. Открыть https://github.com/SpherePrime/CLI." /></a>
-
-<a href="https://github.com/SpherePrime/PrimeProxy"><img src="./assets/primeproxy-11f325c66af4.svg" width="100%" alt="04 PrimeProxy — MTProto-прокси и плагин для Astra на Rust: обход блокировок в РФ. 2 звезды, Rust. Открыть https://github.com/SpherePrime/PrimeProxy." /></a>
-
-<p align="center">
-  <a href="https://github.com/LilKALINOV?tab=repositories&q=astra"><img src="./assets/plugins-6d898d8c061b.svg" width="100%" alt="05 Плагины Astra — голосовой слой ассистента, 4 плагина без вторжения в ядро: Astra-Google-STT, Astra-PrimeProxy, astra-silero, astra-websearch-ddg." /></a>
+  <img src="./assets/stats-b6592ea2547f.svg" width="100%" alt="34+ репозитория с SpherePrime / LilKALINOV, языки и проекты в цифрах." />
 </p>
 
 <p align="center">
-  <img src="./assets/directory-91034255d62d.svg" width="100%" alt="06 Открытые репозитории — все 7 публичных некошеных репозиториев Lil KALINOV и SpherePrime; каждая строка — ссылка на свой репозиторий." />
+  <img src="./assets/section-prime-68137ec0c5b5.svg" width="100%" alt="01 — SpherePrime. Агентные инструменты для разработчиков: терминал, десктоп, роутинг, прокси." />
 </p>
-<p align="center"><a href="https://github.com/SpherePrime/PrimeAi"><img src="./assets/row-primeai-ad927ff3741e.svg" width="100%" alt="PrimeAi — ИИ-провайдер для Astra: Router API, авто-роутинг, веб-поиск. 6 звёзд, TypeScript. Открыть https://github.com/SpherePrime/PrimeAi."></a></p>
 
-<p align="center"><a href="https://github.com/SpherePrime/CLI"><img src="./assets/row-cli-cf6f808b5c60.svg" width="100%" alt="CLI — Агент для кодинга в терминале: любые модели, сессии, LSP. 3 звезды, Go. Открыть https://github.com/SpherePrime/CLI."></a></p>
+<p align="center">
+  <a href="https://github.com/SpherePrime/CLI"><img src="./assets/cli-4167eab0e72f.svg" width="100%" alt="Prime CLI — агентный AI-ассистент для кода в терминале: любые модели, MCP, LSP. Go. Открыть репозиторий SpherePrime." /></a>
+</p>
 
-<p align="center"><a href="https://github.com/SpherePrime/PrimeProxy"><img src="./assets/row-primeproxy-d830785c3167.svg" width="100%" alt="PrimeProxy — MTProto-прокси и плагин для Astra на Rust: обход блокировок в РФ. 2 звезды, Rust. Открыть https://github.com/SpherePrime/PrimeProxy."></a></p>
+<p align="center">
+  <a href="https://github.com/SpherePrime/CLI/tree/main/desktop"><img src="./assets/desktop-1b8dcce468bb.svg" width="100%" alt="Prime Desktop — десктоп-воркспейс Prime для Windows и Linux на Tauri, Electron и React. Открыть исходники." /></a>
+</p>
 
-<p align="center"><a href="https://github.com/LilKALINOV/Astra-Google-STT"><img src="./assets/row-astra-google-stt-987497ae3511.svg" width="100%" alt="Astra-Google-STT — Распознавание речи через Google Web Speech — без API-ключа. 1 звезда, Rust. Открыть https://github.com/LilKALINOV/Astra-Google-STT."></a></p>
+<p align="center">
+  <a href="https://github.com/SpherePrime/PrimeAi"><img src="./assets/primeai-b2e32ebff267.svg" width="49%" alt="PrimeAi — AI-провайдер для Astra с автоматической маршрутизацией через Router API. Открыть репозиторий." /></a>
+  <a href="https://github.com/SpherePrime/PrimeProxy"><img src="./assets/proxy-08dacb323bfc.svg" width="49%" alt="PrimeProxy — локальный MTProto-прокси для Telegram с WebSocket-транспортом. Rust. Открыть репозиторий." /></a>
+</p>
 
-<p align="center"><a href="https://github.com/SpherePrime/Astra-PrimeProxy"><img src="./assets/row-astra-primeproxy-0c7679573cca.svg" width="100%" alt="Astra-PrimeProxy — MTProto-слой внутри ассистента: сеть как плагин. без звёзд, Rust. Открыть https://github.com/SpherePrime/Astra-PrimeProxy."></a></p>
+<p align="center">
+  <img src="./assets/section-plugins-9736c6fbcd13.svg" width="100%" alt="02 — Плагины для Astra. Расширения голосового ассистента: распознавание речи, оффлайн-синтез и поиск." />
+</p>
 
-<p align="center"><a href="https://github.com/LilKALINOV/astra-silero"><img src="./assets/row-astra-silero-a2e58d623201.svg" width="100%" alt="astra-silero — Локальный русский TTS Silero: офлайн, пять голосов. без звёзд, Rust. Открыть https://github.com/LilKALINOV/astra-silero."></a></p>
+<p align="center">
+  <a href="https://github.com/LilKALINOV/Astra-Google-STT"><img src="./assets/stt-e5ff4f59e3a7.svg" width="49%" alt="Astra-Google-STT — распознавание речи прямо внутри Astra. Rust. Открыть репозиторий." /></a>
+  <a href="https://github.com/LilKALINOV/astra-silero"><img src="./assets/silero-cadeb2563d95.svg" width="49%" alt="Astra Silero — локальный синтез русской речи для Astra на базе Silero TTS. Открыть репозиторий." /></a>
+</p>
 
-<p align="center"><a href="https://github.com/LilKALINOV/astra-websearch-ddg"><img src="./assets/row-astra-websearch-ddg-a59f6434abf2.svg" width="100%" alt="astra-websearch-ddg — Поиск DuckDuckGo из ассистента — без лимитов и ключей. без звёзд, Rust. Открыть https://github.com/LilKALINOV/astra-websearch-ddg."></a></p>
+<p align="center">
+  <a href="https://github.com/LilKALINOV/astra-websearch-ddg"><img src="./assets/ddg-38e607ce7c20.svg" width="49%" alt="Astra WebSearch DDG — поиск в реальном времени через DuckDuckGo для Astra. Открыть репозиторий." /></a>
+  <a href="https://github.com/SpherePrime/Astra-PrimeProxy"><img src="./assets/astraproxy-29d45293150d.svg" width="49%" alt="Astra PrimeProxy — защищенный прокси-транспорт для Astra. Rust. Открыть репозиторий." /></a>
+</p>
 
-<a href="https://t.me/SpherePrime"><img src="./assets/footer-b884a545a946.svg" width="100%" alt="Открытый код, который работает. Контакты: Telegram @SpherePrime, knice.tech, minice.ai, Discord." /></a></main>
-</body></html>
+<p align="center">
+  <img src="./assets/section-journey-bf2a313d103f.svg" width="100%" alt="03 — Опыт и Путь. От модификаций Stella и Lead QA в Astra к собственной студии." />
+</p>
+
+<p align="center">
+  <a href="https://github.com/LilKALINOV"><img src="./assets/journey-e56e0112e48c.svg" width="100%" alt="Путь: Stella → Astra → SpherePrime. Моддинг, Lead QA, со-основатель SpherePrime." /></a>
+</p>
+
+<p align="center">
+  <a href="https://lilkalinov.github.io/portfolio/"><img src="./assets/portfolio-0064484b1618.svg" width="100%" alt="Портфолио LilKALINOV — нативные интерфейсы, открытый код и архитектура. Открыть сайт." /></a>
+</p>
+
+<p align="center">
+  <a href="https://t.me/SpherePrime"><img src="./assets/footer-47933ddeb156.svg" width="100%" alt="Есть идея? Обсудим проекты, QA или SpherePrime. Написать в Telegram." /></a>
+</p>
+</main></html>
